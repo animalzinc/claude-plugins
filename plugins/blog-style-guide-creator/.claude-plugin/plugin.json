@@ -1,0 +1,10 @@
+{
+  "name": "blog-style-guide-creator",
+  "version": "1.0.0",
+  "description": "AI-powered editorial style guide generation from blog content and article compliance review system. Analyze published blog articles to extract consistent patterns, then review content with 8 specialized agents in parallel.",
+  "author": {
+    "name": "Tim Metz @ Animalz",
+    "email": "contact@animalz.co",
+    "url": "https://animalz.co"
+  }
+}
