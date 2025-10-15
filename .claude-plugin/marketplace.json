@@ -1,0 +1,54 @@
+{
+  "name": "animalz-plugins",
+  "owner": {
+    "name": "Animalz Inc.",
+    "email": "contact@animalz.co",
+    "url": "https://animalz.co"
+  },
+  "metadata": {
+    "description": "Official Animalz Claude Code plugins for content marketing workflows",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "blog-style-guide-creator",
+      "source": "./plugins/blog-style-guide-creator",
+      "description": "AI-powered editorial style guide generation from blog content and article compliance review system",
+      "version": "1.0.0",
+      "author": {
+        "name": "Tim Metz @ Animalz",
+        "url": "https://animalz.co"
+      },
+      "homepage": "https://github.com/animalzinc/claude-plugins",
+      "repository": "https://github.com/animalzinc/claude-plugins",
+      "license": "MIT",
+      "keywords": [
+        "content-marketing",
+        "style-guide",
+        "editorial",
+        "blog",
+        "content-review",
+        "writing",
+        "editorial-voice"
+      ],
+      "category": "marketing",
+      "strict": false,
+      "commands": [
+        "./commands/generate-style-guide.md",
+        "./commands/style-check.md",
+        "./commands/batch-review.md"
+      ],
+      "agents": [
+        "./agents/style-guide-generator.md",
+        "./agents/voice-tone-agent.md",
+        "./agents/grammar-usage-agent.md",
+        "./agents/punctuation-agent.md",
+        "./agents/formatting-agent.md",
+        "./agents/technical-standards-agent.md",
+        "./agents/content-patterns-agent.md",
+        "./agents/industry-terms-agent.md",
+        "./agents/quick-reference-agent.md"
+      ]
+    }
+  ]
+}
