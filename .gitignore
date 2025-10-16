@@ -1,0 +1,20 @@
+# Claude Code local settings
+.claude/
+
+# macOS
+.DS_Store
+
+# Node modules (if any plugins use them)
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.local

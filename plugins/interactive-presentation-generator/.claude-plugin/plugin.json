@@ -1,0 +1,10 @@
+{
+  "name": "interactive-presentation-generator",
+  "version": "1.0.0",
+  "description": "Transform data, reports, and findings into self-contained interactive HTML presentations. Perfect for content audits, research synthesis, and stakeholder presentations.",
+  "author": {
+    "name": "Tim Metz @ Animalz",
+    "email": "contact@animalz.co",
+    "url": "https://animalz.co"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "interview-transcript-analyzer",
+  "version": "1.0.0",
+  "description": "Analyze interview transcripts with unlimited token limits. Extract themes, rank insights by relevance, and find representative quotes. Intelligently scales agents based on workload.",
+  "author": {
+    "name": "Tim Metz @ Animalz",
+    "email": "contact@animalz.co",
+    "url": "https://animalz.co"
+  }
+}

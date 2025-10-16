@@ -49,6 +49,72 @@
         "./agents/industry-terms-agent.md",
         "./agents/quick-reference-agent.md"
       ]
+    },
+    {
+      "name": "interactive-presentation-generator",
+      "source": "./plugins/interactive-presentation-generator",
+      "description": "Transform data and findings into self-contained interactive HTML presentations",
+      "version": "1.0.0",
+      "author": {
+        "name": "Tim Metz @ Animalz",
+        "url": "https://animalz.co"
+      },
+      "homepage": "https://github.com/animalzinc/claude-plugins",
+      "repository": "https://github.com/animalzinc/claude-plugins",
+      "license": "MIT",
+      "keywords": [
+        "content-marketing",
+        "presentations",
+        "data-visualization",
+        "html",
+        "interactive"
+      ],
+      "category": "marketing",
+      "strict": false
+    },
+    {
+      "name": "interview-transcript-analyzer",
+      "source": "./plugins/interview-transcript-analyzer",
+      "description": "Analyze interview transcripts with unlimited token limits and intelligent agent scaling",
+      "version": "1.0.0",
+      "author": {
+        "name": "Tim Metz @ Animalz",
+        "url": "https://animalz.co"
+      },
+      "homepage": "https://github.com/animalzinc/claude-plugins",
+      "repository": "https://github.com/animalzinc/claude-plugins",
+      "license": "MIT",
+      "keywords": [
+        "content-marketing",
+        "research",
+        "interviews",
+        "qualitative-analysis",
+        "transcripts"
+      ],
+      "category": "marketing",
+      "strict": false
+    },
+    {
+      "name": "content-library-auditor",
+      "source": "./plugins/content-library-auditor",
+      "description": "Analyze WordPress XML, CMS JSON, or CSV exports for content insights",
+      "version": "1.0.0",
+      "author": {
+        "name": "Tim Metz @ Animalz",
+        "url": "https://animalz.co"
+      },
+      "homepage": "https://github.com/animalzinc/claude-plugins",
+      "repository": "https://github.com/animalzinc/claude-plugins",
+      "license": "MIT",
+      "keywords": [
+        "content-marketing",
+        "analytics",
+        "wordpress",
+        "content-audit",
+        "cms"
+      ],
+      "category": "marketing",
+      "strict": false
     }
   ]
 }

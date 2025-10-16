@@ -1,0 +1,21 @@
+Interview with Marcus Rodriguez - Head of Content at StartupXYZ
+Date: October 12, 2024
+Duration: 30 minutes
+
+[Interviewer]: Thanks for your time, Marcus. What's your team's biggest pain point right now?
+
+[Marcus]: Definitely measurement. We create a lot of content, but it's really hard to prove ROI. Our CEO wants to see how content drives revenue, and our analytics tools just show pageviews and time on page. That doesn't tell the whole story.
+
+[Interviewer]: What metrics would you like to track instead?
+
+[Marcus]: I want to see content attribution - which pieces actually lead to conversions. I want to know if someone read three blog posts before signing up, or if they just landed on our pricing page. Right now, we have no idea about that customer journey.
+
+[Interviewer]: Have you tried any solutions for this?
+
+[Marcus]: We've looked at marketing automation platforms, but they're built for email campaigns, not content. We tried Google Analytics, but the learning curve is steep and it still doesn't give us the attribution we need. We're basically flying blind.
+
+[Interviewer]: How does this affect your content decisions?
+
+[Marcus]: We end up making decisions based on gut feel rather than data. "This topic feels important" instead of "this topic converts." It's not ideal, especially when we're trying to scale up our content production.
+
+[Interview continues...]

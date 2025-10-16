@@ -1,0 +1,94 @@
+{
+  "posts": [
+    {
+      "title": "Getting Started with Content Marketing",
+      "date": "2024-01-15",
+      "author": "Alice Smith",
+      "categories": ["How-to Guides"],
+      "word_count": 1850,
+      "status": "published",
+      "excerpt": "Content marketing is essential for modern businesses..."
+    },
+    {
+      "title": "10 SEO Tips for Better Rankings",
+      "date": "2024-02-01",
+      "author": "Bob Johnson",
+      "categories": ["SEO"],
+      "word_count": 1200,
+      "status": "published",
+      "excerpt": "Search engine optimization can seem complex..."
+    },
+    {
+      "title": "How We Increased Traffic by 300%",
+      "date": "2024-02-14",
+      "author": "Alice Smith",
+      "categories": ["Case Studies"],
+      "word_count": 2100,
+      "status": "published",
+      "excerpt": "In this case study, we break down exactly how..."
+    },
+    {
+      "title": "Content Calendar Template for 2024",
+      "date": "2024-03-04",
+      "author": "Carol Davis",
+      "categories": ["Templates"],
+      "word_count": 950,
+      "status": "published",
+      "excerpt": "Plan your content for the entire year..."
+    },
+    {
+      "title": "The Ultimate Guide to Email Marketing",
+      "date": "2024-03-15",
+      "author": "Bob Johnson",
+      "categories": ["How-to Guides"],
+      "word_count": 3200,
+      "status": "published",
+      "excerpt": "Email marketing remains one of the highest ROI channels..."
+    },
+    {
+      "title": "Product Launch: New Analytics Feature",
+      "date": "2024-04-02",
+      "author": "Alice Smith",
+      "categories": ["Product Updates"],
+      "word_count": 1100,
+      "status": "published",
+      "excerpt": "We're excited to announce our new analytics dashboard..."
+    },
+    {
+      "title": "5 Common Content Marketing Mistakes",
+      "date": "2024-04-22",
+      "author": "Carol Davis",
+      "categories": ["Best Practices"],
+      "word_count": 1450,
+      "status": "published",
+      "excerpt": "Avoid these five common mistakes..."
+    },
+    {
+      "title": "Interview: Content Strategy with Expert Jane Doe",
+      "date": "2024-05-08",
+      "author": "Bob Johnson",
+      "categories": ["Interviews"],
+      "word_count": 2800,
+      "status": "published",
+      "excerpt": "We sat down with content strategy expert..."
+    },
+    {
+      "title": "How to Measure Content ROI",
+      "date": "2024-05-23",
+      "author": "Alice Smith",
+      "categories": ["Analytics"],
+      "word_count": 1950,
+      "status": "published",
+      "excerpt": "Measuring return on investment for content marketing..."
+    },
+    {
+      "title": "Customer Story: How Acme Corp Scaled Content",
+      "date": "2024-06-11",
+      "author": "Carol Davis",
+      "categories": ["Case Studies"],
+      "word_count": 2400,
+      "status": "published",
+      "excerpt": "Learn how Acme Corp grew their content team..."
+    }
+  ]
+}

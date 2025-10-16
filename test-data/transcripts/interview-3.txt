@@ -1,0 +1,21 @@
+Interview with Jennifer Kim - Content Director at Enterprise Co
+Date: October 15, 2024
+Duration: 50 minutes
+
+[Interviewer]: Jennifer, you manage a large content team. What's your biggest operational challenge?
+
+[Jennifer]: Collaboration and review. We have 12 writers, 3 editors, plus subject matter experts who need to review technical content. Getting everyone aligned on a piece before it publishes is like herding cats. We use Google Docs, but it's not built for our workflow.
+
+[Interviewer]: Can you walk me through what that looks like?
+
+[Jennifer]: Sure. A writer creates a draft in Google Docs. Then the editor reviews it - lots of back and forth comments. Then it goes to a subject matter expert for technical review. Often they contradict the editor's suggestions. Then it goes back to the writer to resolve conflicts. Meanwhile, someone else has to check it against our style guide manually. The whole process takes 2-3 weeks for a single article.
+
+[Interviewer]: That does sound complex. What would make it better?
+
+[Jennifer]: We need a proper content management workflow tool. Something where each person has a clear role, deadlines are tracked automatically, and style guide checks happen as you write - not after the fact. Also, version control that actually makes sense. Google Docs version history is a mess when you have 30+ comments and edits.
+
+[Interviewer]: How does this impact your publishing velocity?
+
+[Jennifer]: We should be publishing 20 articles a month. We barely manage 12, and that's with everyone working weekends. It's not sustainable.
+
+[Interview continues...]

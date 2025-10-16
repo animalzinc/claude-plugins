@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>Sample Blog</title>
+  <link>https://example.com</link>
+  <description>Sample blog for testing</description>
+
+  <item>
+    <title>Getting Started with Content Marketing</title>
+    <pubDate>Mon, 15 Jan 2024 10:00:00 +0000</pubDate>
+    <dc:creator>Alice Smith</dc:creator>
+    <category>How-to Guides</category>
+    <content:encoded><![CDATA[Content marketing is essential for modern businesses. This guide covers the basics of getting started with a content strategy...]]></content:encoded>
+  </item>
+
+  <item>
+    <title>10 SEO Tips for Better Rankings</title>
+    <pubDate>Thu, 01 Feb 2024 14:30:00 +0000</pubDate>
+    <dc:creator>Bob Johnson</dc:creator>
+    <category>SEO</category>
+    <content:encoded><![CDATA[Search engine optimization can seem complex, but these 10 tips will help you improve your rankings...]]></content:encoded>
+  </item>
+
+  <item>
+    <title>How We Increased Traffic by 300%</title>
+    <pubDate>Wed, 14 Feb 2024 09:15:00 +0000</pubDate>
+    <dc:creator>Alice Smith</dc:creator>
+    <category>Case Studies</category>
+    <content:encoded><![CDATA[In this case study, we break down exactly how we tripled our organic traffic in just 6 months...]]></content:encoded>
+  </item>
+
+  <item>
+    <title>Content Calendar Template for 2024</title>
+    <pubDate>Mon, 04 Mar 2024 11:45:00 +0000</pubDate>
+    <dc:creator>Carol Davis</dc:creator>
+    <category>Templates</category>
+    <content:encoded><![CDATA[Plan your content for the entire year with our free content calendar template...]]></content:encoded>
+  </item>
+
+  <item>
+    <title>The Ultimate Guide to Email Marketing</title>
+    <pubDate>Fri, 15 Mar 2024 13:20:00 +0000</pubDate>
+    <dc:creator>Bob Johnson</dc:creator>
+    <category>How-to Guides</category>
+    <content:encoded><![CDATA[Email marketing remains one of the highest ROI channels. Learn how to build and nurture your email list...]]></content:encoded>
+  </item>
+
+  <item>
+    <title>Product Launch: New Analytics Feature</title>
+    <pubDate>Tue, 02 Apr 2024 10:00:00 +0000</pubDate>
+    <dc:creator>Alice Smith</dc:creator>
+    <category>Product Updates</category>
+    <content:encoded><![CDATA[We're excited to announce our new analytics dashboard feature that helps you track content performance...]]></content:encoded>
+  </item>
+
+  <item>
+    <title>5 Common Content Marketing Mistakes</title>
+    <pubDate>Mon, 22 Apr 2024 15:30:00 +0000</pubDate>
+    <dc:creator>Carol Davis</dc:creator>
+    <category>Best Practices</category>
+    <content:encoded><![CDATA[Avoid these five common mistakes that many content marketers make when starting out...]]></content:encoded>
+  </item>
+
+  <item>
+    <title>Interview: Content Strategy with Expert Jane Doe</title>
+    <pubDate>Wed, 08 May 2024 09:00:00 +0000</pubDate>
+    <dc:creator>Bob Johnson</dc:creator>
+    <category>Interviews</category>
+    <content:encoded><![CDATA[We sat down with content strategy expert Jane Doe to discuss the future of content marketing...]]></content:encoded>
+  </item>
+
+  <item>
+    <title>How to Measure Content ROI</title>
+    <pubDate>Thu, 23 May 2024 14:15:00 +0000</pubDate>
+    <dc:creator>Alice Smith</dc:creator>
+    <category>Analytics</category>
+    <content:encoded><![CDATA[Measuring return on investment for content marketing requires tracking the right metrics...]]></content:encoded>
+  </item>
+
+  <item>
+    <title>Customer Story: How Acme Corp Scaled Content</title>
+    <pubDate>Tue, 11 Jun 2024 10:45:00 +0000</pubDate>
+    <dc:creator>Carol Davis</dc:creator>
+    <category>Case Studies</category>
+    <content:encoded><![CDATA[Learn how Acme Corp grew their content team from 2 to 12 people while maintaining quality...]]></content:encoded>
+  </item>
+
+</channel>
+</rss>

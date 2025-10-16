@@ -1,0 +1,21 @@
+Interview with Sarah Chen - Product Manager at TechCorp
+Date: October 10, 2024
+Duration: 45 minutes
+
+[Interviewer]: Thanks for joining us today, Sarah. Can you tell us about your biggest challenge with content marketing tools?
+
+[Sarah]: Absolutely. The main issue we face is integration. We use about five different tools - one for planning, one for writing, one for SEO, one for analytics. None of them talk to each other. It's a nightmare to get a complete picture of what's working.
+
+[Interviewer]: That sounds frustrating. How much time would you say you spend just moving data between tools?
+
+[Sarah]: Honestly? Probably 6-8 hours a week. And I'm not even counting the time my team spends. It's crazy inefficient. We've looked at all-in-one solutions, but they're either too expensive or missing key features we need.
+
+[Interviewer]: What would an ideal solution look like for you?
+
+[Sarah]: Something that connects everything we already use. I don't want to replace our tools - they work well individually. I just want them to share data automatically. And it needs to be affordable. We're not a huge company.
+
+[Interviewer]: Tell me about your content planning process.
+
+[Sarah]: We plan quarterly, but we're constantly adjusting. Market changes, product launches, competitive moves - everything affects our content calendar. The tools we use don't make it easy to pivot quickly. By the time we've updated everything across platforms, the opportunity has passed.
+
+[Interview continues...]

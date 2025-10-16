@@ -1,0 +1,10 @@
+{
+  "name": "content-library-auditor",
+  "version": "1.0.0",
+  "description": "Analyze WordPress XML, CMS JSON, or CSV exports for content insights. Publishing trends, author breakdowns, topic analysis, and interactive HTML reports with charts.",
+  "author": {
+    "name": "Tim Metz @ Animalz",
+    "email": "contact@animalz.co",
+    "url": "https://animalz.co"
+  }
+}

@@ -45,6 +45,83 @@ Generate comprehensive editorial style guides by analyzing published blog articl
 
 ---
 
+### Interactive Presentation Generator
+
+**Transform data and findings into self-contained interactive HTML presentations**
+
+Turn thick data reports, content audit results, or research findings into beautiful, interactive presentations that stakeholders can open directly in their browser.
+
+**Install:**
+```bash
+/plugin install interactive-presentation-generator
+```
+
+**Features:**
+- 📊 Interactive elements (tabs, accordions, charts)
+- 🎨 Brand customization support
+- 📱 Fully responsive and print-friendly
+- 🚀 Self-contained HTML (no dependencies)
+
+**Use cases:** Content audits, research synthesis, copy testing, stakeholder reports
+
+**Created by:** [Tim Metz](https://www.linkedin.com/in/metztim/) ([@timmetz](https://x.com/timmetz))
+
+**Learn more:** [Plugin Documentation](./plugins/interactive-presentation-generator/README.md)
+
+---
+
+### Interview Transcript Analyzer
+
+**Analyze interview transcripts with unlimited token limits**
+
+Extract themes, rank insights by relevance, and find representative quotes from interview transcripts. Intelligently scales from 1 to 8 parallel agents based on workload.
+
+**Install:**
+```bash
+/plugin install interview-transcript-analyzer
+```
+
+**Features:**
+- 🤖 Intelligent agent scaling (1-8 agents based on volume)
+- 📊 Theme extraction across unlimited transcripts
+- 🎯 Smart ranking (frequency, impact, ICP relevance, custom)
+- 💬 Quote mining with quality scoring
+- ⚡ 15-20 transcripts analyzed in 15-20 minutes
+
+**Use cases:** Customer research, product feedback, user interviews, podcast research
+
+**Created by:** [Tim Metz](https://www.linkedin.com/in/metztim/) ([@timmetz](https://x.com/timmetz))
+
+**Learn more:** [Plugin Documentation](./plugins/interview-transcript-analyzer/README.md)
+
+---
+
+### Content Library Auditor
+
+**Analyze WordPress XML, CMS JSON, or CSV exports for content insights**
+
+Reveal publishing trends, author contributions, topic distribution, and content gaps with interactive HTML reports and charts.
+
+**Install:**
+```bash
+/plugin install content-library-auditor
+```
+
+**Features:**
+- 📊 Multi-format support (WordPress XML, JSON, CSV)
+- 📈 Publishing trend analysis with seasonality detection
+- ✍️ Author contribution breakdowns
+- 🏷️ Topic analysis and content gap identification
+- 📉 Interactive HTML reports with Chart.js
+
+**Use cases:** Content audits, editorial planning, author performance, competitive analysis
+
+**Created by:** [Tim Metz](https://www.linkedin.com/in/metztim/) ([@timmetz](https://x.com/timmetz))
+
+**Learn more:** [Plugin Documentation](./plugins/content-library-auditor/README.md)
+
+---
+
 ## About Animalz
 
 [Animalz](https://animalz.co) is a content marketing agency specializing in high-quality editorial content for B2B SaaS companies. These plugins were developed internally to streamline our workflows and open-sourced to benefit the wider content marketing community.
@@ -74,10 +151,14 @@ Want to contribute your own content marketing plugin? See the [Claude Code Plugi
 
 ## Credits
 
-### Blog Style Guide Creator
-- **Author:** Tim Metz
-- **Organization:** Animalz
-- **License:** MIT
+All plugins created by **Tim Metz** and published by **Animalz**:
+
+1. **Blog Style Guide Creator** - Editorial style guide generation
+2. **Interactive Presentation Generator** - Data to HTML presentations
+3. **Interview Transcript Analyzer** - Research synthesis at scale
+4. **Content Library Auditor** - CMS export analysis
+
+**License:** MIT (all plugins)
 
 Connect with Tim:
 - 📝 [Substack: We Eat Robots](https://weeatrobots.substack.com/)
