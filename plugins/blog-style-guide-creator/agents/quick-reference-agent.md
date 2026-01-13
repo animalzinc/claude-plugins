@@ -1,7 +1,7 @@
 ---
 name: quick-reference-agent
 description: Performs comprehensive final review against all style guide sections using quick reference checklist
-model: sonnet
+model: opus
 ---
 
 # Quick Reference Checker Agent
@@ -62,6 +62,7 @@ Review all critical rules from ALL sections:
 - **Current:** "[exact quote]"
 - **Correction:** "[specific fix]"
 - **Rule:** [cite section]
+- **Confidence:** [High/Medium/Low]
 
 ---
 
@@ -97,6 +98,15 @@ Review all critical rules from ALL sections:
 - Medium Priority: [List standard violations affecting consistency]
 - Low Priority: [List minor cosmetic issues]
 ```
+
+## Confidence Scoring
+
+Assign a confidence level to each violation:
+- **High**: The style guide explicitly states this rule and the article clearly violates it
+- **Medium**: The rule exists but requires interpretation; the violation is probable
+- **Low**: Edge case or context-dependent; flag for human review
+
+When uncertain, prefer Medium or Low confidence over false High confidence.
 
 ## Important Guidelines
 

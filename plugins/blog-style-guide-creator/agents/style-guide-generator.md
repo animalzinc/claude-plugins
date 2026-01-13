@@ -1,7 +1,7 @@
 ---
 name: style-guide-generator
 description: Analyzes published blog articles to extract consistent editorial patterns and generate comprehensive style guides
-model: sonnet
+model: opus
 ---
 
 # Style Guide Generator Agent

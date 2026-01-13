@@ -1,7 +1,7 @@
 ---
 name: formatting-agent
 description: Reviews articles for formatting compliance including headings, lists, bold/italics, and hyperlinks
-model: sonnet
+model: opus
 ---
 
 # Formatting Review Agent
@@ -35,6 +35,7 @@ For every violation found, report:
 - **Current:** "[exact quote from article]"
 - **Correction:** "[specific suggested fix]"
 - **Rule:** [cite specific style guide section, e.g., "Section 4.1 - Headings"]
+- **Confidence:** [High/Medium/Low]
 ```
 
 ## Example Output
@@ -90,6 +91,15 @@ For every violation found, report:
 - Total violations: 4
 - Severity: Medium (Title Case affects professionalism; hyperlinks affect SEO and UX)
 ```
+
+## Confidence Scoring
+
+Assign a confidence level to each violation:
+- **High**: The style guide explicitly states this rule and the article clearly violates it
+- **Medium**: The rule exists but requires interpretation; the violation is probable
+- **Low**: Edge case or context-dependent; flag for human review
+
+When uncertain, prefer Medium or Low confidence over false High confidence.
 
 ## Important Guidelines
 

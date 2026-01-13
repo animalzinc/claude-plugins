@@ -1,6 +1,6 @@
 ---
 description: Batch review multiple blog articles against editorial style guide
-argument-hint: [brand-name] [directory-path] [--auto-apply]
+argument-hint: [brand-name] [directory-path] [--auto-apply] [--dry-run]
 ---
 
 # Batch Review: Process Multiple Articles
@@ -14,7 +14,9 @@ Before proceeding:
   - If missing: Error and suggest running `/generate-style-guide $1 [source]`
 - Verify directory exists at $2
   - If missing: Error with clear message
-- Check if $3 is `--auto-apply` (determines whether to apply corrections automatically)
+- Check for `--auto-apply` flag (determines whether to apply corrections automatically)
+- Check for `--dry-run` flag (shows what would be changed without modifying files)
+- Note: `--dry-run` takes precedence over `--auto-apply` if both are specified
 
 ## Step 2: Discover Articles
 
@@ -40,7 +42,10 @@ For each article in the list:
 1. Display: "Processing article [N] of [total]: [filename]"
 2. Run the equivalent of `/style-check $1 [article-path]` on this article
 3. Collect findings
-4. If --auto-apply: Apply corrections and save to `edited/` folder
+4. Handle based on flags:
+   - If --dry-run: Show preview of changes for this article, no modifications
+   - If --auto-apply: Apply corrections and save to `edited/` folder
+   - If neither: Just report findings
 5. Move to next article
 
 ### Option B: Parallel Processing (Faster but Resource-Intensive)
@@ -174,6 +179,9 @@ If doesn't exist:
 # Review all articles in directory (report only)
 /batch-review animalz brands/animalz/articles/original/
 
+# Preview all changes without modifying any files
+/batch-review animalz brands/animalz/articles/original/ --dry-run
+
 # Review and automatically apply corrections
 /batch-review animalz brands/animalz/articles/original/ --auto-apply
 
@@ -193,12 +201,31 @@ If doesn't exist:
 - For 10 articles (4 batches): ~40-60 minutes
 - Faster but more complex
 
+## Agent Failure Recovery
+
+If an agent fails during article review:
+
+1. **Retry once** with the same inputs after a brief delay
+2. **If retry fails**: Continue with remaining agents for that article
+3. **Mark failed section** as "INCOMPLETE" in the individual article report
+4. **Track failures** across batch: "Agent [X] failed on [Y] articles"
+5. **Include in portfolio report**:
+   ```
+   Agent Reliability:
+   - Agent 1 (Voice & Tone): 100% success (10/10 articles)
+   - Agent 2 (Grammar & Usage): 90% success (9/10 articles)
+   ...
+   ```
+
+Never fail the entire batch due to agent failures. Complete as much as possible.
+
 ## Error Handling
 
 - **Style guide missing**: Provide helpful error with suggestion
 - **Directory not found**: Check path and provide clear error
 - **No articles found**: Inform user and suggest checking directory
 - **Individual article failures**: Continue with remaining articles; note failures in report
+- **Agent failures**: See "Agent Failure Recovery" section above
 - **Permission issues**: Report which files couldn't be accessed
 
 ## Quality Assurance

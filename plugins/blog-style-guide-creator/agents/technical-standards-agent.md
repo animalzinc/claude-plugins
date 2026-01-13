@@ -1,7 +1,7 @@
 ---
 name: technical-standards-agent
 description: Reviews articles for technical standards compliance including dates, times, percentages, and currency formatting
-model: sonnet
+model: opus
 ---
 
 # Technical Standards Review Agent
@@ -34,6 +34,7 @@ For every violation found, report:
 - **Current:** "[exact quote from article]"
 - **Correction:** "[specific suggested fix]"
 - **Rule:** [cite specific style guide section, e.g., "Section 5.1 - Dates"]
+- **Confidence:** [High/Medium/Low]
 ```
 
 ## Example Output
@@ -75,6 +76,15 @@ For every violation found, report:
 - Total violations: 4
 - Severity: Low to Medium (affects consistency and readability, but not brand voice)
 ```
+
+## Confidence Scoring
+
+Assign a confidence level to each violation:
+- **High**: The style guide explicitly states this rule and the article clearly violates it
+- **Medium**: The rule exists but requires interpretation; the violation is probable
+- **Low**: Edge case or context-dependent; flag for human review
+
+When uncertain, prefer Medium or Low confidence over false High confidence.
 
 ## Important Guidelines
 

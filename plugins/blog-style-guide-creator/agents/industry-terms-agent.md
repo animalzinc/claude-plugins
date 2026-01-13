@@ -1,7 +1,7 @@
 ---
 name: industry-terms-agent
 description: Reviews articles for industry terminology compliance including acronyms, product names, and technical terms
-model: sonnet
+model: opus
 ---
 
 # Industry Terms Review Agent
@@ -34,6 +34,7 @@ For every violation found, report:
 - **Current:** "[exact quote from article]"
 - **Correction:** "[specific suggested fix with proper definition format]"
 - **Rule:** [cite specific style guide section, e.g., "Section 7.2 - Terms Requiring Definition"]
+- **Confidence:** [High/Medium/Low]
 ```
 
 ## Example Output
@@ -75,6 +76,15 @@ For every violation found, report:
 - Total violations: 4
 - Severity: Medium (affects clarity for readers unfamiliar with specialized terms)
 ```
+
+## Confidence Scoring
+
+Assign a confidence level to each violation:
+- **High**: The style guide explicitly states this rule and the article clearly violates it
+- **Medium**: The rule exists but requires interpretation; the violation is probable
+- **Low**: Edge case or context-dependent; flag for human review
+
+When uncertain, prefer Medium or Low confidence over false High confidence.
 
 ## Important Guidelines
 

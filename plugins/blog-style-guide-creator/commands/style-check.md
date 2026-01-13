@@ -1,6 +1,6 @@
 ---
 description: Review blog article against editorial style guide using 8 specialized agents
-argument-hint: [brand-name] [article-path] [--auto-apply]
+argument-hint: [brand-name] [article-path] [--auto-apply] [--dry-run]
 ---
 
 # Style Check: Multi-Agent Article Review
@@ -14,7 +14,9 @@ Before proceeding:
   - If missing: Error and suggest running `/generate-style-guide $1 [source]`
 - Verify article exists at $2
   - If missing: Error with clear message
-- Check if $3 is `--auto-apply` (determines whether to apply corrections automatically)
+- Check for `--auto-apply` flag (determines whether to apply corrections automatically)
+- Check for `--dry-run` flag (shows what would be changed without modifying files)
+- Note: `--dry-run` takes precedence over `--auto-apply` if both are specified
 
 ## Step 2: Read Required Files
 
@@ -140,16 +142,27 @@ Create a structured report:
 - To apply manually: Edit the article at $2 using the corrections provided
 ```
 
-## Step 6: Conditional Auto-Apply
+## Step 6: Conditional Auto-Apply or Dry Run
 
-**If $3 is `--auto-apply`:**
+**If `--dry-run` flag is present:**
+- Generate full report showing what WOULD be changed
+- For each violation, show before/after preview:
+  ```
+  Line [X]: [current text]
+       →  [corrected text]
+  ```
+- Do NOT modify any files
+- Display at end: "DRY RUN COMPLETE: No files were modified"
+- Show summary: "[X] corrections would be applied"
+
+**If `--auto-apply` flag is present (and NOT --dry-run):**
 - Proceed to apply all corrections automatically
 - Work through violations from top to bottom by line number
 - Use the Edit tool to apply each correction
 - Save result to same path with `_edited` suffix (unless already in `edited/` folder)
 - Generate before/after summary
 
-**If $3 is NOT `--auto-apply`:**
+**If neither flag is present:**
 - Display the report
 - Prompt user: "Review complete. Run `/article-edit $1 $2` to apply corrections."
 
@@ -164,6 +177,9 @@ Save the review report to:
 # Review only (no auto-apply)
 /style-check animalz brands/animalz/articles/original/my-article.md
 
+# Preview what would be changed without modifying files
+/style-check animalz brands/animalz/articles/original/my-article.md --dry-run
+
 # Review and automatically apply corrections
 /style-check animalz brands/animalz/articles/original/my-article.md --auto-apply
 
@@ -171,11 +187,34 @@ Save the review report to:
 /style-check hubspot /Users/name/Documents/draft-article.md
 ```
 
+## Agent Failure Recovery
+
+If an agent fails during parallel execution:
+
+1. **Retry once** with the same inputs after a brief delay
+2. **If retry fails**: Continue with remaining agents (don't fail entire review)
+3. **Mark failed section** as "INCOMPLETE" in the report:
+   ```
+   ### Agent [X] - [Section Name]
+   ⚠️ INCOMPLETE: Agent failed after retry. Manual review recommended for this section.
+   ```
+4. **Add warning** at top of report: "Note: [X] agent(s) failed. Some sections may be incomplete."
+5. **Report success/failure** of each agent at end of review:
+   ```
+   Agent Status:
+   - Agent 1 (Voice & Tone): ✅ Success
+   - Agent 2 (Grammar & Usage): ❌ Failed (manual review needed)
+   - Agent 3 (Punctuation): ✅ Success
+   ...
+   ```
+
+Never fail the entire review due to a single agent failure.
+
 ## Error Handling
 
 - **Style guide missing**: Provide helpful error with suggestion to generate one
 - **Article not found**: Check path and provide clear error
-- **Agent failures**: If any agent fails, continue with others and note the failure
+- **Agent failures**: See "Agent Failure Recovery" section above
 - **No violations found**: Celebrate! Report that article is fully compliant
 
 ## Performance Notes

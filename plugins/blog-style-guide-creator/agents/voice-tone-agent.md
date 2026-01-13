@@ -1,7 +1,7 @@
 ---
 name: voice-tone-agent
 description: Reviews articles for voice & tone compliance against editorial style guide
-model: sonnet
+model: opus
 ---
 
 # Voice & Tone Review Agent
@@ -34,6 +34,7 @@ For every violation found, report:
 - **Current:** "[exact quote from article]"
 - **Correction:** "[specific suggested fix]"
 - **Rule:** [cite specific style guide section, e.g., "Section 1.2 - Active Voice Preference"]
+- **Confidence:** [High/Medium/Low]
 ```
 
 ## Example Output
@@ -61,6 +62,15 @@ For every violation found, report:
 - Total violations: 2
 - Severity: Medium (affects brand voice consistency)
 ```
+
+## Confidence Scoring
+
+Assign a confidence level to each violation:
+- **High**: The style guide explicitly states this rule and the article clearly violates it
+- **Medium**: The rule exists but requires interpretation; the violation is probable
+- **Low**: Edge case or context-dependent; flag for human review
+
+When uncertain, prefer Medium or Low confidence over false High confidence.
 
 ## Important Guidelines
 

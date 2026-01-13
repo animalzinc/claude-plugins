@@ -1,7 +1,7 @@
 ---
 name: content-patterns-agent
 description: Reviews articles for content pattern compliance including titles, openings, CTAs, and bylines
-model: sonnet
+model: opus
 ---
 
 # Content Patterns Review Agent
@@ -34,6 +34,7 @@ For every violation found, report:
 - **Current:** "[exact quote from article or 'N/A' if missing]"
 - **Correction:** "[specific suggested fix]"
 - **Rule:** [cite specific style guide section, e.g., "Section 6.1 - Article Titles"]
+- **Confidence:** [High/Medium/Low]
 ```
 
 ## Example Output
@@ -75,6 +76,15 @@ For every violation found, report:
 - Total violations: 4
 - Severity: High (missing byline and CTA are structural requirements; weak opening affects engagement)
 ```
+
+## Confidence Scoring
+
+Assign a confidence level to each violation:
+- **High**: The style guide explicitly states this rule and the article clearly violates it
+- **Medium**: The rule exists but requires interpretation; the violation is probable
+- **Low**: Edge case or context-dependent; flag for human review
+
+When uncertain, prefer Medium or Low confidence over false High confidence.
 
 ## Important Guidelines
 

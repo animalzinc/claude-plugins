@@ -9,21 +9,32 @@ Generate a comprehensive house style guide for **$1** based on sample articles.
 
 ## Step 1: Collect Sample Articles
 
-**If $2 is a URL (blog/website):**
-- Use WebFetch to analyze the blog at $2
-- Identify and fetch 15-20 representative articles spanning multiple years
-- Look for variety in topics, formats, and publication dates
-- Save articles to `brands/$1/source-articles/`
+Users can combine any of these input methods:
 
-**If $2 is a directory path:**
-- Read all markdown files from the directory $2
-- Verify there are at least 15 articles (warn if fewer)
-- Articles should already be in `brands/$1/source-articles/`
+**Directory of local files**
+- If a directory path is provided, read all markdown/text files (*.md, *.txt)
+- Gives full control over which articles to analyze
+
+**URLs pasted directly**
+- If URLs are provided, use WebFetch to retrieve each article
+- URLs can be space-separated or on separate lines
+- Save fetched articles to `brands/$1/source-articles/`
+
+**Blog URL with guidance**
+- If a blog URL is provided, attempt to discover and fetch articles
+- User can include guidance like "only articles from 2024 or later" or "focus on technical content"
+- Follow user's guidance when selecting which articles to fetch
+
+**Combining inputs**
+- All methods can be combined in a single command
+- Example: local directory + a few extra URLs + guidance for additional discovery
 
 ## Step 2: Validate Inputs
 
 Before proceeding:
-- Confirm at least 15 articles are available for analysis
+- Confirm at least 5 articles are available for analysis
+  - If 5-9 articles: Proceed, but note "10-15 articles recommended for best results"
+  - If <5 articles: Warn that results may be unreliable, ask user to confirm
 - Create brand directory if it doesn't exist: `brands/$1/`
 - Create subdirectories: `brands/$1/source-articles/`, `brands/$1/articles/original/`, `brands/$1/articles/edited/`
 
@@ -105,19 +116,26 @@ After generation:
 - Add changelog note at bottom
 
 **Error Handling:**
-- If fewer than 15 articles available, warn user and ask if they want to proceed anyway
-- If blog URL is inaccessible, provide clear error message
+- If fewer than 5 articles: Warn and ask user to confirm before proceeding
+- If 5-9 articles: Note recommendation for 10-15, but proceed
+- If any URL is inaccessible, report which URLs failed and continue with others
 - If brand directory creation fails, report the issue
 
 ## Usage Examples
 
 ```bash
-# Generate style guide from blog URL
-/generate-style-guide animalz https://www.animalz.co/blog
-
-# Generate style guide from local directory
-/generate-style-guide hubspot brands/hubspot/source-articles/
-
-# Update existing style guide with new articles
+# From local directory
 /generate-style-guide animalz brands/animalz/source-articles/
+
+# From pasted URLs
+/generate-style-guide animalz https://example.com/blog/post-1 https://example.com/blog/post-2 https://example.com/blog/post-3
+
+# Blog URL with guidance
+/generate-style-guide acme https://acme.com/blog - only use articles from 2024 or later, focus on thought leadership pieces
+
+# Combined: directory + extra URLs
+/generate-style-guide animalz brands/animalz/source-articles/ https://example.com/blog/new-post-1 https://example.com/blog/new-post-2
+
+# Combined: URLs + blog with guidance
+/generate-style-guide hubspot https://blog.hubspot.com/post-1 https://blog.hubspot.com/post-2 - also grab 5 more recent marketing articles from the blog
 ```
