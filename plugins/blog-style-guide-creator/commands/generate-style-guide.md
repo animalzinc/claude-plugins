@@ -18,12 +18,14 @@ Users can combine any of these input methods:
 **URLs pasted directly**
 - If URLs are provided, use WebFetch to retrieve each article
 - URLs can be space-separated or on separate lines
+- **CRITICAL:** Use this exact WebFetch prompt: "Extract the COMPLETE article content verbatim as markdown. Include the full title, all body paragraphs, all headings and subheadings, all lists, all quotes, and any author/date metadata. Preserve all formatting: bold, italics, hyperlinks (as markdown links), code blocks, and block quotes. Do NOT summarize or paraphrase. Return the entire article exactly as written."
 - Save fetched articles to `brands/$1/source-articles/`
 
 **Blog URL with guidance**
 - If a blog URL is provided, attempt to discover and fetch articles
 - User can include guidance like "only articles from 2024 or later" or "focus on technical content"
 - Follow user's guidance when selecting which articles to fetch
+- **CRITICAL:** When fetching each discovered article, use this exact WebFetch prompt: "Extract the COMPLETE article content verbatim as markdown. Include the full title, all body paragraphs, all headings and subheadings, all lists, all quotes, and any author/date metadata. Preserve all formatting: bold, italics, hyperlinks (as markdown links), code blocks, and block quotes. Do NOT summarize or paraphrase. Return the entire article exactly as written."
 
 **Combining inputs**
 - All methods can be combined in a single command
