@@ -115,6 +115,29 @@
       ],
       "category": "marketing",
       "strict": false
+    },
+    {
+      "name": "copywriting-coach",
+      "source": "./plugins/copywriting-coach",
+      "description": "Structured 7-phase copywriting process for landing pages, ads, emails, and taglines. Human writes, AI coaches through Harry Dry's Three Laws, Sullivan's craft principles, and Wiebe's Money Words.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Tim Metz @ Animalz",
+        "url": "https://animalz.co"
+      },
+      "homepage": "https://github.com/animalzinc/claude-plugins",
+      "repository": "https://github.com/animalzinc/claude-plugins",
+      "license": "MIT",
+      "keywords": [
+        "copywriting",
+        "landing-page",
+        "advertising",
+        "copy",
+        "conversion",
+        "marketing"
+      ],
+      "category": "marketing",
+      "strict": false
     }
   ]
 }
