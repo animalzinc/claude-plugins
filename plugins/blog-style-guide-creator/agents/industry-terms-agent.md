@@ -1,7 +1,6 @@
 ---
 name: industry-terms-agent
 description: Reviews articles for industry terminology compliance including acronyms, product names, and technical terms
-model: opus
 ---
 
 # Industry Terms Review Agent

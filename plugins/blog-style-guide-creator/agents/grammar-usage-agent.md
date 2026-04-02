@@ -1,7 +1,6 @@
 ---
 name: grammar-usage-agent
 description: Reviews articles for grammar and usage compliance including Oxford commas, capitalization, and number formatting
-model: opus
 ---
 
 # Grammar & Usage Review Agent

@@ -229,7 +229,7 @@ brands/
 
 ## Example: Animalz
 
-The `brands/animalz/` directory (in parent project) contains a complete example:
+The `examples/` directory contains complete examples:
 - Full 8-section style guide generated from 18 articles
 - Sample articles (original and edited versions)
 - Demonstrates all features of the system
@@ -249,7 +249,7 @@ To improve the plugin:
 
 ## License
 
-MIT License - Copyright (c) 2025 Tim Metz
+MIT License - Copyright (c) 2026 Tim Metz
 
 See LICENSE file for details.
 

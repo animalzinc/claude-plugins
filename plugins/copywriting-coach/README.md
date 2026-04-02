@@ -50,6 +50,8 @@ Resume the most recent project:
 
 Each phase has quality gates that must pass before advancing. No skipping.
 
+See [EXAMPLES.md](./EXAMPLES.md) for detailed walkthroughs of each copy type.
+
 ---
 
 ## Copy types supported

@@ -1,0 +1,11 @@
+{
+  "name": "design-reference",
+  "version": "1.0.0",
+  "description": "Iterative design research process: brief, reference collection, per-reference feedback, pattern synthesis, design principles, and prototype iteration. Builds shared visual language before any prototyping begins.",
+  "keywords": ["design", "frontend", "research", "references", "prototype", "ui"],
+  "author": {
+    "name": "Tim Metz @ Animalz",
+    "email": "contact@animalz.co",
+    "url": "https://animalz.co"
+  }
+}

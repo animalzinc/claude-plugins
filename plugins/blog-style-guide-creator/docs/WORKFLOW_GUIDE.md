@@ -476,7 +476,7 @@ Verify violations make sense given updated rules.
 
 ### Agent Prompts
 
-Each agent has a dedicated prompt in `.claude/prompts/`:
+Each agent has a dedicated prompt in `agents/`:
 
 - `voice-tone-agent.md`
 - `grammar-usage-agent.md`
@@ -545,7 +545,7 @@ Some rules may be checked by multiple agents (e.g., Title Case by both Grammar a
 
 **Solutions:**
 1. Check which agent should catch it
-2. Review that agent's prompt in `.claude/prompts/`
+2. Review that agent's prompt in `agents/`
 3. Add explicit rule to agent prompt
 4. Re-run review to verify fix
 
@@ -568,7 +568,7 @@ Some rules may be checked by multiple agents (e.g., Title Case by both Grammar a
 2. Review specific violations that were wrong
 3. Update relevant agent prompt to improve accuracy
 4. Apply corrections manually for this article
-5. File issue in `docs/decisions/` about the pattern
+5. Document the pattern for future reference
 
 ---
 
@@ -578,7 +578,7 @@ Some rules may be checked by multiple agents (e.g., Title Case by both Grammar a
 
 Add a new review dimension:
 
-1. **Create agent prompt** in `.claude/prompts/new-agent.md`
+1. **Create agent prompt** in `agents/new-agent.md`
 2. **Follow template** from existing agents
 3. **Update slash command** to include new agent
 4. **Test on sample article**
@@ -613,6 +613,4 @@ Integrate into publishing workflow:
 ## Questions?
 
 - **Project structure**: See [README.md](../README.md)
-- **Adding brands**: See [brands/README.md](../brands/README.md)
-- **Session logs**: See [docs/logs/](logs/)
-- **Technical decisions**: See [docs/decisions/](decisions/)
+- **Usage examples**: See [EXAMPLES.md](../EXAMPLES.md)

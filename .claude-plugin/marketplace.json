@@ -7,14 +7,60 @@
   },
   "metadata": {
     "description": "Official Animalz Claude Code plugins for content marketing workflows",
-    "version": "1.0.0"
+    "version": "2.0.0"
   },
   "plugins": [
+    {
+      "name": "structured-article-writer",
+      "source": "./plugins/structured-article-writer",
+      "description": "8-phase structured article writing process for thought leadership. Human fills the blank page — Claude enforces discipline through quality gates. Includes /write-rescue and /write-status companion commands.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Tim Metz @ Animalz",
+        "url": "https://animalz.co"
+      },
+      "homepage": "https://github.com/animalzinc/claude-plugins",
+      "repository": "https://github.com/animalzinc/claude-plugins",
+      "license": "MIT",
+      "keywords": [
+        "writing",
+        "article",
+        "thought-leadership",
+        "editorial",
+        "content-marketing",
+        "structured-writing"
+      ],
+      "category": "marketing",
+      "strict": false
+    },
+    {
+      "name": "copywriting-coach",
+      "source": "./plugins/copywriting-coach",
+      "description": "Structured 7-phase copywriting process for landing pages, ads, emails, and taglines. Human writes, AI coaches through Harry Dry's Three Laws, Sullivan's craft principles, and Wiebe's Money Words.",
+      "version": "1.0.1",
+      "author": {
+        "name": "Tim Metz @ Animalz",
+        "url": "https://animalz.co"
+      },
+      "homepage": "https://github.com/animalzinc/claude-plugins",
+      "repository": "https://github.com/animalzinc/claude-plugins",
+      "license": "MIT",
+      "keywords": [
+        "copywriting",
+        "landing-page",
+        "advertising",
+        "copy",
+        "conversion",
+        "marketing"
+      ],
+      "category": "marketing",
+      "strict": false
+    },
     {
       "name": "blog-style-guide-creator",
       "source": "./plugins/blog-style-guide-creator",
       "description": "AI-powered editorial style guide generation from blog content and article compliance review system",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": {
         "name": "Tim Metz @ Animalz",
         "url": "https://animalz.co"
@@ -51,9 +97,9 @@
       ]
     },
     {
-      "name": "interactive-presentation-generator",
-      "source": "./plugins/interactive-presentation-generator",
-      "description": "Transform data and findings into self-contained interactive HTML presentations",
+      "name": "design-reference",
+      "source": "./plugins/design-reference",
+      "description": "Iterative design research process: brief, reference collection, feedback, principles, prototype, approval. Builds visual direction from stakeholder input before any prototyping begins.",
       "version": "1.0.0",
       "author": {
         "name": "Tim Metz @ Animalz",
@@ -63,41 +109,20 @@
       "repository": "https://github.com/animalzinc/claude-plugins",
       "license": "MIT",
       "keywords": [
-        "content-marketing",
-        "presentations",
-        "data-visualization",
-        "html",
-        "interactive"
-      ],
-      "category": "marketing",
-      "strict": false
-    },
-    {
-      "name": "interview-transcript-analyzer",
-      "source": "./plugins/interview-transcript-analyzer",
-      "description": "Analyze interview transcripts with unlimited token limits and intelligent agent scaling",
-      "version": "1.0.0",
-      "author": {
-        "name": "Tim Metz @ Animalz",
-        "url": "https://animalz.co"
-      },
-      "homepage": "https://github.com/animalzinc/claude-plugins",
-      "repository": "https://github.com/animalzinc/claude-plugins",
-      "license": "MIT",
-      "keywords": [
-        "content-marketing",
+        "design",
+        "frontend",
         "research",
-        "interviews",
-        "qualitative-analysis",
-        "transcripts"
+        "references",
+        "prototype",
+        "ui"
       ],
       "category": "marketing",
       "strict": false
     },
     {
-      "name": "content-library-auditor",
-      "source": "./plugins/content-library-auditor",
-      "description": "Analyze WordPress XML, CMS JSON, or CSV exports for content insights",
+      "name": "session-saver",
+      "source": "./plugins/session-saver",
+      "description": "Save a structured session summary so you can pick up where you left off next time. Captures objectives, files changed, decisions, and generates a continuation prompt.",
       "version": "1.0.0",
       "author": {
         "name": "Tim Metz @ Animalz",
@@ -107,19 +132,19 @@
       "repository": "https://github.com/animalzinc/claude-plugins",
       "license": "MIT",
       "keywords": [
-        "content-marketing",
-        "analytics",
-        "wordpress",
-        "content-audit",
-        "cms"
+        "session",
+        "continuity",
+        "workflow",
+        "productivity",
+        "save"
       ],
-      "category": "marketing",
+      "category": "productivity",
       "strict": false
     },
     {
-      "name": "copywriting-coach",
-      "source": "./plugins/copywriting-coach",
-      "description": "Structured 7-phase copywriting process for landing pages, ads, emails, and taglines. Human writes, AI coaches through Harry Dry's Three Laws, Sullivan's craft principles, and Wiebe's Money Words.",
+      "name": "image-prompt-creator",
+      "source": "./plugins/image-prompt-creator",
+      "description": "5-phase guided workflow for creating production-quality image generation prompts for Nano Banana (Google's AI image generator). Supports brand presets, iterative revision, and reference image management.",
       "version": "1.0.0",
       "author": {
         "name": "Tim Metz @ Animalz",
@@ -129,12 +154,12 @@
       "repository": "https://github.com/animalzinc/claude-plugins",
       "license": "MIT",
       "keywords": [
-        "copywriting",
-        "landing-page",
-        "advertising",
-        "copy",
-        "conversion",
-        "marketing"
+        "image",
+        "prompt",
+        "nano-banana",
+        "design",
+        "visual",
+        "ai-images"
       ],
       "category": "marketing",
       "strict": false

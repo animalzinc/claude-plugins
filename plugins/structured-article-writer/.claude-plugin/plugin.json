@@ -1,0 +1,17 @@
+{
+  "name": "structured-article-writer",
+  "version": "1.0.0",
+  "description": "Structured 8-phase writing process for thought leadership articles. Human fills the blank page — AI enforces discipline, challenges weak thinking, and guards quality gates at every phase.",
+  "author": {
+    "name": "Tim Metz @ Animalz",
+    "email": "contact@animalz.co",
+    "url": "https://animalz.co"
+  },
+  "keywords": [
+    "writing",
+    "article",
+    "thought-leadership",
+    "editorial",
+    "content-marketing"
+  ]
+}

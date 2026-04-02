@@ -1,7 +1,6 @@
 ---
 name: copy-reviewer
 description: Fresh-context copy reviewer that runs three-laws check, Money Words audit, interference analysis, and cut recommendations
-model: sonnet
 ---
 
 # Copy Reviewer

@@ -1,6 +1,8 @@
 # Animalz Claude Code Plugins
 
-Official Claude Code plugins for content marketing workflows.
+Official Claude Code plugins and skills for content marketing workflows.
+
+**For a full guide on how to use these plugins and get started with Claude Code, read [Claude Code for Content Marketers](https://www.animalz.co/blog/claude-code) on the Animalz blog.**
 
 ---
 
@@ -20,105 +22,22 @@ Then browse and install available plugins:
 
 ---
 
-## Available Plugins
+## Featured Plugins
 
-### Blog Style Guide Creator
+### Structured Article Writer
 
-**AI-powered editorial style guide generation from blog content**
+**8-phase structured writing process for thought leadership articles**
 
-Generate comprehensive editorial style guides by analyzing published blog articles, then review content with 8 specialized AI agents running in parallel.
-
-**Install:**
-```bash
-/plugin install blog-style-guide-creator
-```
-
-**Features:**
-- 🤖 Automated style guide generation from blog articles
-- 🔍 Multi-agent review system (8 specialized agents in parallel)
-- 📊 Batch processing with portfolio compliance reporting
-- ⚡ One-command workflows via custom slash commands
-
-**Created by:** [Tim Metz](https://www.linkedin.com/in/metztim/) ([@timmetz](https://x.com/timmetz))
-
-**Learn more:** [Plugin Documentation](./plugins/blog-style-guide-creator/README.md)
-
----
-
-### Interactive Presentation Generator
-
-**Transform data and findings into self-contained interactive HTML presentations**
-
-Turn thick data reports, content audit results, or research findings into beautiful, interactive presentations that stakeholders can open directly in their browser.
+Human fills the blank page — Claude enforces discipline. Foundation → Thesis → Structure → Research → Outline → Introduction → Drafting → Review, with quality gates at every phase. Includes `/write-rescue` (diagnose a broken draft) and `/write-status` (quick progress check).
 
 **Install:**
 ```bash
-/plugin install interactive-presentation-generator
+/plugin install structured-article-writer
 ```
-
-**Features:**
-- 📊 Interactive elements (tabs, accordions, charts)
-- 🎨 Brand customization support
-- 📱 Fully responsive and print-friendly
-- 🚀 Self-contained HTML (no dependencies)
-
-**Use cases:** Content audits, research synthesis, copy testing, stakeholder reports
 
 **Created by:** [Tim Metz](https://www.linkedin.com/in/metztim/) ([@timmetz](https://x.com/timmetz))
 
-**Learn more:** [Plugin Documentation](./plugins/interactive-presentation-generator/README.md)
-
----
-
-### Interview Transcript Analyzer
-
-**Analyze interview transcripts with unlimited token limits**
-
-Extract themes, rank insights by relevance, and find representative quotes from interview transcripts. Intelligently scales from 1 to 8 parallel agents based on workload.
-
-**Install:**
-```bash
-/plugin install interview-transcript-analyzer
-```
-
-**Features:**
-- 🤖 Intelligent agent scaling (1-8 agents based on volume)
-- 📊 Theme extraction across unlimited transcripts
-- 🎯 Smart ranking (frequency, impact, ICP relevance, custom)
-- 💬 Quote mining with quality scoring
-- ⚡ 15-20 transcripts analyzed in 15-20 minutes
-
-**Use cases:** Customer research, product feedback, user interviews, podcast research
-
-**Created by:** [Tim Metz](https://www.linkedin.com/in/metztim/) ([@timmetz](https://x.com/timmetz))
-
-**Learn more:** [Plugin Documentation](./plugins/interview-transcript-analyzer/README.md)
-
----
-
-### Content Library Auditor
-
-**Analyze WordPress XML, CMS JSON, or CSV exports for content insights**
-
-Reveal publishing trends, author contributions, topic distribution, and content gaps with interactive HTML reports and charts.
-
-**Install:**
-```bash
-/plugin install content-library-auditor
-```
-
-**Features:**
-- 📊 Multi-format support (WordPress XML, JSON, CSV)
-- 📈 Publishing trend analysis with seasonality detection
-- ✍️ Author contribution breakdowns
-- 🏷️ Topic analysis and content gap identification
-- 📉 Interactive HTML reports with Chart.js
-
-**Use cases:** Content audits, editorial planning, author performance, competitive analysis
-
-**Created by:** [Tim Metz](https://www.linkedin.com/in/metztim/) ([@timmetz](https://x.com/timmetz))
-
-**Learn more:** [Plugin Documentation](./plugins/content-library-auditor/README.md)
+**Learn more:** [Plugin Documentation](./plugins/structured-article-writer/README.md)
 
 ---
 
@@ -133,24 +52,75 @@ Human writes, AI coaches. A `/copywrite` command that guides you through Brief, 
 /plugin install copywriting-coach
 ```
 
-**Features:**
-- 📝 7-phase structured process with quality gates you can't skip
-- 🎯 Two coach modes: Strict (human always proposes first) or Helpful (AI offers suggestions)
-- 📊 Three-laws evaluation table for every variant
-- 💰 Money Words audit (Joanna Wiebe's framework)
-- ✍️ Supports landing pages, ads, emails, taglines, social posts, product descriptions
-
-**Use cases:** Landing page copy, ad headlines, email campaigns, taglines, A/B test variant generation
-
 **Created by:** [Tim Metz](https://www.linkedin.com/in/metztim/) ([@timmetz](https://x.com/timmetz))
 
 **Learn more:** [Plugin Documentation](./plugins/copywriting-coach/README.md)
 
 ---
 
+### Blog Style Guide Creator
+
+**AI-powered editorial style guide generation from blog content**
+
+Generate comprehensive editorial style guides by analyzing published blog articles, then review content with 8 specialized AI agents running in parallel.
+
+**Install:**
+```bash
+/plugin install blog-style-guide-creator
+```
+
+**Created by:** [Tim Metz](https://www.linkedin.com/in/metztim/) ([@timmetz](https://x.com/timmetz))
+
+**Learn more:** [Plugin Documentation](./plugins/blog-style-guide-creator/README.md)
+
+---
+
+## Skills
+
+### Design Reference
+
+**Iterative design research process**
+
+Brief → references → feedback → principles → prototype → approval. Builds visual direction from stakeholder input before any prototyping begins.
+
+**Install:**
+```bash
+/plugin install design-reference
+```
+
+---
+
+### Session Saver
+
+**Save structured session summaries for multi-day projects**
+
+Captures objectives, files changed, decisions, and generates a continuation prompt so you can pick up where you left off.
+
+**Install:**
+```bash
+/plugin install session-saver
+```
+
+---
+
+### Image Prompt Creator
+
+**Guided workflow for creating AI image generation prompts**
+
+5-phase process for Nano Banana (Google's AI image generator): Brief → Concept → Prompt Craft → Generate & Iterate → Save. Supports brand presets with color palettes, style guidelines, and reference images.
+
+**Install:**
+```bash
+/plugin install image-prompt-creator
+```
+
+---
+
 ## About Animalz
 
 [Animalz](https://animalz.co) is a content marketing agency specializing in high-quality editorial content for B2B SaaS companies. These plugins were developed internally to streamline our workflows and open-sourced to benefit the wider content marketing community.
+
+**Read our full guide:** [Claude Code for Content Marketers](https://www.animalz.co/blog/claude-code)
 
 ---
 
@@ -179,11 +149,12 @@ Want to contribute your own content marketing plugin? See the [Claude Code Plugi
 
 All plugins created by **Tim Metz** and published by **Animalz**:
 
-1. **Blog Style Guide Creator** - Editorial style guide generation
-2. **Interactive Presentation Generator** - Data to HTML presentations
-3. **Interview Transcript Analyzer** - Research synthesis at scale
-4. **Content Library Auditor** - CMS export analysis
-5. **Copywriting Coach** - Structured copywriting process
+1. **Structured Article Writer** — 8-phase thought leadership writing process
+2. **Copywriting Coach** — 7-phase short-form copy process
+3. **Blog Style Guide Creator** — Style guide generation and compliance review
+4. **Design Reference** — Iterative design research
+5. **Session Saver** — Session continuity for multi-day projects
+6. **Image Prompt Creator** — AI image prompt workflow
 
 **License:** MIT (all plugins)
 

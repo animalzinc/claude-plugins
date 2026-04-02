@@ -23,7 +23,7 @@ Before proceeding:
 Read the following files:
 - Article to review: $2
 - Brand style guide: `brands/$1/style-guide.md`
-- All 8 agent prompts from `.claude/prompts/`:
+- All 8 agent prompts from `agents/`:
   - voice-tone-agent.md
   - grammar-usage-agent.md
   - punctuation-agent.md
@@ -38,7 +38,7 @@ Read the following files:
 **CRITICAL: Use Task tool to launch ALL 8 agents simultaneously in a SINGLE message.**
 
 Each agent should receive:
-- The agent prompt from `.claude/prompts/[agent-name].md`
+- The agent prompt from `agents/[agent-name].md`
 - The complete article content from $2
 - The relevant section(s) from `brands/$1/style-guide.md`
 
@@ -138,8 +138,8 @@ Create a structured report:
 ## Next Steps
 
 - Review findings above
-- To apply corrections automatically: `/article-edit $1 $2`
-- To apply manually: Edit the article at $2 using the corrections provided
+- To apply corrections: Ask Claude to apply the corrections directly to the article at $2
+- Or edit the article manually using the corrections provided above
 ```
 
 ## Step 6: Conditional Auto-Apply or Dry Run
@@ -164,7 +164,7 @@ Create a structured report:
 
 **If neither flag is present:**
 - Display the report
-- Prompt user: "Review complete. Run `/article-edit $1 $2` to apply corrections."
+- Prompt user: "Review complete. Ask Claude to apply corrections, or edit the article manually."
 
 ## Step 7: Save Report
 

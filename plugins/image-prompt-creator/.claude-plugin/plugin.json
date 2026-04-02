@@ -1,0 +1,11 @@
+{
+  "name": "image-prompt-creator",
+  "version": "1.0.0",
+  "description": "5-phase workflow for creating production-quality AI image generation prompts. Handles brand consistency, concept exploration, Nano Banana prompt crafting, iterative revision, and saving. Includes full prompting guide for Google's Nano Banana image generator.",
+  "author": {
+    "name": "Tim Metz @ Animalz",
+    "email": "contact@animalz.co",
+    "url": "https://animalz.co"
+  },
+  "keywords": ["image", "prompt", "nano-banana", "design", "visual", "ai-images"]
+}

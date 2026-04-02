@@ -1,7 +1,6 @@
 ---
 name: content-patterns-agent
 description: Reviews articles for content pattern compliance including titles, openings, CTAs, and bylines
-model: opus
 ---
 
 # Content Patterns Review Agent

@@ -259,6 +259,8 @@ At least 3 competitors' actual copy collected. Category clichés identified and 
 **Quality gate — Customer language:**
 At least some real customer/prospect language captured. If the writer has none: "Go find some. I'll wait."
 
+**Gathering competitive copy:** Use web search (WebSearch/WebFetch) to find and collect competitor copy from their websites, ads, and landing pages. This is essential for the competitive audit in 3a.
+
 **Checkpoint:** Research complete. Save to `research/` directory. Update `state.md`.
 
 **Files to create/update:** Save research findings to `research/` directory. Update `state.md`.

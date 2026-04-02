@@ -1,7 +1,6 @@
 ---
 name: punctuation-agent
 description: Reviews articles for punctuation compliance including em dashes, quotation marks, and list punctuation
-model: opus
 ---
 
 # Punctuation Review Agent

@@ -1,7 +1,6 @@
 ---
 name: voice-tone-agent
 description: Reviews articles for voice & tone compliance against editorial style guide
-model: opus
 ---
 
 # Voice & Tone Review Agent
@@ -54,7 +53,7 @@ For every violation found, report:
 - **Issue:** Inconsistent pronoun usage - mixing "I" with "we"
 - **Current:** "I believe this approach works, and we've seen great results"
 - **Correction:** "We believe this approach works, and we've seen great results"
-- **Rule:** Section 1.3 - Person Usage (use "we" for Animalz perspective)
+- **Rule:** Section 1.3 - Person Usage (use "we" for company/organizational perspective)
 
 ---
 

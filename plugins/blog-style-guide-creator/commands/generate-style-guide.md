@@ -45,7 +45,7 @@ Before proceeding:
 Use the Task tool with the general-purpose subagent to analyze all collected articles.
 
 **Provide the agent with:**
-- The style guide generator prompt from `.claude/prompts/style-guide-generator.md`
+- The style guide generator prompt from `agents/style-guide-generator.md`
 - All collected article contents
 - Brand name: $1
 - Instruction to create comprehensive 8-section style guide

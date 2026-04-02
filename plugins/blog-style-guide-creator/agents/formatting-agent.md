@@ -1,7 +1,6 @@
 ---
 name: formatting-agent
 description: Reviews articles for formatting compliance including headings, lists, bold/italics, and hyperlinks
-model: opus
 ---
 
 # Formatting Review Agent

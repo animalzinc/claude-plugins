@@ -1,7 +1,6 @@
 ---
 name: technical-standards-agent
 description: Reviews articles for technical standards compliance including dates, times, percentages, and currency formatting
-model: opus
 ---
 
 # Technical Standards Review Agent
