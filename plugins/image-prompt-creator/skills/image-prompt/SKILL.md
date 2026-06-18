@@ -1,4 +1,4 @@
-<!-- SYNC: Source at animalz-intelligence-os/modules/image-prompt-creator/.claude/skills/image-prompt/SKILL.md -->
+<!-- SYNC: Source at animalz-intelligence-os/toolkit-repo/image-prompt-creator/.claude/skills/image-prompt/SKILL.md -->
 ---
 name: image-prompt
 description: "Create production-quality image generation prompts for Nano Banana (Google's AI image generator). Guides through brand selection, concept exploration, prompt crafting, and iterative revision. Use when asked to 'create an image prompt', 'make a featured image', 'generate image for blog', or similar."
