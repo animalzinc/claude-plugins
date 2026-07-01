@@ -7,7 +7,7 @@
   },
   "metadata": {
     "description": "Official Animalz Claude Code plugins for content marketing workflows",
-    "version": "2.0.0"
+    "version": "2.1.0"
   },
   "plugins": [
     {
@@ -162,6 +162,30 @@
         "ai-images"
       ],
       "category": "marketing",
+      "strict": false
+    },
+    {
+      "name": "mdview",
+      "source": "./plugins/mdview",
+      "description": "Render a markdown file into a clean browser reading view (not raw syntax) with rich-text copy and an inline-comment to paste-ready-feedback loop. A lightweight local review surface: no server, no login.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Tim Metz @ Animalz",
+        "url": "https://animalz.co"
+      },
+      "homepage": "https://github.com/animalzinc/claude-plugins",
+      "repository": "https://github.com/animalzinc/claude-plugins",
+      "license": "MIT",
+      "keywords": [
+        "markdown",
+        "preview",
+        "reading",
+        "review",
+        "comments",
+        "feedback",
+        "documentation"
+      ],
+      "category": "productivity",
       "strict": false
     }
   ]
