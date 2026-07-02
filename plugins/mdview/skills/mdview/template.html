@@ -135,16 +135,30 @@
     box-shadow: inset -2px 0 0 color-mix(in srgb, var(--marker) 45%, transparent);
     border-radius: 4px; transition: background var(--dur) var(--ease); }
 
+  /* Inline editing (double-click a block) */
+  #doc [data-block].editing { outline: 2px solid var(--brand); outline-offset: 5px;
+    border-radius: 4px; background: color-mix(in srgb, var(--brand) 4%, transparent); cursor: text; }
+  #doc [data-block].has-edit { background: color-mix(in srgb, var(--orphan) 7%, transparent);
+    box-shadow: inset -2px 0 0 color-mix(in srgb, var(--orphan) 50%, transparent);
+    border-radius: 4px; }
+  .marker.edit-marker { background: var(--orphan);
+    box-shadow: 0 1px 3px color-mix(in srgb, var(--orphan) 40%, transparent); }
+  .marker.edit-marker:hover { background: color-mix(in srgb, var(--orphan) 82%, var(--fg)); }
+  .cmt .old { font-size: 12.5px; color: var(--faint); line-height: 1.4; min-width: 0; padding-top: 2px;
+    text-decoration: line-through; overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+    -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .cmt.edit .num { background: var(--orphan); }
+
   /* Add-comment affordance (left gutter) */
-  #add-btn { position: absolute; left: 12px; width: 26px; height: 26px; padding: 0;
+  #add-btn { position: absolute; width: 26px; height: 26px; padding: 0;
     border: 1px solid var(--border); background: var(--surface); color: var(--muted);
     border-radius: 50%; cursor: pointer; font-size: 17px; line-height: 23px; text-align: center;
     display: none; box-shadow: 0 1px 2px rgba(0,0,0,.05);
     transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease); }
   #add-btn:hover { color: var(--brand); border-color: var(--brand); }
 
-  /* Comment markers (right gutter) */
-  .marker { position: absolute; right: 10px; width: 23px; height: 23px; border-radius: 50%;
+  /* Comment markers (right of the text column) */
+  .marker { position: absolute; width: 23px; height: 23px; border-radius: 50%;
     background: var(--marker); color: var(--on-brand); font-size: 12px; font-weight: 500; letter-spacing: 0;
     line-height: 1; display: flex; align-items: center; justify-content: center; padding-top: 1px;
     cursor: pointer; border: none; font-family: var(--ui);
@@ -183,15 +197,17 @@
   .cmt .row-act button:hover { color: var(--brand-hover); }
   .empty { color: var(--faint); font-size: 13.5px; line-height: 1.55; text-align: center;
     padding: 100px 10px 10px; background: url(data:image/png;base64,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) no-repeat top center; background-size: 78px auto; }
+  .panel-actions { display: flex; gap: 8px; align-items: stretch; margin-bottom: 16px; }
   #add-general { font: inherit; font-size: 12.5px; font-weight: 500; color: var(--muted); background: none;
-    border: 1px dashed var(--border); border-radius: 9px; padding: 9px 10px; width: 100%;
-    cursor: pointer; margin-top: 6px; letter-spacing: -0.01em;
+    border: 1px dashed var(--border); border-radius: 9px; padding: 9px 10px; flex: 1;
+    cursor: pointer; letter-spacing: -0.01em;
     transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease); }
   #add-general:hover { color: var(--brand); border-color: color-mix(in srgb, var(--brand) 55%, var(--border)); }
-  #btn-clear { font: inherit; font-size: 12px; color: var(--faint); background: none; border: none;
-    padding: 14px 4px 0; width: 100%; cursor: pointer; text-align: center; letter-spacing: -0.01em;
-    transition: color var(--dur) var(--ease); }
-  #btn-clear:hover { color: var(--orphan); }
+  #btn-clear { font: inherit; font-size: 12px; color: var(--faint); background: none;
+    border: 1px dashed transparent; border-radius: 9px; padding: 9px 8px; flex: 0 0 auto;
+    cursor: pointer; text-align: center; letter-spacing: -0.01em;
+    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease); }
+  #btn-clear:hover { color: var(--orphan); border-color: color-mix(in srgb, var(--orphan) 45%, var(--border)); }
 
   /* Composer popover */
   #composer { position: fixed; z-index: 100; width: 312px; background: var(--surface);
@@ -284,7 +300,7 @@
   "use strict";
   const RAW_MD = __MDVIEW_MARKDOWN_JSON__;
   const SOURCE_PATH = __MDVIEW_SOURCE_PATH__;
-  const FILENAME = SOURCE_PATH.split("/").pop();
+  const FILENAME = SOURCE_PATH.split(/[\\/]/).pop();
   const STORE_KEY = "mdview:comments:" + SOURCE_PATH;
   const THEME_KEY = "mdview:theme";
   const PANEL_KEY = "mdview:panel";
@@ -319,6 +335,11 @@
     if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
+  // non-anchor links open in a new tab, so the review (and any in-progress edit) is never navigated away
+  doc.querySelectorAll('a[href]:not([href^="#"])').forEach((a) => {
+    a.target = "_blank"; a.rel = "noopener";
+  });
+
   // tag leaf block elements (exclude blocks that contain another block, e.g. blockquote>p)
   let blocks = [];
   function tagBlocks() {
@@ -343,6 +364,13 @@
     const t = norm(el.textContent);
     if (c.blockPrefix && t.slice(0, c.blockPrefix.length) === c.blockPrefix) return true;
     if (c.quote && t.includes(norm(c.quote))) return true;
+    // an edit matches both its pre-edit text (after reload: doc shows the original
+    // source again) and its post-edit text (right after editing, before reload)
+    if (c.edit) {
+      const o = norm(c.oldText || "").slice(0, 80), nn = norm(c.newText || "").slice(0, 80);
+      if (o && t.slice(0, o.length) === o) return true;
+      if (nn && t.slice(0, nn.length) === nn) return true;
+    }
     return false;
   }
   // returns element | null(general) | undefined(orphaned)
@@ -371,9 +399,13 @@
   // ---- add-comment affordance ----
   let hoverBlock = null;
   function placeAddBtn(blk) {
+    if (editingBlock) return; // no comment affordance while an inline edit is open
     hoverBlock = blk;
     const wr = docWrap.getBoundingClientRect();
+    const dr = doc.getBoundingClientRect();
     const r = blk.getBoundingClientRect();
+    // hug the text column's left edge, not the window edge
+    addBtn.style.left = Math.max(6, dr.left - wr.left - 40) + "px";
     addBtn.style.top = (r.top - wr.top + docWrap.scrollTop + 1) + "px";
     addBtn.style.display = "block";
   }
@@ -448,17 +480,95 @@
   });
 
   function deleteComment(id) {
-    comments = comments.filter((c) => c.id !== id);
+    const c = comments.find((x) => x.id === id);
+    if (c && c.edit) {
+      // discarding an edit: put the original text back if the block still shows the edited version
+      const el = resolve(c);
+      if (el && norm(el.textContent) === norm(c.newText)) el.textContent = c.oldText;
+    }
+    comments = comments.filter((x) => x.id !== id);
     saveComments(comments);
     render();
   }
+
+  // ---- inline editing (double-click a block) ----
+  let editingBlock = null, editingStartText = "", editingOriginalHTML = "";
+
+  function editableBlock(blk) {
+    if (!blk) return false;
+    if (blk.tagName === "PRE" || blk.closest("pre, table")) return false;
+    if (blk.querySelector("img, input")) return false;
+    return true;
+  }
+  function startEdit(blk) {
+    finishEdit(true);
+    if (!editableBlock(blk)) { toast("This block can't be edited inline — add a comment instead"); return; }
+    editingBlock = blk;
+    editingStartText = norm(blk.textContent);
+    editingOriginalHTML = blk.innerHTML;
+    blk.classList.add("editing");
+    blk.setAttribute("contenteditable", "plaintext-only");
+    if (!blk.isContentEditable) blk.setAttribute("contenteditable", "true");
+    addBtn.style.display = "none";
+    blk.focus();
+    toast("Editing — click away to keep, Esc to cancel");
+  }
+  function finishEdit(commit) {
+    const blk = editingBlock;
+    if (!blk) return;
+    editingBlock = null; // clear first: blur() below re-enters via focusout
+    blk.classList.remove("editing");
+    blk.removeAttribute("contenteditable");
+    blk.blur();
+    if (!commit) { blk.innerHTML = editingOriginalHTML; return; }
+    const now = norm(blk.textContent);
+    if (now === editingStartText) return;
+    if (!now) { blk.innerHTML = editingOriginalHTML; toast("Block emptied — edit cancelled. Add a comment to request a deletion."); return; }
+    const entry = comments.find((c) => c.edit && blockMatches(blk, c));
+    if (entry) {
+      if (now === norm(entry.oldText)) {
+        comments = comments.filter((c) => c.id !== entry.id); // reverted to the original text
+      } else {
+        entry.newText = blk.textContent.trim();
+      }
+    } else {
+      comments.push({
+        id: "e" + Date.now() + Math.round(performance.now()),
+        edit: true, oldText: editingStartText, newText: blk.textContent.trim(),
+        blockIndex: Number(blk.dataset.block), blockPrefix: "", quote: "",
+        general: false, body: "", createdAt: Date.now(),
+      });
+    }
+    saveComments(comments);
+    render();
+  }
+  doc.addEventListener("dblclick", (e) => {
+    if (composer.style.display === "block") return;
+    const blk = e.target.closest("[data-block]");
+    if (!blk || !doc.contains(blk) || blk === editingBlock) return;
+    startEdit(blk);
+  });
+  doc.addEventListener("focusout", (e) => {
+    if (editingBlock && e.target === editingBlock) finishEdit(true);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (!editingBlock) return;
+    if (e.key === "Escape") { e.preventDefault(); finishEdit(false); }
+    else if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); finishEdit(true); }
+  });
 
   // ---- clear all (with undo) ----
   let lastCleared = null;
   function clearAll() {
     if (!comments.length) return;
+    finishEdit(true);
     const n = comments.length;
     lastCleared = comments.slice();
+    // restore original text of any block still showing an edited version
+    comments.filter((c) => c.edit).forEach((c) => {
+      const el = resolve(c);
+      if (el && norm(el.textContent) === norm(c.newText)) el.textContent = c.oldText;
+    });
     comments = [];
     saveComments(comments);
     closeComposer();
@@ -470,61 +580,102 @@
     });
   }
 
-  // ---- ordering: resolved (doc order) -> general -> orphaned ----
+  // ---- ordering: resolved (doc order) -> orphaned -> general ----
+  // (matches the numbering in the copied feedback: anchored items first, doc-wide notes last)
   function ordered() {
     const items = comments.map((c) => ({ c, el: resolve(c) }));
     const resolved = items.filter((o) => o.el).sort((a, b) => blocks.indexOf(a.el) - blocks.indexOf(b.el));
     const general = items.filter((o) => o.el === null).sort((a, b) => a.c.createdAt - b.c.createdAt);
     const orphan = items.filter((o) => o.el === undefined).sort((a, b) => a.c.createdAt - b.c.createdAt);
-    return { resolved, general, orphan, all: resolved.concat(general, orphan) };
+    return { resolved, general, orphan, all: resolved.concat(orphan, general) };
   }
 
   // ---- render markers + panel ----
   function render() {
     document.querySelectorAll(".marker").forEach((m) => m.remove());
-    doc.querySelectorAll(".has-comment").forEach((el) => el.classList.remove("has-comment"));
+    doc.querySelectorAll(".has-comment, .has-edit").forEach((el) => el.classList.remove("has-comment", "has-edit"));
     const o = ordered();
 
-    // numbering across resolved + general + orphan (panel matches markers)
+    // numbering across resolved + orphan + general (panel matches the copied feedback)
     const numOf = new Map();
     o.all.forEach((item, i) => numOf.set(item.c.id, i + 1));
 
-    // markers + block highlight for resolved
+    // markers + block highlight for resolved — markers hug the text column's right edge
     const wr = docWrap.getBoundingClientRect();
+    const dr = doc.getBoundingClientRect();
+    const markerLeft = Math.min(wr.width - 33, dr.right - wr.left + 14);
     o.resolved.forEach((item) => {
-      item.el.classList.add("has-comment");
+      item.el.classList.add(item.c.edit ? "has-edit" : "has-comment");
       const r = item.el.getBoundingClientRect();
       const mk = document.createElement("button");
-      mk.className = "marker";
+      mk.className = "marker" + (item.c.edit ? " edit-marker" : "");
       mk.textContent = numOf.get(item.c.id);
+      mk.style.left = markerLeft + "px";
       mk.style.top = (r.top - wr.top + docWrap.scrollTop + 1) + "px";
-      mk.title = item.c.body;
-      mk.addEventListener("click", () => openComposer(item.el, item.c));
+      mk.title = item.c.edit ? "Edited — click to edit again" : item.c.body;
+      mk.addEventListener("click", () => {
+        if (item.c.edit) startEdit(item.el); else openComposer(item.el, item.c);
+      });
       docWrap.appendChild(mk);
     });
 
     // count pill
-    const n = comments.length;
-    $("count").textContent = n ? n + (n === 1 ? " comment" : " comments") : "";
-    $("btn-feedback").disabled = n === 0;
+    const nEdits = comments.filter((c) => c.edit).length;
+    const nCom = comments.length - nEdits;
+    const parts = [];
+    if (nCom) parts.push(nCom + (nCom === 1 ? " comment" : " comments"));
+    if (nEdits) parts.push(nEdits + (nEdits === 1 ? " edit" : " edits"));
+    $("count").textContent = parts.join(" · ");
+    $("btn-feedback").disabled = comments.length === 0;
 
-    // panel
+    // panel — actions first, so they're reachable without scrolling past the comments
     panel.innerHTML = "";
+    const acts = document.createElement("div");
+    acts.className = "panel-actions";
+    const gen = document.createElement("button");
+    gen.id = "add-general"; gen.textContent = "+ General note";
+    gen.addEventListener("click", () => openComposer(null));
+    acts.appendChild(gen);
+    if (comments.length) {
+      const clr = document.createElement("button");
+      clr.id = "btn-clear"; clr.textContent = "Clear all";
+      clr.title = "Clear all comments and edits (with undo)";
+      clr.addEventListener("click", clearAll);
+      acts.appendChild(clr);
+    }
+    panel.appendChild(acts);
+
     const section = (label) => { const h = document.createElement("div"); h.className = "panel-h"; h.textContent = label; panel.appendChild(h); };
     const row = (item, cls) => {
       const c = item.c, el = document.createElement("div");
-      el.className = "cmt" + (cls ? " " + cls : "");
-      const quote = c.general ? "" : (c.quote || c.blockPrefix || "");
-      el.innerHTML =
-        '<div class="cmt-top"><span class="num">' + numOf.get(c.id) + "</span>" +
-        (quote ? '<span class="quote">“' + esc(quote) + "”</span>" : "") + "</div>" +
-        '<div class="body"></div>' +
-        '<div class="row-act"><button data-act="edit">Edit</button><button data-act="del">Delete</button></div>';
-      el.querySelector(".body").textContent = c.body;
+      el.className = "cmt" + (c.edit ? " edit" : "") + (cls ? " " + cls : "");
+      if (c.edit) {
+        el.innerHTML =
+          '<div class="cmt-top"><span class="num">' + numOf.get(c.id) + '</span><span class="old"></span></div>' +
+          '<div class="body"></div>' +
+          '<div class="row-act"><button data-act="edit">Edit</button><button data-act="del">Discard</button></div>';
+        el.querySelector(".old").textContent = c.oldText;
+        el.querySelector(".body").textContent = c.newText;
+      } else {
+        const quote = c.general ? "" : (c.quote || c.blockPrefix || "");
+        el.innerHTML =
+          '<div class="cmt-top"><span class="num">' + numOf.get(c.id) + "</span>" +
+          (quote ? '<span class="quote">“' + esc(quote) + "”</span>" : "") + "</div>" +
+          '<div class="body"></div>' +
+          '<div class="row-act"><button data-act="edit">Edit</button><button data-act="del">Delete</button></div>';
+        el.querySelector(".body").textContent = c.body;
+      }
       el.addEventListener("click", (e) => {
         const act = e.target.getAttribute && e.target.getAttribute("data-act");
         if (act === "del") { e.stopPropagation(); deleteComment(c.id); return; }
-        if (act === "edit") { e.stopPropagation(); openComposer(item.el || null, c); return; }
+        if (act === "edit") {
+          e.stopPropagation();
+          if (c.edit) {
+            if (item.el) { item.el.scrollIntoView({ behavior: "smooth", block: "center" }); startEdit(item.el); }
+            return;
+          }
+          openComposer(item.el || null, c); return;
+        }
         if (item.el) item.el.scrollIntoView({ behavior: "smooth", block: "center" });
       });
       panel.appendChild(el);
@@ -533,24 +684,16 @@
     if (o.all.length === 0) {
       const e = document.createElement("div");
       e.className = "empty";
-      e.textContent = "No comments yet. Hover any paragraph and click + to add one, or select text first to quote it.";
+      e.textContent = "No feedback yet. Hover a paragraph and click + to comment (select text first to quote it), or double-click a paragraph to edit it directly.";
       panel.appendChild(e);
     }
-    if (o.resolved.length) { section("Comments"); o.resolved.forEach((it) => row(it)); }
-    if (o.general.length) { section("General notes"); o.general.forEach((it) => row(it)); }
-    if (o.orphan.length) { section("Text changed"); o.orphan.forEach((it) => row(it, "orphan")); }
-
-    const gen = document.createElement("button");
-    gen.id = "add-general"; gen.textContent = "+ General note";
-    gen.addEventListener("click", () => openComposer(null));
-    panel.appendChild(gen);
-
-    if (comments.length) {
-      const clr = document.createElement("button");
-      clr.id = "btn-clear"; clr.textContent = "Clear all comments";
-      clr.addEventListener("click", clearAll);
-      panel.appendChild(clr);
+    if (o.resolved.length) {
+      const hasE = o.resolved.some((it) => it.c.edit), hasC = o.resolved.some((it) => !it.c.edit);
+      section(hasE && hasC ? "Comments & edits" : hasE ? "Edits" : "Comments");
+      o.resolved.forEach((it) => row(it));
     }
+    if (o.orphan.length) { section("Text changed"); o.orphan.forEach((it) => row(it, "orphan")); }
+    if (o.general.length) { section("General notes"); o.general.forEach((it) => row(it)); }
   }
 
   function esc(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
@@ -560,19 +703,29 @@
     const o = ordered();
     const anchored = o.resolved.concat(o.orphan);
     const lines = ["Feedback on `" + FILENAME + "`:", ""];
-    let n = 1;
+    let n = 1, hasEdits = false;
     anchored.forEach((item) => {
-      let q = (item.c.quote || item.c.blockPrefix || "").trim();
-      if (q.length > 120) q = q.slice(0, 120) + "…";
-      lines.push(n + '. On "' + q + '":');
-      lines.push("   " + item.c.body);
+      if (item.c.edit) {
+        hasEdits = true;
+        lines.push(n + ". Replace:");
+        lines.push('   "' + item.c.oldText + '"');
+        lines.push("   with:");
+        lines.push('   "' + item.c.newText + '"');
+      } else {
+        let q = (item.c.quote || item.c.blockPrefix || "").trim();
+        if (q.length > 120) q = q.slice(0, 120) + "…";
+        lines.push(n + '. On "' + q + '":');
+        lines.push("   " + item.c.body);
+      }
       n++;
     });
     if (o.general.length) {
       lines.push("", "General notes:");
-      o.general.forEach((item) => lines.push("- " + item.c.body));
+      o.general.forEach((item) => { lines.push(n + ". " + item.c.body); n++; });
     }
-    lines.push("", "Please revise accordingly.");
+    lines.push("", "Please revise accordingly." + (hasEdits
+      ? " For Replace items, keep the block's existing markdown formatting (links, emphasis) where it still applies."
+      : ""));
     return lines.join("\n");
   }
 
@@ -614,8 +767,9 @@
     }
   }
 
-  $("btn-rich").addEventListener("click", copyRichText);
+  $("btn-rich").addEventListener("click", () => { finishEdit(true); copyRichText(); });
   $("btn-feedback").addEventListener("click", () => {
+    finishEdit(true); // commit an in-progress inline edit first
     if (!comments.length) { toast("No comments yet"); return; }
     copyText(buildFeedback(), "Feedback copied. Paste it into the chat");
   });

@@ -1,8 +1,16 @@
 {
   "name": "mdview",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Render a markdown file into a clean browser reading view (not raw syntax) with rich-text copy and an inline-comment to paste-ready-feedback loop.",
-  "keywords": ["markdown", "preview", "reading", "review", "comments", "feedback", "documentation"],
+  "keywords": [
+    "markdown",
+    "preview",
+    "reading",
+    "review",
+    "comments",
+    "feedback",
+    "documentation"
+  ],
   "author": {
     "name": "Tim Metz @ Animalz",
     "email": "contact@animalz.co",

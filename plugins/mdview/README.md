@@ -43,17 +43,18 @@ Claude runs the bundled generator on the file, which writes a self-contained HTM
 
 ## What the page gives you
 
-- **Rendered reading view.** Full GitHub-flavored markdown: headings, lists, tables, task lists, code blocks, blockquotes, images. Light/dark toggle plus a color / black-and-white palette toggle.
-- **Copy as rich text.** Copies the rendered content as formatted text for pasting into email, a doc, or a notes app.
-- **Inline comments.** Hover any block and click the `+` to comment, or select text first to quote a specific phrase. Comments appear as numbered markers in the margin and in a side panel. A "+ General note" adds doc-wide feedback. Comments persist per file across reloads.
-- **Copy feedback.** Assembles every comment into a single paste-ready prompt. Paste it back into the chat and Claude applies the changes to the source.
-- **Clear all comments.** Wipes the saved comments for a file so the next review starts clean, with a one-tap Undo.
+- **Rendered reading view.** Full GitHub-flavored markdown: headings, lists, tables, task lists, code blocks, blockquotes, images. Light/dark toggle plus a color / black-and-white palette toggle. Local images are embedded into the file, so the page is fully self-contained.
+- **Copy as rich text.** Copies the rendered content as formatted text (including embedded images) for pasting into email, a doc, or a notes app.
+- **Inline comments.** Hover any block and click the `+` to comment, or select text first to quote a specific phrase. Comments appear as numbered markers beside the text and in a side panel. A "+ General note" adds doc-wide feedback. Comments persist per file across reloads.
+- **Inline edits.** Double-click any paragraph, heading, list item, or blockquote and just retype it. The change is tracked alongside your comments and lands in the copied feedback as a precise replace instruction, so small wording fixes don't need a comment at all.
+- **Copy feedback.** Assembles every comment and edit into a single paste-ready prompt. Paste it back into the chat and Claude applies the changes to the source.
+- **Clear all.** Wipes the saved comments and edits for a file so the next review starts clean, with a one-tap Undo.
 
 ## The feedback loop
 
 1. Claude writes a markdown file.
 2. You open it with mdview and read the rendered version.
-3. You drop inline comments where you want changes.
+3. You drop inline comments where you want changes, and directly retype anything small.
 4. You click **Copy feedback** and paste the result back into the chat.
 5. Claude revises the source. Repeat until it is right.
 
@@ -68,7 +69,9 @@ Claude runs the bundled generator on the file, which writes a self-contained HTM
 ## Notes and limits
 
 - Intended for your own trusted local files. The rendered markdown is not sanitized, so do not use it on untrusted content.
-- Relative image and link paths resolve against the source file's directory. Relative links to other markdown files open as raw text.
+- Local images up to 4 MB are embedded as data URIs; larger ones load from their original location (works locally, but not after pasting elsewhere). Remote images stay remote.
+- Relative link paths resolve against the source file's directory and open in a new tab. Relative links to other markdown files open as raw text.
+- Code blocks, tables, and blocks containing images can be commented on but not edited inline.
 - Nothing is downloaded at view time and no fonts are embedded, so generated files stay small and work offline.
 
 ---

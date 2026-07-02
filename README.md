@@ -116,6 +116,23 @@ Captures objectives, files changed, decisions, and generates a continuation prom
 
 ---
 
+### mdview
+
+**A clean, rendered reading view for markdown, with inline comments and edits that come back as a paste-ready prompt**
+
+Stop reading Claude's markdown output as raw syntax. mdview renders any .md file into a formatted page in your browser, lets you drop inline comments or directly retype small fixes, and copies all your feedback as one prompt for the next revision. No server, no login — just a self-contained HTML file.
+
+**Install:**
+```bash
+/plugin install mdview
+```
+
+**Created by:** [Tim Metz](https://www.linkedin.com/in/metztim/) ([@timmetz](https://x.com/timmetz))
+
+**Learn more:** [Plugin Documentation](./plugins/mdview/README.md)
+
+---
+
 ## About Animalz
 
 [Animalz](https://animalz.co) is a content marketing agency specializing in high-quality editorial content for B2B SaaS companies. These plugins were developed internally to streamline our workflows and open-sourced to benefit the wider content marketing community.
@@ -155,6 +172,7 @@ All plugins created by **Tim Metz** and published by **Animalz**:
 4. **Design Reference** — Iterative design research
 5. **Session Saver** — Session continuity for multi-day projects
 6. **Image Prompt Creator** — AI image prompt workflow
+7. **mdview** — Rendered markdown review with an inline-feedback loop
 
 **License:** MIT (all plugins)
 

@@ -9,11 +9,14 @@ and opens it in the default browser.
 Usage: python3 generate.py <path-to.md> [--browser <AppName>] [--no-open] [--print-path]
 """
 import argparse
+import base64
 import hashlib
 import html
 import json
+import re
 import subprocess
 import sys
+import urllib.parse
 from pathlib import Path
 
 SKILL_DIR = Path(__file__).resolve().parent
@@ -21,13 +24,55 @@ TEMPLATE = SKILL_DIR / "template.html"
 MARKED = SKILL_DIR / "assets" / "marked.min.js"
 CACHE = Path.home() / ".cache" / "mdview"
 
+# Local images get inlined as data URIs so the generated HTML is fully
+# self-contained and images survive "Copy as rich text" into other apps.
+MAX_INLINE_IMG = 4 * 1024 * 1024  # per image; larger ones fall back to <base>-relative loading
+IMG_MIME = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".gif": "image/gif",
+            ".webp": "image/webp", ".svg": "image/svg+xml", ".avif": "image/avif", ".bmp": "image/bmp"}
+MD_IMG = re.compile(r'!\[([^\]]*)\]\(\s*([^)\s]+)(\s+"[^"]*")?\s*\)')
+HTML_IMG = re.compile(r'(<img\b[^>]*\bsrc=")([^"]+)(")')
+FENCE = re.compile(r"^\s{0,3}(```|~~~)")
+
+
+def inline_images(md: str, base: Path) -> str:
+    def to_data_uri(url: str):
+        if re.match(r"^(https?:|data:|file:|//)", url):
+            return None  # remote or already-inlined: leave untouched
+        p = urllib.parse.unquote(url)
+        f = Path(p).expanduser() if p.startswith(("/", "~")) else base / p
+        mime = IMG_MIME.get(f.suffix.lower())
+        try:
+            if not mime or not f.is_file() or f.stat().st_size > MAX_INLINE_IMG:
+                return None
+            return "data:%s;base64,%s" % (mime, base64.b64encode(f.read_bytes()).decode())
+        except OSError:
+            return None
+
+    def sub_md(m):
+        uri = to_data_uri(m.group(2))
+        return "![%s](%s%s)" % (m.group(1), uri, m.group(3) or "") if uri else m.group(0)
+
+    def sub_html(m):
+        uri = to_data_uri(m.group(2))
+        return m.group(1) + uri + m.group(3) if uri else m.group(0)
+
+    out, in_fence = [], False
+    for line in md.splitlines(keepends=True):
+        if FENCE.match(line):
+            in_fence = not in_fence
+        elif not in_fence:
+            line = MD_IMG.sub(sub_md, line)
+            line = HTML_IMG.sub(sub_html, line)
+        out.append(line)
+    return "".join(out)
+
 
 def build(md_path: Path) -> Path:
     src = Path(md_path).expanduser().resolve()
     if not src.is_file():
         sys.exit(f"mdview: not a file: {src}")
 
-    md = src.read_text(encoding="utf-8")
+    md = inline_images(src.read_text(encoding="utf-8"), src.parent)
     tpl = TEMPLATE.read_text(encoding="utf-8")
     marked = MARKED.read_text(encoding="utf-8")
 
