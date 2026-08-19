@@ -37,7 +37,7 @@
     --brand: #ededed; --brand-hover: #ffffff; --link: #ededed; --marker: #d6d4d1; --orphan: #9a9a9a;
     --on-brand: #141414;
   }
-  html.mono.dark #doc input[type=checkbox]:checked {
+  html.mono.dark .docbody input[type=checkbox]:checked {
     background: var(--brand) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23141414' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5 12.5 10 17.5 19 7'/%3E%3C/svg%3E") center / 12px 12px no-repeat;
   }
   html.mono #toast .toast-act { color: #cfcfcf; }
@@ -85,60 +85,109 @@
 
   /* Layout */
   #layout { display: flex; align-items: flex-start; }
-  #doc-wrap { position: relative; flex: 1; min-width: 0; padding: 0 56px; }
-  #doc { max-width: 700px; margin: 56px auto 180px; font-family: var(--reading);
+  #doc-wrap { position: relative; flex: 1; min-width: 0; padding: 0 56px; container-type: inline-size; }
+  .docbody { max-width: 700px; margin: 56px auto 180px; font-family: var(--reading);
     font-size: 18px; line-height: 1.72; letter-spacing: -0.006em; }
 
+  /* YAML frontmatter: metadata, not prose. Sits above the title as a labelled card in
+     the UI font, so it never reads as the doc's opening paragraph. Each value is a <p>,
+     so it stays commentable and inline-editable like any other block. */
+  .docbody .fm { margin: 0 0 2.4em; padding: 13px 16px 15px; border: 1px solid var(--border);
+    border-radius: 10px; background: var(--surface); font-family: var(--ui);
+    letter-spacing: -0.005em; }
+  .docbody .fm-label { font-size: 10px; font-weight: 500; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--faint); margin-bottom: 11px; }
+  .docbody .fm-list { margin: 0; display: grid; column-gap: 20px; row-gap: 9px;
+    grid-template-columns: minmax(64px, max-content) minmax(0, 1fr); align-items: baseline; }
+  .docbody .fm-key { font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+    overflow-wrap: anywhere; }
+  .docbody .fm-val { margin: 0; min-width: 0; }
+  .docbody .fm-val p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--fg);
+    white-space: pre-wrap; overflow-wrap: anywhere; }
+  @container (max-width: 620px) {
+    .docbody .fm-list { grid-template-columns: minmax(0, 1fr); row-gap: 2px; }
+    .docbody .fm-key { margin-top: 8px; }
+  }
+
   /* Reading typography */
-  #doc h1, #doc h2, #doc h3, #doc h4, #doc h5, #doc h6 {
+  .docbody h1, .docbody h2, .docbody h3, .docbody h4, .docbody h5, .docbody h6 {
     font-family: var(--heading); font-weight: 400; letter-spacing: -0.02em; color: var(--fg); }
-  #doc h1 { font-size: 2.15em; line-height: 1.12; margin: .1em 0 .5em; }
-  #doc h2 { font-size: 1.5em; line-height: 1.2; margin: 1.8em 0 .55em;
+  .docbody h1 { font-size: 2.15em; line-height: 1.12; margin: .1em 0 .5em; }
+  .docbody h2 { font-size: 1.5em; line-height: 1.2; margin: 1.8em 0 .55em;
     padding-bottom: .3em; border-bottom: 1px solid var(--border); }
-  #doc h3 { font-size: 1.26em; margin: 1.5em 0 .4em; }
-  #doc h4 { font-size: 1.06em; margin: 1.35em 0 .3em; }
-  #doc h1 em, #doc h2 em, #doc h3 em, #doc h4 em { font-style: italic; }
-  #doc p { margin: 0 0 1.1em; }
-  #doc ul, #doc ol { margin: 0 0 1.1em; padding-left: 1.4em; }
-  #doc li { margin: .3em 0; padding-left: .12em; }
-  #doc li::marker { color: var(--faint); }
-  #doc li > p { margin: 0; }
-  #doc a { color: var(--link); text-decoration: none;
+  .docbody h3 { font-size: 1.26em; margin: 1.5em 0 .4em; }
+  .docbody h4 { font-size: 1.06em; margin: 1.35em 0 .3em; }
+  .docbody h1 em, .docbody h2 em, .docbody h3 em, .docbody h4 em { font-style: italic; }
+  .docbody p { margin: 0 0 1.1em; }
+  .docbody ul, .docbody ol { margin: 0 0 1.1em; padding-left: 1.4em; }
+  .docbody li { margin: .3em 0; padding-left: .12em; }
+  .docbody li::marker { color: var(--faint); }
+  .docbody li > p { margin: 0; }
+  .docbody a { color: var(--link); text-decoration: none;
     border-bottom: 1px solid color-mix(in srgb, var(--link) 32%, transparent);
     transition: border-color var(--dur) var(--ease); }
-  #doc a:hover { border-bottom-color: var(--link); }
-  #doc strong { font-weight: 700; }
-  #doc em { font-style: italic; }
-  #doc blockquote { margin: 1.5em 0; padding: .75em 1.3em .75em 1.4em; color: var(--muted); font-style: italic;
+  .docbody a:hover { border-bottom-color: var(--link); }
+  .docbody strong { font-weight: 700; }
+  .docbody em { font-style: italic; }
+  .docbody blockquote { margin: 1.5em 0; padding: .75em 1.3em .75em 1.4em; color: var(--muted); font-style: italic;
     border-left: 3px solid color-mix(in srgb, var(--brand) 45%, var(--border)); }
-  #doc blockquote p:last-child { margin-bottom: 0; }
-  #doc code { font-family: var(--mono); font-size: .86em; background: var(--code-bg);
+  .docbody blockquote p:last-child { margin-bottom: 0; }
+  .docbody code { font-family: var(--mono); font-size: .86em; background: var(--code-bg);
     padding: .15em .42em; border-radius: 5px; letter-spacing: 0; }
-  #doc pre { background: var(--code-bg); padding: 15px 18px; border-radius: 10px;
-    overflow: auto; margin: 0 0 1.2em; border: 1px solid var(--border); }
-  #doc pre code { background: none; padding: 0; font-size: .84em; }
-  #doc img { max-width: 100%; height: auto; border-radius: 8px; }
-  #doc hr { border: none; border-top: 1px solid var(--border); margin: 2.4em 0; }
-  #doc table { border-collapse: collapse; width: 100%; margin: 0 0 1.2em;
-    font-size: .93em; display: block; overflow-x: auto; }
-  #doc th, #doc td { border: 1px solid var(--border); padding: 8px 13px; text-align: left; }
-  #doc th { background: color-mix(in srgb, var(--brand) 6%, transparent); font-weight: 500; }
-  #doc input[type=checkbox] { appearance: none; -webkit-appearance: none; margin: 0 .55em 0 0;
+  .docbody pre { background: var(--code-bg); padding: 15px 18px; border-radius: 10px;
+    overflow: auto; margin: 0 0 1.2em; border: 1px solid var(--border);
+    /* wrap by default: long lines reflow instead of scrolling sideways */
+    white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; }
+  .docbody pre.nowrap { white-space: pre; overflow-wrap: normal; word-break: normal; overflow-x: auto; }
+  .docbody pre code { background: none; padding: 0; font-size: .84em; }
+
+  /* Per-code-block toolbar (copy + wrap toggle). Lives in a .code-wrap sibling of
+     <pre>, never inside it, so pre.textContent stays clean for the comment/anchor system. */
+  .docbody .code-wrap { position: relative; margin: 0 0 1.2em; }
+  .docbody .code-wrap pre { margin: 0; }
+  .docbody .code-tools { position: absolute; top: 8px; right: 8px; display: flex; gap: 5px;
+    opacity: 0; pointer-events: none; transition: opacity var(--dur) var(--ease); z-index: 3; }
+  .docbody .code-wrap:hover .code-tools, .docbody .code-tools:focus-within { opacity: 1; pointer-events: auto; }
+  .docbody .code-tool { font: inherit; font-family: var(--ui); font-size: 11.5px; font-weight: 500;
+    line-height: 1; color: var(--muted); background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 8px; cursor: pointer; letter-spacing: -0.01em;
+    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease); }
+  .docbody .code-tool:hover { color: var(--fg); border-color: color-mix(in srgb, var(--fg) 20%, var(--border)); }
+  .docbody .code-tool.ok { color: var(--brand); border-color: color-mix(in srgb, var(--brand) 45%, var(--border)); }
+  .docbody .code-tool[aria-pressed="true"] { color: var(--on-brand); background: var(--brand); border-color: transparent; }
+  .docbody.copying .code-tools { display: none; } /* keep toolbar out of "Copy as rich text" output */
+  .docbody img { max-width: 100%; height: auto; border-radius: 8px; }
+  .docbody hr { border: none; border-top: 1px solid var(--border); margin: 2.4em 0; }
+  /* Tables break out of the reading column: natural width, capped at the
+     space actually available (100cqw tracks #doc-wrap, so the comments panel
+     is accounted for). A scrollbar appears only when even that isn't enough. */
+  .docbody table { border-collapse: collapse; width: fit-content; min-width: 100%;
+    max-width: calc(100cqw - 112px); margin: 0 0 1.2em; margin-left: 50%;
+    transform: translateX(-50%); font-size: .93em; display: block; overflow-x: auto; }
+  .docbody th, .docbody td { border: 1px solid var(--border); padding: 8px 13px; text-align: left; }
+  .docbody th { background: color-mix(in srgb, var(--brand) 6%, transparent); font-weight: 500; }
+  .docbody input[type=checkbox] { appearance: none; -webkit-appearance: none; margin: 0 .55em 0 0;
     width: 17px; height: 17px; border: 1.5px solid color-mix(in srgb, var(--fg) 26%, var(--border));
     border-radius: 5px; background: var(--surface); vertical-align: -0.24em; position: relative;
     cursor: default; transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease); }
-  #doc input[type=checkbox]:checked { border-color: var(--brand);
+  .docbody input[type=checkbox]:checked { border-color: var(--brand);
     background: var(--brand) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5 12.5 10 17.5 19 7'/%3E%3C/svg%3E") center / 12px 12px no-repeat; }
-  #doc ul:has(input[type=checkbox]) { list-style: none; padding-left: .1em; }
-  #doc li:has(input[type=checkbox]) { margin: .4em 0; }
-  #doc [data-block].has-comment { background: color-mix(in srgb, var(--marker) 6%, transparent);
+  .docbody ul:has(input[type=checkbox]) { list-style: none; padding-left: .1em; }
+  .docbody li:has(input[type=checkbox]) { margin: .4em 0; }
+  .docbody [data-block].has-comment { background: color-mix(in srgb, var(--marker) 6%, transparent);
     box-shadow: inset -2px 0 0 color-mix(in srgb, var(--marker) 45%, transparent);
     border-radius: 4px; transition: background var(--dur) var(--ease); }
 
+  /* Table cells are commentable/editable blocks: show which one the cursor is on,
+     since a whole row shares one vertical position in the gutter. */
+  .docbody td.hover-cell, .docbody th.hover-cell {
+    box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--brand) 30%, transparent); }
+
   /* Inline editing (double-click a block) */
-  #doc [data-block].editing { outline: 2px solid var(--brand); outline-offset: 5px;
+  .docbody [data-block].editing { outline: 2px solid var(--brand); outline-offset: 5px;
     border-radius: 4px; background: color-mix(in srgb, var(--brand) 4%, transparent); cursor: text; }
-  #doc [data-block].has-edit { background: color-mix(in srgb, var(--orphan) 7%, transparent);
+  .docbody td.editing, .docbody th.editing { outline-offset: -2px; border-radius: 0; }
+  .docbody [data-block].has-edit { background: color-mix(in srgb, var(--orphan) 7%, transparent);
     box-shadow: inset -2px 0 0 color-mix(in srgb, var(--orphan) 50%, transparent);
     border-radius: 4px; }
   .marker.edit-marker { background: var(--orphan);
@@ -148,6 +197,11 @@
     text-decoration: line-through; overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
     -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
   .cmt.edit .num { background: var(--orphan); }
+  /* A code-block edit can be hundreds of lines; clamp the panel preview so one card
+     can't own the whole panel. The full text still reaches the copied feedback. */
+  .cmt.codeedit .body { font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: 12px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+    -webkit-line-clamp: 8; -webkit-box-orient: vertical; }
 
   /* Add-comment affordance (left gutter) */
   #add-btn { position: absolute; width: 26px; height: 26px; padding: 0;
@@ -156,6 +210,9 @@
     display: none; box-shadow: 0 1px 2px rgba(0,0,0,.05);
     transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease); }
   #add-btn:hover { color: var(--brand); border-color: var(--brand); }
+  /* inside a table cell the button floats over content, so it needs its own backdrop */
+  #add-btn.in-cell { width: 22px; height: 22px; font-size: 15px; line-height: 19px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.14); }
 
   /* Comment markers (right of the text column) */
   .marker { position: absolute; width: 23px; height: 23px; border-radius: 50%;
@@ -187,6 +244,8 @@
     min-width: 0; padding-top: 2px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
     -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
   .cmt.orphan .num { background: var(--orphan); }
+  .cmt .loc { font-size: 11.5px; color: var(--faint); margin-top: 5px; margin-left: 28px;
+    line-height: 1.35; overflow-wrap: break-word; }
   .cmt .body { font-size: 13.5px; margin-top: 7px; line-height: 1.5; white-space: pre-wrap;
     overflow-wrap: break-word; word-break: break-word; color: var(--fg); }
   .cmt .row-act { display: flex; gap: 14px; margin-top: 11px; padding-top: 9px;
@@ -244,11 +303,81 @@
     #comments { position: fixed; right: 0; top: 49px; height: calc(100vh - 49px);
       box-shadow: -10px 0 30px rgba(20,16,30,.14); z-index: 40; background: var(--surface); }
     #doc-wrap { padding: 0 40px; }
-    #doc { margin-top: 40px; }
+    .docbody { margin-top: 40px; }
     .toolbar .name { max-width: 42vw; }
   }
+
+  /* ---------- split mode: reference pane (left) + working pane (right) ----------
+     Only active when the page was generated with a second file. The panes scroll
+     independently so they can be kept aligned; markers already position against
+     #doc-wrap's scrollTop, so the working pane needs no other change. */
+  #ref-wrap { display: none; }
+  html.split, html.split body { height: 100%; overflow: hidden; }
+  html.split #layout { height: calc(100vh - 49px); align-items: stretch; }
+  html.split #ref-wrap { display: flex; flex-direction: column; flex: 1 1 0;
+    min-width: 0; border-right: 1px solid var(--border); background: var(--bg); }
+  html.split #comments { align-self: stretch; height: auto; }
+  /* The working pane's scroller stays #doc-wrap itself — marker and add-button
+     positioning is written against its scrollTop — so the header goes in a column
+     wrapper around it rather than inside it. */
+  #doc-col { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+  html.split #doc-col { flex: 1 1 0; }
+  html.split #doc-wrap, html.split #ref-body { flex: 1; min-height: 0; overflow-y: auto;
+    padding: 0 46px; overscroll-behavior: contain; }
+  html.split .docbody { margin: 34px auto 220px; }
+  /* pane header */
+  .pane-h { display: flex; align-items: baseline; gap: 9px; flex: 0 0 auto;
+    padding: 9px 46px 9px; border-bottom: 1px solid var(--border);
+    background: var(--bg); font-family: var(--ui); }
+  .pane-h .pane-name { font-size: 12.5px; font-weight: 500; color: var(--fg);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pane-h .pane-role { font-size: 10px; font-weight: 500; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--faint); flex: 0 0 auto; }
+  html:not(.split) .pane-h { display: none; }
+  /* reference pane is read-only: dim it slightly and kill the edit affordances */
+  html.split #ref { opacity: .92; }
+  html.split #ref .code-tools { display: none; }
+  /* per-block "bring across" control, mirrored on the reference pane's right edge */
+  #ref-btns { position: absolute; inset: 0; pointer-events: none; }
+  .bring-btn { position: absolute; display: flex; gap: 3px; pointer-events: auto;
+    opacity: 0; transition: opacity var(--dur) var(--ease); }
+  .bring-btn.show, .bring-btn:focus-within { opacity: 1; }
+  .bring-btn button { font: inherit; font-family: var(--ui); font-size: 11px; font-weight: 500;
+    line-height: 1; padding: 4px 7px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--surface); color: var(--muted); cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,.05); white-space: nowrap;
+    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease); }
+  .bring-btn button:hover { color: var(--brand); border-color: var(--brand); }
+  .bring-btn button.ok { color: var(--brand); border-color: var(--brand); }
+  #ref .ref-hover { background: color-mix(in srgb, var(--brand) 7%, transparent);
+    border-radius: 5px; box-shadow: 0 0 0 5px color-mix(in srgb, var(--brand) 7%, transparent); }
+  #ref .brought { box-shadow: inset 3px 0 0 var(--brand); padding-left: 11px;
+    margin-left: -14px; border-radius: 2px; }
+  /* bring items in the panel */
+  .cmt.bring { border-left-color: var(--brand); }
+  .cmt.bring .cmt-src { font-family: var(--mono); font-size: 10.5px; color: var(--faint);
+    display: block; margin-bottom: 4px; }
+  .cmt.bring pre { font-family: var(--mono); font-size: 11px; line-height: 1.45;
+    background: var(--code-bg); border-radius: 6px; padding: 7px 9px; margin: 0;
+    max-height: 132px; overflow: auto; white-space: pre-wrap; word-break: break-word; }
+  /* scroll-sync toggle sits with the other icon buttons */
+  .tb.icon.on { color: var(--brand); border-color: var(--brand); }
+  html:not(.split) #btn-sync { display: none; }
+  @media (max-width: 1100px) {
+    html.split #doc-wrap, html.split #ref-body { padding: 0 26px; }
+    .pane-h { padding-left: 26px; padding-right: 26px; }
+  }
+/* ---- mermaid diagrams: rendered SVG shown in place of the code, source behind a toggle ---- */
+.mermaid-render { padding: 8px 0; overflow-x: auto; }
+.mermaid-render svg { max-width: 100%; height: auto; }
+html.dark .mermaid-render { background: #fff; border-radius: 8px; padding: 12px; }
+.code-wrap.mermaid-rendered pre { display: none; }
+.code-wrap.mermaid-rendered.show-code pre { display: block; }
+.code-wrap.mermaid-rendered.show-code .mermaid-render { display: none; }
 </style>
 <script>
+  // Split mode is set before first paint so the panes never flash as a single column.
+  if (__MDVIEW_IS_SPLIT__) document.documentElement.classList.add("split");
   // Palette toggle (Animalz color <-> black & white). Independent of the app logic.
   try { if (localStorage.getItem("mdview:mono") === "on") document.documentElement.classList.add("mono"); } catch (e) {}
   document.addEventListener("DOMContentLoaded", function () {
@@ -269,16 +398,33 @@
     <span class="spacer"></span>
     <button class="tb" id="btn-rich" title="Copy the rendered text as rich/formatted text">Copy as rich text</button>
     <button class="tb primary" id="btn-feedback" title="Copy your comments as a paste-ready prompt">Copy feedback</button>
+    <button class="tb icon" id="btn-sync" title="Keep the two panes aligned by heading" aria-label="Toggle scroll sync"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h11"></path><polyline points="12 5 15 8 12 11"></polyline><path d="M20 16H9"></path><polyline points="12 13 9 16 12 19"></polyline></svg></button>
     <button class="tb icon" id="btn-panel" title="Toggle comments panel" aria-label="Toggle comments panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="15" y1="4" x2="15" y2="20"></line></svg></button>
     <button class="tb icon" id="btn-mono" title="Toggle Animalz color / black & white" aria-label="Toggle color palette"><svg class="icon-color" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5" fill="currentColor"></circle></svg><svg class="icon-nocolor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="7.5"></circle></svg></button>
     <button class="tb icon" id="btn-theme" title="Toggle light/dark" aria-label="Toggle light/dark"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"></circle><line x1="12" y1="2.6" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="21.4"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="2.6" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="21.4" y2="12"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.4A8 8 0 0 1 9.6 4 6.5 6.5 0 1 0 20 14.4z"></path></svg></button>
   </header>
 
   <div id="layout">
-    <main id="doc-wrap">
-      <article id="doc"></article>
-      <button id="add-btn" title="Comment on this block">+</button>
-    </main>
+    <section id="ref-wrap" aria-label="Reference document">
+      <div class="pane-h">
+        <span class="pane-role">Reference</span>
+        <span class="pane-name" id="ref-name"></span>
+      </div>
+      <div id="ref-body">
+        <article id="ref" class="docbody"></article>
+        <div id="ref-btns"></div>
+      </div>
+    </section>
+    <div id="doc-col">
+      <div class="pane-h">
+        <span class="pane-role">Working</span>
+        <span class="pane-name" id="doc-name"></span>
+      </div>
+      <main id="doc-wrap">
+        <article id="doc" class="docbody"></article>
+        <button id="add-btn" title="Comment on this block">+</button>
+      </main>
+    </div>
     <aside id="comments"></aside>
   </div>
 
@@ -295,16 +441,29 @@
   <div id="toast"></div>
 
 <script>/*__MARKED_JS__*/</script>
+<script>/*__MERMAID_JS__*/</script>
 <script>
 (function () {
   "use strict";
   const RAW_MD = __MDVIEW_MARKDOWN_JSON__;
+  const FRONTMATTER_HTML = __MDVIEW_FRONTMATTER_JSON__;
   const SOURCE_PATH = __MDVIEW_SOURCE_PATH__;
   const FILENAME = SOURCE_PATH.split(/[\\/]/).pop();
-  const STORE_KEY = "mdview:comments:" + SOURCE_PATH;
+  // Split mode: a read-only reference document rendered beside the working one.
+  const REF_MD = __MDVIEW_REF_MARKDOWN_JSON__;          // null when not in split mode
+  const REF_FRONTMATTER_HTML = __MDVIEW_REF_FRONTMATTER_JSON__;
+  const REF_PATH = __MDVIEW_REF_SOURCE_PATH__;
+  const REF_FILENAME = REF_PATH ? REF_PATH.split(/[\\/]/).pop() : "";
+  const SPLIT = REF_MD !== null;
+  // Feedback is keyed on the *pair* in split mode, so a split session never collides
+  // with the comments saved from viewing either file on its own.
+  const STORE_KEY = "mdview:comments:" + SOURCE_PATH + (SPLIT ? "||" + REF_PATH : "");
+  const SYNC_KEY = "mdview:sync";
   const THEME_KEY = "mdview:theme";
   const PANEL_KEY = "mdview:panel";
-  const BLOCK_SEL = "p, li, h1, h2, h3, h4, h5, h6, blockquote, pre, table";
+  // td/th are blocks in their own right, so a single table cell can be commented on and
+  // edited (the whole <table> then stops being a leaf and drops out of the block list).
+  const BLOCK_SEL = "p, li, h1, h2, h3, h4, h5, h6, blockquote, pre, table, td, th";
 
   const $ = (id) => document.getElementById(id);
   const doc = $("doc"), docWrap = $("doc-wrap"), panel = $("comments");
@@ -314,7 +473,11 @@
   // ---- render markdown ----
   marked.setOptions({ gfm: true, breaks: false });
   doc.innerHTML = marked.parse(RAW_MD);
-  $("filename").textContent = FILENAME;
+  // frontmatter card goes in before tagBlocks(), so its values are ordinary blocks
+  if (FRONTMATTER_HTML) doc.insertAdjacentHTML("afterbegin", FRONTMATTER_HTML);
+  $("filename").textContent = SPLIT ? REF_FILENAME + "  →  " + FILENAME : FILENAME;
+  $("doc-name").textContent = FILENAME;
+  $("ref-name").textContent = REF_FILENAME;
 
   // heading slugs (marked v12 dropped headerIds)
   const usedIds = new Set();
@@ -348,7 +511,135 @@
   }
   tagBlocks();
 
+  // ---- code-block toolbar: copy raw text + per-block wrap toggle (wrap on by default) ----
+  // Each <pre> is moved into a .code-wrap sibling that also holds the toolbar, so the
+  // toolbar's text never lands in pre.textContent (the comment/anchor system reads that).
+  function enhanceCodeBlocks() {
+    doc.querySelectorAll("pre").forEach((pre) => {
+      if (pre.parentElement && pre.parentElement.classList.contains("code-wrap")) return;
+      const code = pre.querySelector("code") || pre;
+      const wrap = document.createElement("div");
+      wrap.className = "code-wrap";
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+
+      const bar = document.createElement("div");
+      bar.className = "code-tools";
+      bar.setAttribute("contenteditable", "false");
+
+      const wrapBtn = document.createElement("button");
+      wrapBtn.type = "button";
+      wrapBtn.className = "code-tool";
+      wrapBtn.textContent = "Wrap";
+      wrapBtn.setAttribute("aria-pressed", "true"); // wrapping is the default state
+      wrapBtn.title = "Toggle line wrapping for this block";
+      wrapBtn.addEventListener("click", () => {
+        const nowrap = pre.classList.toggle("nowrap");
+        wrapBtn.setAttribute("aria-pressed", String(!nowrap));
+      });
+
+      const copyBtn = document.createElement("button");
+      copyBtn.type = "button";
+      copyBtn.className = "code-tool";
+      copyBtn.textContent = "Copy";
+      copyBtn.title = "Copy this block's raw text";
+      copyBtn.addEventListener("click", async () => {
+        const flash = (label, ok) => {
+          copyBtn.textContent = label;
+          copyBtn.classList.toggle("ok", !!ok);
+          clearTimeout(copyBtn._t);
+          copyBtn._t = setTimeout(() => { copyBtn.textContent = "Copy"; copyBtn.classList.remove("ok"); }, 1400);
+        };
+        try { await navigator.clipboard.writeText(code.textContent); flash("Copied", true); }
+        catch (e) { flash("Failed", false); }
+      });
+
+      bar.appendChild(wrapBtn);
+      bar.appendChild(copyBtn);
+      wrap.appendChild(bar);
+    });
+  }
+  enhanceCodeBlocks();
+
+  // ---- mermaid: render each ```mermaid block to SVG, keep the source <pre> in the DOM ----
+  // The SVG goes in a sibling .mermaid-render inside the .code-wrap (never inside the <pre>),
+  // so pre.textContent — which the comment/anchor system reads — stays the raw mermaid source.
+  // mermaid.min.js is only injected by generate.py when the document contains a mermaid fence.
+  let mermaidSeq = 0;
+  async function renderMermaidIn(root) {
+    if (!window.mermaid) return;
+    for (const codeEl of root.querySelectorAll("pre > code.language-mermaid")) {
+      const pre = codeEl.parentElement;
+      try {
+        const { svg } = await mermaid.render("mermaid-" + (mermaidSeq++), codeEl.textContent);
+        const holder = document.createElement("div");
+        holder.className = "mermaid-render";
+        holder.setAttribute("contenteditable", "false");
+        holder.innerHTML = svg;
+        const wrap = pre.closest(".code-wrap");
+        if (wrap) {
+          wrap.insertBefore(holder, pre);
+          wrap.classList.add("mermaid-rendered");
+          const bar = wrap.querySelector(".code-tools");
+          if (bar) {
+            const codeBtn = document.createElement("button");
+            codeBtn.type = "button";
+            codeBtn.className = "code-tool";
+            codeBtn.textContent = "Code";
+            codeBtn.title = "Toggle between the diagram and its mermaid source";
+            codeBtn.addEventListener("click", () => {
+              const showing = wrap.classList.toggle("show-code");
+              codeBtn.textContent = showing ? "Diagram" : "Code";
+            });
+            bar.insertBefore(codeBtn, bar.firstChild);
+          }
+        } else {
+          // reference pane: no code-wrap enhancement there, hide the pre directly
+          pre.insertAdjacentElement("beforebegin", holder);
+          pre.style.display = "none";
+        }
+      } catch (e) { /* bad mermaid syntax: leave the code block visible */ }
+    }
+  }
+  if (window.mermaid) {
+    mermaid.initialize({ startOnLoad: false, theme: "neutral", securityLevel: "loose" });
+    renderMermaidIn(doc);
+  }
+
   const norm = (s) => (s || "").replace(/\s+/g, " ").trim();
+  // Write plain text back into a block, keeping a <pre>'s inner <code> wrapper so the
+  // code styling survives an undo (a bare textContent assignment would drop it).
+  function setBlockText(el, text) {
+    const code = el.tagName === "PRE" ? el.querySelector("code") : null;
+    (code || el).textContent = text;
+  }
+
+  // ---- table cells ----
+  // A cell's text alone is a terrible anchor ("Nothing" can occur six times), so every
+  // cell comment/edit also stores its row label + column header + grid coordinates.
+  function cellInfo(el) {
+    const td = el && el.closest && el.closest("td, th");
+    if (!td || !doc.contains(td)) return null;
+    const tr = td.parentElement, table = td.closest("table");
+    if (!tr || !table) return null;
+    const ci = [...tr.children].indexOf(td);
+    const ri = [...table.querySelectorAll("tr")].indexOf(tr);
+    const headCells = (table.querySelector("thead tr") || {}).children;
+    const col = headCells && headCells[ci] ? norm(headCells[ci].textContent) : "";
+    // first cell of the row is the label, unless it's an index column ("1", "2", …)
+    let row = norm(tr.children[0] ? tr.children[0].textContent : "");
+    if ((!row || /^\W*\d+\W*$/.test(row)) && tr.children[1]) row = norm(tr.children[1].textContent);
+    return { row, col, ri, ci };
+  }
+  // "row “Data collection”, column “What's needed”" — used in the panel and the copied feedback
+  function cellLabel(cell) {
+    if (!cell) return "";
+    const parts = [];
+    if (cell.row) parts.push("row “" + cell.row + "”");
+    if (cell.col) parts.push("column “" + cell.col + "”");
+    if (!parts.length) parts.push("cell " + (cell.ri + 1) + "," + (cell.ci + 1));
+    return "table " + parts.join(", ");
+  }
 
   // ---- storage ----
   function loadComments() {
@@ -361,6 +652,15 @@
 
   // ---- anchor resolution ----
   function blockMatches(el, c) {
+    // cell anchors resolve by position in the grid, never by text: cell text is short,
+    // often duplicated, and (for edits) deliberately changed
+    if (c.cell) {
+      const info = cellInfo(el);
+      if (!info) return false;
+      if (info.ci === c.cell.ci && info.row === c.cell.row && info.col === c.cell.col) return true;
+      return info.ri === c.cell.ri && info.ci === c.cell.ci;
+    }
+    if (cellInfo(el)) return false; // don't let a non-cell anchor drift into a table
     const t = norm(el.textContent);
     if (c.blockPrefix && t.slice(0, c.blockPrefix.length) === c.blockPrefix) return true;
     if (c.quote && t.includes(norm(c.quote))) return true;
@@ -398,22 +698,31 @@
 
   // ---- add-comment affordance ----
   let hoverBlock = null;
+  function markHoverCell(blk) {
+    doc.querySelectorAll(".hover-cell").forEach((el) => el.classList.remove("hover-cell"));
+    if (blk && blk.closest("td, th") === blk) blk.classList.add("hover-cell");
+  }
   function placeAddBtn(blk) {
     if (editingBlock) return; // no comment affordance while an inline edit is open
     hoverBlock = blk;
+    markHoverCell(blk);
     const wr = docWrap.getBoundingClientRect();
     const dr = doc.getBoundingClientRect();
     const r = blk.getBoundingClientRect();
-    // hug the text column's left edge, not the window edge
-    addBtn.style.left = Math.max(6, dr.left - wr.left - 40) + "px";
-    addBtn.style.top = (r.top - wr.top + docWrap.scrollTop + 1) + "px";
+    // cells: straddle the cell's own top-left corner, so it's unambiguous which cell is
+    // targeted (a whole row shares one top, so the left gutter can't tell them apart)
+    // and it covers as little of the cell's text as possible
+    const inCell = blk.tagName === "TD" || blk.tagName === "TH";
+    addBtn.style.left = (inCell ? Math.max(2, r.left - wr.left - 9) : Math.max(6, dr.left - wr.left - 40)) + "px";
+    addBtn.style.top = (r.top - wr.top + docWrap.scrollTop + (inCell ? -9 : 1)) + "px";
+    addBtn.classList.toggle("in-cell", inCell);
     addBtn.style.display = "block";
   }
   doc.addEventListener("mouseover", (e) => {
     const blk = e.target.closest("[data-block]");
     if (blk && doc.contains(blk)) placeAddBtn(blk);
   });
-  docWrap.addEventListener("mouseleave", () => { addBtn.style.display = "none"; });
+  docWrap.addEventListener("mouseleave", () => { addBtn.style.display = "none"; markHoverCell(null); });
   addBtn.addEventListener("mousedown", (e) => e.preventDefault()); // keep text selection
   addBtn.addEventListener("click", () => { if (hoverBlock) openComposer(hoverBlock); });
 
@@ -430,7 +739,10 @@
     } else if (blk) {
       quote = (lastSel.block === blk && lastSel.text) ? lastSel.text : norm(blk.textContent).slice(0, 140);
     }
-    composerQuote.textContent = blk || (existing && !existing.general) ? "“" + quote + "”" : "General note (whole document)";
+    const cell = blk ? cellInfo(blk) : (existing && existing.cell);
+    composerQuote.textContent = blk || (existing && !existing.general)
+      ? "“" + quote + "”" + (cell ? " (" + cellLabel(cell) + ")" : "")
+      : "General note (whole document)";
     composerText.value = existing ? existing.body : "";
 
     // position near the block, clamped to viewport
@@ -460,6 +772,7 @@
         id: "c" + Date.now() + Math.round(performance.now()),
         blockIndex: Number(composerBlock.dataset.block),
         blockPrefix: norm(composerBlock.textContent).slice(0, 80),
+        cell: cellInfo(composerBlock),
         quote, occurrence: 0, body, general: false, createdAt: Date.now(),
       });
     } else {
@@ -484,7 +797,7 @@
     if (c && c.edit) {
       // discarding an edit: put the original text back if the block still shows the edited version
       const el = resolve(c);
-      if (el && norm(el.textContent) === norm(c.newText)) el.textContent = c.oldText;
+      if (el && norm(el.textContent) === norm(c.newText)) setBlockText(el, c.oldText);
     }
     comments = comments.filter((x) => x.id !== id);
     saveComments(comments);
@@ -492,50 +805,72 @@
   }
 
   // ---- inline editing (double-click a block) ----
-  let editingBlock = null, editingStartText = "", editingOriginalHTML = "";
+  let editingBlock = null, editingStartText = "", editingOriginalHTML = "", editingCell = null;
+  let editingTarget = null, editingHiddenBar = null;
 
   function editableBlock(blk) {
     if (!blk) return false;
-    if (blk.tagName === "PRE" || blk.closest("pre, table")) return false;
     if (blk.querySelector("img, input")) return false;
     return true;
+  }
+  // A <pre> is edited on its inner <code> so the element structure (and the smaller
+  // code font-size) survives typing; every other block is edited on itself.
+  function editTargetFor(blk) {
+    return blk.tagName === "PRE" ? (blk.querySelector("code") || blk) : blk;
   }
   function startEdit(blk) {
     finishEdit(true);
     if (!editableBlock(blk)) { toast("This block can't be edited inline — add a comment instead"); return; }
     editingBlock = blk;
-    editingStartText = norm(blk.textContent);
+    editingTarget = editTargetFor(blk);
+    editingCell = cellInfo(blk); // captured before the text changes: the cell may be its own row label
+    // Raw, not normalised: code blocks carry meaningful newlines and indentation, and the
+    // stored oldText is what reaches the Replace instruction. Matching normalises on its
+    // own (see blockMatches), so anchoring is unaffected by keeping this raw.
+    editingStartText = blk.textContent.replace(/\s+$/, "");
     editingOriginalHTML = blk.innerHTML;
     blk.classList.add("editing");
-    blk.setAttribute("contenteditable", "plaintext-only");
-    if (!blk.isContentEditable) blk.setAttribute("contenteditable", "true");
+    markHoverCell(null);
+    // The code toolbar is a sibling of the <pre>; hide it so Wrap/Copy can't be clicked
+    // mid-edit and can't shift the text under the cursor.
+    editingHiddenBar = blk.tagName === "PRE" && blk.parentElement
+      ? blk.parentElement.querySelector(".code-bar") : null;
+    if (editingHiddenBar) editingHiddenBar.style.display = "none";
+    editingTarget.setAttribute("contenteditable", "plaintext-only");
+    if (!editingTarget.isContentEditable) editingTarget.setAttribute("contenteditable", "true");
     addBtn.style.display = "none";
-    blk.focus();
-    toast("Editing — click away to keep, Esc to cancel");
+    editingTarget.focus();
+    toast(blk.tagName === "PRE"
+      ? "Editing code block — Enter adds a line, click away to keep, Esc to cancel"
+      : "Editing — click away to keep, Esc to cancel");
   }
   function finishEdit(commit) {
     const blk = editingBlock;
     if (!blk) return;
+    const target = editingTarget || blk;
     editingBlock = null; // clear first: blur() below re-enters via focusout
+    editingTarget = null;
     blk.classList.remove("editing");
-    blk.removeAttribute("contenteditable");
-    blk.blur();
+    target.removeAttribute("contenteditable");
+    target.blur();
+    if (editingHiddenBar) { editingHiddenBar.style.display = ""; editingHiddenBar = null; }
     if (!commit) { blk.innerHTML = editingOriginalHTML; return; }
-    const now = norm(blk.textContent);
-    if (now === editingStartText) return;
-    if (!now) { blk.innerHTML = editingOriginalHTML; toast("Block emptied — edit cancelled. Add a comment to request a deletion."); return; }
+    const nowRaw = blk.textContent.replace(/\s+$/, "");
+    if (nowRaw === editingStartText) return;
+    if (!norm(nowRaw)) { blk.innerHTML = editingOriginalHTML; toast("Block emptied — edit cancelled. Add a comment to request a deletion."); return; }
     const entry = comments.find((c) => c.edit && blockMatches(blk, c));
     if (entry) {
-      if (now === norm(entry.oldText)) {
+      if (norm(nowRaw) === norm(entry.oldText)) {
         comments = comments.filter((c) => c.id !== entry.id); // reverted to the original text
       } else {
-        entry.newText = blk.textContent.trim();
+        entry.newText = nowRaw;
       }
     } else {
       comments.push({
         id: "e" + Date.now() + Math.round(performance.now()),
-        edit: true, oldText: editingStartText, newText: blk.textContent.trim(),
+        edit: true, oldText: editingStartText, newText: nowRaw,
         blockIndex: Number(blk.dataset.block), blockPrefix: "", quote: "",
+        cell: editingCell, code: blk.tagName === "PRE",
         general: false, body: "", createdAt: Date.now(),
       });
     }
@@ -567,7 +902,7 @@
     // restore original text of any block still showing an edited version
     comments.filter((c) => c.edit).forEach((c) => {
       const el = resolve(c);
-      if (el && norm(el.textContent) === norm(c.newText)) el.textContent = c.oldText;
+      if (el && norm(el.textContent) === norm(c.newText)) setBlockText(el, c.oldText);
     });
     comments = [];
     saveComments(comments);
@@ -585,9 +920,13 @@
   function ordered() {
     const items = comments.map((c) => ({ c, el: resolve(c) }));
     const resolved = items.filter((o) => o.el).sort((a, b) => blocks.indexOf(a.el) - blocks.indexOf(b.el));
-    const general = items.filter((o) => o.el === null).sort((a, b) => a.c.createdAt - b.c.createdAt);
+    const unanchored = items.filter((o) => o.el === null).sort((a, b) => a.c.createdAt - b.c.createdAt);
+    // blocks brought over from the reference pane are unanchored too, but they are an
+    // instruction to add text rather than a note, so they get their own section
+    const brings = unanchored.filter((o) => o.c.bring);
+    const general = unanchored.filter((o) => !o.c.bring);
     const orphan = items.filter((o) => o.el === undefined).sort((a, b) => a.c.createdAt - b.c.createdAt);
-    return { resolved, general, orphan, all: resolved.concat(orphan, general) };
+    return { resolved, general, brings, orphan, all: resolved.concat(orphan, brings, general) };
   }
 
   // ---- render markers + panel ----
@@ -604,6 +943,7 @@
     const wr = docWrap.getBoundingClientRect();
     const dr = doc.getBoundingClientRect();
     const markerLeft = Math.min(wr.width - 33, dr.right - wr.left + 14);
+    let lastTop = -Infinity; // cells in one row share a top; stack their markers instead of overlapping
     o.resolved.forEach((item) => {
       item.el.classList.add(item.c.edit ? "has-edit" : "has-comment");
       const r = item.el.getBoundingClientRect();
@@ -611,7 +951,9 @@
       mk.className = "marker" + (item.c.edit ? " edit-marker" : "");
       mk.textContent = numOf.get(item.c.id);
       mk.style.left = markerLeft + "px";
-      mk.style.top = (r.top - wr.top + docWrap.scrollTop + 1) + "px";
+      const top = Math.max(r.top - wr.top + docWrap.scrollTop + 1, lastTop + 26);
+      lastTop = top;
+      mk.style.top = top + "px";
       mk.title = item.c.edit ? "Edited — click to edit again" : item.c.body;
       mk.addEventListener("click", () => {
         if (item.c.edit) startEdit(item.el); else openComposer(item.el, item.c);
@@ -621,10 +963,12 @@
 
     // count pill
     const nEdits = comments.filter((c) => c.edit).length;
-    const nCom = comments.length - nEdits;
+    const nBring = comments.filter((c) => c.bring).length;
+    const nCom = comments.length - nEdits - nBring;
     const parts = [];
     if (nCom) parts.push(nCom + (nCom === 1 ? " comment" : " comments"));
     if (nEdits) parts.push(nEdits + (nEdits === 1 ? " edit" : " edits"));
+    if (nBring) parts.push(nBring + " brought");
     $("count").textContent = parts.join(" · ");
     $("btn-feedback").disabled = comments.length === 0;
 
@@ -648,11 +992,22 @@
     const section = (label) => { const h = document.createElement("div"); h.className = "panel-h"; h.textContent = label; panel.appendChild(h); };
     const row = (item, cls) => {
       const c = item.c, el = document.createElement("div");
-      el.className = "cmt" + (c.edit ? " edit" : "") + (cls ? " " + cls : "");
-      if (c.edit) {
+      el.className = "cmt" + (c.edit ? " edit" : "") + (c.code ? " codeedit" : "") + (cls ? " " + cls : "");
+      const loc = c.cell ? '<div class="loc">' + esc(cellLabel(c.cell)) + "</div>" : "";
+      if (c.bring) {
+        el.className += " bring";
+        el.innerHTML =
+          '<div class="cmt-top"><span class="num">' + numOf.get(c.id) + "</span>" +
+          '<span class="quote">' + esc(c.scope === "section" ? "Section" : "Block") + " from reference</span></div>" +
+          '<span class="cmt-src"></span><pre></pre>' +
+          '<div class="row-act"><button data-act="copy">Copy markdown</button><button data-act="del">Remove</button></div>';
+        el.querySelector(".cmt-src").textContent =
+          c.refFile + (c.refHeading ? " › " + c.refHeading : "");
+        el.querySelector("pre").textContent = c.refText;
+      } else if (c.edit) {
         el.innerHTML =
           '<div class="cmt-top"><span class="num">' + numOf.get(c.id) + '</span><span class="old"></span></div>' +
-          '<div class="body"></div>' +
+          loc + '<div class="body"></div>' +
           '<div class="row-act"><button data-act="edit">Edit</button><button data-act="del">Discard</button></div>';
         el.querySelector(".old").textContent = c.oldText;
         el.querySelector(".body").textContent = c.newText;
@@ -661,13 +1016,20 @@
         el.innerHTML =
           '<div class="cmt-top"><span class="num">' + numOf.get(c.id) + "</span>" +
           (quote ? '<span class="quote">“' + esc(quote) + "”</span>" : "") + "</div>" +
-          '<div class="body"></div>' +
+          loc + '<div class="body"></div>' +
           '<div class="row-act"><button data-act="edit">Edit</button><button data-act="del">Delete</button></div>';
         el.querySelector(".body").textContent = c.body;
       }
       el.addEventListener("click", (e) => {
         const act = e.target.getAttribute && e.target.getAttribute("data-act");
         if (act === "del") { e.stopPropagation(); deleteComment(c.id); return; }
+        if (act === "copy") {
+          e.stopPropagation();
+          navigator.clipboard.writeText(c.refText).then(
+            () => toast("Markdown copied"), () => toast("Copy failed"));
+          return;
+        }
+        if (c.bring) { e.stopPropagation(); scrollRefTo(c); return; }
         if (act === "edit") {
           e.stopPropagation();
           if (c.edit) {
@@ -684,7 +1046,8 @@
     if (o.all.length === 0) {
       const e = document.createElement("div");
       e.className = "empty";
-      e.textContent = "No feedback yet. Hover a paragraph and click + to comment (select text first to quote it), or double-click a paragraph to edit it directly.";
+      e.textContent = "No feedback yet. Hover any block (including a single table cell) and click + to comment (select text first to quote it), or double-click it to edit the text directly."
+        + (SPLIT ? " On the reference side, hover a block and use → to carry it across, or → § on a heading to take the whole section." : "");
       panel.appendChild(e);
     }
     if (o.resolved.length) {
@@ -693,7 +1056,9 @@
       o.resolved.forEach((it) => row(it));
     }
     if (o.orphan.length) { section("Text changed"); o.orphan.forEach((it) => row(it, "orphan")); }
+    if (o.brings.length) { section("Bring across"); o.brings.forEach((it) => row(it)); }
     if (o.general.length) { section("General notes"); o.general.forEach((it) => row(it)); }
+    markBrought();
   }
 
   function esc(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
@@ -703,28 +1068,68 @@
     const o = ordered();
     const anchored = o.resolved.concat(o.orphan);
     const lines = ["Feedback on `" + FILENAME + "`:", ""];
-    let n = 1, hasEdits = false;
+    let n = 1, hasEdits = false, hasCodeEdits = false;
     anchored.forEach((item) => {
+      const where = item.c.cell ? " (" + cellLabel(item.c.cell) + ")" : "";
       if (item.c.edit) {
         hasEdits = true;
-        lines.push(n + ". Replace:");
-        lines.push('   "' + item.c.oldText + '"');
-        lines.push("   with:");
-        lines.push('   "' + item.c.newText + '"');
+        // Multi-line edits (code blocks, mostly) go in fences rather than quotes: a
+        // quoted wall of newlines is ambiguous about where the text starts and ends,
+        // and leading whitespace has to survive verbatim.
+        const multiline = /\n/.test(item.c.oldText || "") || /\n/.test(item.c.newText || "");
+        if (multiline) {
+          hasCodeEdits = hasCodeEdits || !!item.c.code;
+          lines.push(n + ". Replace" + where + (item.c.code ? " (code block)" : "") + ":");
+          lines.push("~~~");
+          lines.push(item.c.oldText);
+          lines.push("~~~");
+          lines.push("   with:");
+          lines.push("~~~");
+          lines.push(item.c.newText);
+          lines.push("~~~");
+        } else {
+          lines.push(n + ". Replace" + where + ":");
+          lines.push('   "' + item.c.oldText + '"');
+          lines.push("   with:");
+          lines.push('   "' + item.c.newText + '"');
+        }
       } else {
         let q = (item.c.quote || item.c.blockPrefix || "").trim();
         if (q.length > 120) q = q.slice(0, 120) + "…";
-        lines.push(n + '. On "' + q + '":');
+        lines.push(n + '. On "' + q + '"' + where + ":");
         lines.push("   " + item.c.body);
       }
       n++;
     });
+    if (o.brings.length) {
+      lines.push("", "Bring across from `" + REF_FILENAME + "`:");
+      o.brings.forEach((item) => {
+        const c = item.c;
+        lines.push(n + ". " + (c.scope === "section"
+          ? 'Section "' + c.refHeading + '"'
+          : "Block" + (c.refHeading ? ' under "' + c.refHeading + '"' : "")) + ":");
+        lines.push("~~~markdown");
+        lines.push(c.refText);
+        lines.push("~~~");
+        n++;
+      });
+    }
     if (o.general.length) {
       lines.push("", "General notes:");
       o.general.forEach((item) => { lines.push(n + ". " + item.c.body); n++; });
     }
-    lines.push("", "Please revise accordingly." + (hasEdits
+    const hasCells = anchored.some((item) => item.c.cell);
+    lines.push("", "Please revise accordingly." + (o.brings.length
+      ? " \"Bring across\" items are verbatim markdown from the reference file that should be"
+        + " reinstated in `" + FILENAME + "`: insert each one where it belongs in the current"
+        + " structure, adapting only what is needed to fit (heading level, surrounding wording),"
+        + " and tell me where you put it."
+      : "") + (hasEdits
       ? " For Replace items, keep the block's existing markdown formatting (links, emphasis) where it still applies."
+      : "") + (hasCodeEdits
+      ? " Code-block Replace items are verbatim: substitute the fenced text exactly, preserving newlines and leading whitespace, and do not reformat or re-wrap it."
+      : "") + (hasCells
+      ? " Items that name a table row and column apply to that one cell: change only that cell, leave the rest of the row and the table's shape alone."
       : ""));
     return lines.join("\n");
   }
@@ -753,16 +1158,25 @@
     }
   }
   async function copyRichText() {
+    // Strip the per-block code toolbars so "Wrap"/"Copy" never end up in the copy.
+    // .copying hides them (for innerText); the html clone drops them from the markup.
+    doc.classList.add("copying");
+    const clone = doc.cloneNode(true);
+    clone.querySelectorAll(".code-tools").forEach((el) => el.remove());
+    const html = clone.innerHTML, plain = doc.innerText;
+    doc.classList.remove("copying");
     try {
       await navigator.clipboard.write([new ClipboardItem({
-        "text/html": new Blob([doc.innerHTML], { type: "text/html" }),
-        "text/plain": new Blob([doc.innerText], { type: "text/plain" }),
+        "text/html": new Blob([html], { type: "text/html" }),
+        "text/plain": new Blob([plain], { type: "text/plain" }),
       })]);
       toast("Copied. Paste into email, Notion, or Docs");
     } catch (e) {
+      doc.classList.add("copying");
       const r = document.createRange(); r.selectNodeContents(doc);
       const s = getSelection(); s.removeAllRanges(); s.addRange(r);
       document.execCommand("copy"); s.removeAllRanges();
+      doc.classList.remove("copying");
       toast("Copied");
     }
   }
@@ -787,9 +1201,195 @@
     render();
   });
 
-  // reposition markers on resize
-  let rT; window.addEventListener("resize", () => { clearTimeout(rT); rT = setTimeout(render, 120); });
+  // ---- split mode: the reference pane ----
+  // Read-only. Its job is to let a block or a whole section be carried over to the
+  // working document, so every top-level element is mapped back to the exact source
+  // markdown that produced it (via marked's token stream) rather than to its rendered
+  // text — an instruction to reinstate a section has to carry the real markdown.
+  const refEl = $("ref"), refBody = $("ref-body");
+  let refUnits = [];  // { el, raw, sectionRaw, heading, depth }
 
+  function buildRefUnits() {
+    // marked emits one top-level element per token, minus the tokens that render
+    // nothing. If that correspondence ever breaks, fall back to rendered text so the
+    // pane still works — only the exactness of the copied markdown is lost.
+    const toks = marked.lexer(REF_MD).filter((t) => t.type !== "space" && t.type !== "def");
+    const kids = [...refEl.children];
+    const aligned = toks.length === kids.length;
+    if (!aligned) console.warn("mdview: reference token/element mismatch (" +
+      toks.length + " vs " + kids.length + "); copied text will be plain, not markdown.");
+
+    let heading = "";
+    refUnits = kids.map((el, i) => {
+      const t = aligned ? toks[i] : null;
+      const isH = /^H[1-6]$/.test(el.tagName);
+      if (isH) heading = el.textContent.trim();
+      return {
+        el, i,
+        raw: (t && t.raw ? t.raw : el.textContent).replace(/\n+$/, ""),
+        depth: isH ? Number(el.tagName[1]) : 0,
+        heading: isH ? el.textContent.trim() : heading,
+      };
+    });
+    refUnits.forEach((u, i) => {
+      u.sectionRaw = u.depth ? sectionUnits(i).map((x) => x.raw).join("\n\n") : null;
+    });
+  }
+
+  // A heading's section runs to the next heading of the same or higher level, minus any
+  // rule that merely separates it from what follows — that belongs to neither section.
+  function sectionUnits(i) {
+    const u = refUnits[i];
+    let end = refUnits.length;
+    for (let j = i + 1; j < refUnits.length; j++) {
+      if (refUnits[j].depth && refUnits[j].depth <= u.depth) { end = j; break; }
+    }
+    while (end > i + 1 && refUnits[end - 1].el.tagName === "HR") end--;
+    return refUnits.slice(i, end);
+  }
+
+  function addBring(u, scope) {
+    const text = scope === "section" ? u.sectionRaw : u.raw;
+    comments.push({
+      id: "b" + Date.now() + Math.round(performance.now()),
+      bring: true, general: true, scope,
+      refFile: REF_FILENAME, refHeading: u.heading,
+      refIndex: u.i, refText: text,
+      body: "", quote: "", blockPrefix: "", createdAt: Date.now(),
+    });
+    saveComments(comments);
+    render();
+  }
+
+  // reference blocks already carried over get a spine, so a long pass is resumable
+  function markBrought() {
+    if (!SPLIT) return;
+    refEl.querySelectorAll(".brought").forEach((el) => el.classList.remove("brought"));
+    comments.filter((c) => c.bring).forEach((c) => {
+      const u = refUnits[c.refIndex];
+      if (!u) return;
+      if (c.scope === "section" && u.sectionRaw) {
+        sectionUnits(c.refIndex).forEach((x) => x.el.classList.add("brought"));
+      } else u.el.classList.add("brought");
+    });
+  }
+
+  function scrollRefTo(c) {
+    const u = refUnits[c.refIndex];
+    if (u) u.el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  function placeBringButtons() {
+    refBody.querySelectorAll(".bring-btn").forEach((b) => b.remove());
+    const left = refEl.offsetLeft + refEl.offsetWidth + 8;
+    refUnits.forEach((u) => {
+      const wrap = document.createElement("div");
+      wrap.className = "bring-btn";
+      wrap.style.left = left + "px";
+      wrap.style.top = (u.el.offsetTop + 1) + "px";
+      const mk = (label, title, fn) => {
+        const b = document.createElement("button");
+        b.type = "button"; b.textContent = label; b.title = title;
+        b.addEventListener("click", (e) => { e.stopPropagation(); fn(b); });
+        wrap.appendChild(b);
+      };
+      if (u.sectionRaw && u.sectionRaw !== u.raw) {
+        mk("→ §", "Bring this whole section across", () => addBring(u, "section"));
+      }
+      mk("→", "Bring this block across", () => addBring(u, "block"));
+      mk("⧉", "Copy this block's markdown", (b) => {
+        navigator.clipboard.writeText(u.raw).then(() => {
+          b.classList.add("ok"); b.textContent = "✓";
+          setTimeout(() => { b.classList.remove("ok"); b.textContent = "⧉"; }, 1100);
+        }, () => toast("Copy failed"));
+      });
+      u.el._bringBtn = wrap;
+      refBody.appendChild(wrap);
+    });
+  }
+
+  function initRefPane() {
+    if (!SPLIT) return;
+    refEl.innerHTML = marked.parse(REF_MD);
+    buildRefUnits();  // before the frontmatter card goes in, so tokens still line up
+    if (REF_FRONTMATTER_HTML) refEl.insertAdjacentHTML("afterbegin", REF_FRONTMATTER_HTML);
+    refEl.querySelectorAll('a[href]').forEach((a) => { a.target = "_blank"; a.rel = "noopener"; });
+    renderMermaidIn(refEl);
+    placeBringButtons();
+
+    // hover reveals the controls for the block under the pointer
+    let hovered = null;
+    refBody.addEventListener("mousemove", (e) => {
+      if (e.target.closest(".bring-btn")) return;
+      const el = e.target.closest("#ref > *");
+      if (el === hovered) return;
+      if (hovered) { hovered.classList.remove("ref-hover"); if (hovered._bringBtn) hovered._bringBtn.classList.remove("show"); }
+      hovered = el;
+      if (hovered) { hovered.classList.add("ref-hover"); if (hovered._bringBtn) hovered._bringBtn.classList.add("show"); }
+    });
+    refBody.addEventListener("mouseleave", () => {
+      if (hovered) { hovered.classList.remove("ref-hover"); if (hovered._bringBtn) hovered._bringBtn.classList.remove("show"); }
+      hovered = null;
+    });
+
+    initScrollSync();
+  }
+
+  // ---- scroll sync: align the panes on shared headings ----
+  // Text matching, not position: the two documents have diverged, so the only thing
+  // they reliably share is heading wording. Headings with no counterpart are left
+  // alone rather than guessed at, so an unmatched stretch simply stops tracking.
+  function initScrollSync() {
+    const btn = $("btn-sync");
+    let on = localStorage.getItem(SYNC_KEY) !== "off";
+    const paint = () => btn.classList.toggle("on", on);
+    paint();
+    btn.addEventListener("click", () => {
+      on = !on; localStorage.setItem(SYNC_KEY, on ? "on" : "off"); paint();
+    });
+
+    const headKey = (el) => norm(el.textContent).toLowerCase();
+    const headsOf = (root) => [...root.querySelectorAll("h1,h2,h3,h4,h5,h6")];
+    const index = (root) => {
+      const m = new Map();
+      headsOf(root).forEach((h) => { const k = headKey(h); if (!m.has(k)) m.set(k, h); });
+      return m;
+    };
+    const refIdx = index(refEl), docIdx = index(doc);
+
+    let lock = false;
+    const sync = (from, to, fromIdx, toIdx) => {
+      if (!on || lock) return;
+      // the heading nearest the top of the source pane that also exists in the target
+      let best = null, bestTop = -Infinity;
+      fromIdx.forEach((h, k) => {
+        if (!toIdx.has(k)) return;
+        const top = h.getBoundingClientRect().top - from.getBoundingClientRect().top;
+        if (top <= 80 && top > bestTop) { bestTop = top; best = k; }
+      });
+      if (best === null) return;
+      const target = toIdx.get(best);
+      lock = true;
+      to.scrollTop += target.getBoundingClientRect().top - to.getBoundingClientRect().top - bestTop;
+      requestAnimationFrame(() => { lock = false; });
+    };
+
+    let t1, t2;
+    refBody.addEventListener("scroll", () => {
+      clearTimeout(t1); t1 = setTimeout(() => sync(refBody, docWrap, refIdx, docIdx), 60);
+    });
+    docWrap.addEventListener("scroll", () => {
+      clearTimeout(t2); t2 = setTimeout(() => sync(docWrap, refBody, docIdx, refIdx), 60);
+    });
+  }
+
+  // reposition markers (and the reference pane's controls) on resize
+  let rT; window.addEventListener("resize", () => {
+    clearTimeout(rT);
+    rT = setTimeout(() => { if (SPLIT) placeBringButtons(); render(); }, 120);
+  });
+
+  initRefPane();
   render();
 })();
 </script>
