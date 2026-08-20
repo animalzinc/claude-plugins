@@ -20,6 +20,8 @@ Run the generator bundled with this skill (it sits next to this file as `generat
 python3 <this-skill-dir>/generate.py /abs/path/to/file.md
 ```
 
+On Windows, `python3` is usually not a real command: Windows ships a stub under that name that opens the Microsoft Store instead of running anything. Use `py -3` there, and fall back to `python`. If none of the three runs the script, Python 3 is not installed on the machine — say so and point at python.org, rather than retrying variants.
+
 That writes a self-contained file to `~/.cache/mdview/<hash>.html` and opens it in the browser. Nothing else to start or stop. Flags (rarely needed): `--browser <AppName>` to force a specific app (macOS only), `--no-open` / `--print-path` to just build and print the path.
 
 To read two files side by side, pass the second with `--against`:
