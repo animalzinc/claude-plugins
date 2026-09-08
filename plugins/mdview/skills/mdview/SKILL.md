@@ -1,10 +1,10 @@
-<!-- SYNC: Personal version at ~/.claude/skills/mdview/SKILL.md -->
 ---
 name: mdview
 description: Open a clean, rendered (not raw) view of a markdown file in the browser for fast reading, with rich-text copy and an inline-comment to paste-ready-feedback loop. Use when the user says "show me the markdown", "render this markdown", "open that doc so I can read it", "let me review the markdown", "mdview <file>", or asks to view, read, or proof a .md file you produced.
 disable-model-invocation: false
 allowed-tools: []
 ---
+<!-- SYNC: Personal version at ~/.claude/skills/mdview/SKILL.md -->
 
 # mdview
 
