@@ -1,4 +1,3 @@
-<!-- SYNC: Personal version at ~/.claude/commands/save-session.md -->
 ---
 name: Session Saver
 description: Save a structured session log so the next session can pick up where you left off
@@ -10,6 +9,7 @@ triggers:
   - end of session
   - session log
 ---
+<!-- SYNC: Personal version at ~/.claude/commands/save-session.md -->
 
 # Session Saver
 
