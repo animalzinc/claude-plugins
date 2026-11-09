@@ -17,7 +17,6 @@ npm-debug.log*
 
 # Session/working files
 docs/SESSION_LOG.md
-docs/REORGANIZATION_STATUS.md
 
 # Environment files
 .env
