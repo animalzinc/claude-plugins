@@ -86,8 +86,8 @@ Each check takes its parameters from the rule block, so a guide that sets the op
 | `money` | `style`: `abbreviated` or `words` | "$2.6 million" against `abbreviated`, "$2.6M" against `words` |
 | `thousands` | `style`: `comma`, `k`, or `either`; `consistent` (default true) | "4k" against `comma`; a piece that mixes "200k" and "200,000" |
 | `date-format` | `ordinals` (default false) | "September 24th" when ordinals are off |
-| `time-format` | `style`: `9am`, `9 am`, or `9 a.m.` | Times in another style |
+| `time-format` | `style`: `9am`, `9 am`, or `9 a.m.`; `drop_zero_minutes` (default false); `noon_midnight` (default false) | Times in another style; with `drop_zero_minutes`, ":00" on the hour ("9:00 a.m."); with `noon_midnight`, 12 o'clock written as a time instead of noon or midnight |
 | `quote-style` | `marks`: `curly` or `straight`; `punctuation_inside` (default true) | The other kind of marks; a comma or period outside a closing quote |
 | `bold-label` | `separator`: `colon`, `period`, or `dash` | List labels with another separator |
 | `link-hygiene` | `tracking` (default true), `https` (default true), `max_anchor_words` (default 12) | Tracking parameters, `http://` links, anchors longer than the limit |
-| `regex` | `pattern`, `message`, `flags`, optional `replacement` | A custom pattern for a rule no built-in check covers |
+| `regex` | `pattern`, `message`, `flags`, optional `replacement`, `certainty`: `certain` (default) or `uncertain` | A custom pattern for a rule no built-in check covers; `uncertain` sends each hit to the mechanical confirmer, for a rule whose exemptions need a reader |

@@ -222,6 +222,35 @@ class FindingsStep(Base):
         self.assertEqual([f for f in merged if f["pass"] == "proof"], [])
         self.assertEqual(next(f for f in merged if f["id"] == name["id"])["also_found_by"], ["proof"])
 
+    def test_split_kit_rule_merges_on_same_text(self):
+        rules_path = self.run / "rules.json"
+        data = read_json(rules_path)
+        for r in data["rules"]:
+            if r["id"] == "PUNC-EMDASH":
+                r["source"] = "kit:k7#dash-spacing"
+            elif r["id"] == "WORD-INTRO":
+                r["source"] = "kit:k7"
+            elif r["id"] == "WORD-NAMES":
+                r["source"] = "kit:k8#term-case"
+        write(rules_path, data)
+        lint = read_json(self.fdir / "lint.json")
+        dash = next(f for f in lint if f["rule_id"] == "PUNC-EMDASH")
+        name = next(f for f in lint if f["rule_id"] == "WORD-NAMES")
+        write(self.fdir / "usage.json", [
+            {"rule_id": "WORD-INTRO", "line": dash["line"], "quote": dash["quote"], "replacement": None,
+             "comment": "Close up the dash.", "basis": "explicit"},
+            {"rule_id": "WORD-INTRO", "line": name["line"], "quote": name["quote"], "replacement": None,
+             "comment": "Another kit rule.", "basis": "explicit"}])
+        findings_run(self.run)
+        merged = read_json(self.fdir / "merged.json")
+        on_dash = [f for f in merged if f["line"] == dash["line"] and f["quote"] == dash["quote"]]
+        self.assertEqual([(f["id"], f["replacement"]) for f in on_dash], [(dash["id"], dash["replacement"])])
+        self.assertEqual(on_dash[0]["also_found_by"], ["usage"])
+        merged_drop = next(d for d in read_json(self.fdir / "drops.json") if d["stage"] == "merged")
+        self.assertIn("kit:k7", merged_drop["reason"])
+        on_name = [f["rule_id"] for f in merged if f["line"] == name["line"] and f["quote"] == name["quote"]]
+        self.assertEqual(sorted(on_name), ["WORD-INTRO", "WORD-NAMES"])
+
     def test_needs_lint(self):
         (self.fdir / "lint.json").unlink()
         with self.assertRaises(SgcError):

@@ -24,6 +24,12 @@ class DashSpacing(unittest.TestCase):
         self.assertEqual(len(found), 2)
         self.assertIsNone(found[0]["replacement"])
 
+    def test_none_skips_sign_off_lines(self):
+        for line in ("%s Ty Magnin" % EM, "  *%s Ty Magnin*" % EM, "> %s Ty Magnin" % EM, "%sJ. R. Smith" % EM):
+            self.assertEqual(hits("dash-spacing", {"style": "none"}, "Thanks for reading.\n\n" + line), [], line)
+        self.assertEqual(len(hits("dash-spacing", {"style": "none"}, "%s Ty Magnin said so" % EM)), 1)
+        self.assertEqual(len(hits("dash-spacing", {"style": "none"}, "We flew %s Ty Magnin" % EM)), 1)
+
     def test_spaced_hyphen_and_en_dash_as_em_dash(self):
         self.assertEqual(quotes("dash-spacing", {"style": "closed"}, "fun - and risky"),
                          [("fun - and", "fun%sand" % EM)])
@@ -134,6 +140,12 @@ class Numbers(unittest.TestCase):
                 "1. First step\n## 2. Setup")
         self.assertEqual(hits("numerals", {"spell_out_below": 10}, text), [])
 
+    def test_numeral_en_dash_range(self):
+        self.assertEqual(hits("numerals", {"spell_out_below": 10}, "Post 3%s5 times per week." % EN), [])
+        self.assertEqual(hits("numerals", {"spell_out_below": 10}, "Post 3 %s 5 times per week." % EN), [])
+        self.assertEqual(quotes("numerals", {"spell_out_below": 10}, "Post 3%s5 times, then 4 more posts." % EN),
+                         [("4", "four")])
+
     def test_numeral_not_clearly_a_count(self):
         self.assertEqual(hits("numerals", {"spell_out_below": 10}, "The score was 3 at halftime.")[0]["certainty"],
                          "uncertain")
@@ -158,6 +170,9 @@ class Numbers(unittest.TestCase):
         self.assertEqual(hits("money", {"style": "abbreviated"}, "raised $2.6M"), [])
         self.assertEqual(quotes("money", {"style": "words"}, "raised $2.6M"), [("$2.6M", "$2.6 million")])
         self.assertEqual(hits("money", {"style": "words"}, "raised $2.6 million"), [])
+        self.assertEqual(hits("money", {"style": "abbreviated"}, "earned $150 thousand"), [])
+        self.assertEqual(quotes("money", {"style": "abbreviated"}, "$3 billion and $1 trillion"),
+                         [("$3 billion", "$3B"), ("$1 trillion", "$1T")])
 
     def test_thousands(self):
         self.assertEqual(quotes("thousands", {"style": "comma"}, "sold 4k kites"), [("4k", "4,000")])
@@ -185,6 +200,20 @@ class Numbers(unittest.TestCase):
         self.assertEqual(quotes("time-format", {"style": "9 a.m."}, "Meet at 9am sharp."), [("9am", "9 a.m.")])
         self.assertEqual(hits("time-format", {"style": "9 a.m."}, "Meet at 9 a.m. sharp."), [])
         self.assertEqual(quotes("time-format", {"style": "9am"}, "Meet at 9 a.m. Then fly."), [("9 a.m.", "9am.")])
+
+    def test_time_format_on_the_hour_and_noon(self):
+        style = {"style": "9 a.m."}
+        self.assertEqual(hits("time-format", style, "Meet at 9:00 a.m. sharp."), [])
+        self.assertEqual(quotes("time-format", style, "Meet at 9:00am or 12pm today."),
+                         [("9:00am", "9:00 a.m."), ("12pm", "12 p.m.")])
+        both = dict(style, drop_zero_minutes=True, noon_midnight=True)
+        self.assertEqual(quotes("time-format", both, "Meet at 9:00 a.m. sharp, 9:30am, or 12 p.m. today."),
+                         [("9:00 a.m.", "9 a.m."), ("9:30am", "9:30 a.m."), ("12 p.m.", "noon")])
+        self.assertEqual(quotes("time-format", both, "Fly till 12:00am. 12 p.m. is lunch."),
+                         [("12:00am", "midnight"), ("12 p.m.", "Noon")])
+        self.assertEqual(quotes("time-format", dict(style, noon_midnight=True), "Lunch at 12:30pm today."),
+                         [("12:30pm", "12:30 p.m.")])
+        self.assertEqual(hits("time-format", both, "Meet at 9 a.m., noon, or midnight."), [])
 
 
 class QuoteStyle(unittest.TestCase):
@@ -258,6 +287,12 @@ class Regex(unittest.TestCase):
         params = {"pattern": r"(\d+) users", "message": "Say people.", "replacement": r"\1 people"}
         self.assertEqual(quotes("regex", params, "We met 5 users."), [("5 users", "5 people")])
 
+    def test_certainty(self):
+        params = {"pattern": r"\bclick here\b", "message": "Name the target.", "flags": "i"}
+        self.assertEqual(hits("regex", params, "Click here to go.")[0]["certainty"], "certain")
+        self.assertEqual(hits("regex", dict(params, certainty="uncertain"), "Click here to go.")[0]["certainty"],
+                         "uncertain")
+
 
 class Params(unittest.TestCase):
     def test_invalid_and_missing(self):
@@ -267,6 +302,9 @@ class Params(unittest.TestCase):
         self.assertTrue(normalize_params("dash-spacing", {"style": "closed", "color": "red"})[1])
         self.assertTrue(normalize_params("nope", {})[1])
         self.assertTrue(normalize_params("regex", {"pattern": "(", "message": "x"})[1])
+        self.assertTrue(normalize_params("regex", {"pattern": "x", "message": "x", "certainty": "maybe"})[1])
+        params, errors = normalize_params("time-format", {"style": "9am"})
+        self.assertEqual((errors, params["drop_zero_minutes"], params["noon_midnight"]), ([], False, False))
         params, errors = normalize_params("heading-case", {"case": "title"})
         self.assertEqual((errors, params["levels"], params["style"]), ([], [2, 3, 4], "cmos"))
 

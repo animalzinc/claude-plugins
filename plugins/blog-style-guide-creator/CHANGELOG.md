@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.0.1
+
+November 2026. Fixes from running the plugin on a real guide.
+
+**Checking**
+
+- `numerals` skips both numbers of an en-dash range ("3–5 times per week"), closed or spaced.
+- `dash-spacing` with `style: none` skips a sign-off line: an em dash followed by a short capitalized name ("— Ty Magnin"), with optional leading whitespace, emphasis marks, or a blockquote marker. Em dashes in running prose are still flagged.
+- `time-format` takes two optional parameters, both off by default: `drop_zero_minutes` writes "9 a.m." for "9:00 a.m." and flags the ":00" form, and `noon_midnight` writes noon and midnight for 12 p.m. and 12 a.m.
+- `regex` takes an optional `certainty` (`certain` by default, or `uncertain`), so a pattern whose rule carries exemptions sends its hits to the mechanical confirmer.
+- `money` with `style: abbreviated` abbreviates million, billion, and trillion only, and leaves "$150 thousand" as written.
+- `sgc findings` merges findings on the same text from rules that share a kit ID in `source` (a kit rule split into `kit:<id>#<check>` and `kit:<id>`), keeping the lint finding and its fix.
+
+**Auditing**
+
+- The guide auditor no longer reports judgment rules that lack a number, scope gaps the rule's own text already limits, persona and tone sections that restate rules, rules that agree with each other, or wording in instructional prose that is not a model example.
+
 ## 2.0.0
 
 November 2026. A rebuild for current Claude Code and the Claude 5 models.

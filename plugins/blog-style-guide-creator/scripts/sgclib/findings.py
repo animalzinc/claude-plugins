@@ -80,6 +80,14 @@ def _builtin(rule_id):
     return None
 
 
+def _kit_id(rule):
+    """The kit rule ID in a `kit:<id>` or `kit:<id>#<check>` source, else None."""
+    source = str((rule or {}).get("source") or "")
+    if not source.startswith("kit:"):
+        return None
+    return source[4:].split("#", 1)[0] or None
+
+
 def _occurrences(article, quote):
     out = []
     for n in article.numbers():
@@ -233,7 +241,8 @@ def findings_run(run_dir, guide_path=None, decisions_path=None):
             f["status"] = "auto" if pass_name in CODE_CHECKED_PASSES else "pending"
             kept.append(f)
 
-    # merge overlaps of one rule on one line, and the same fix to the same text under two rules
+    # merge overlaps of one rule on one line, the same fix to the same text under two rules,
+    # and findings on the same text from rules split out of one kit rule (lint first, so it stays)
     kept.sort(key=lambda f: (f["line"], f["col"], order_key(f["pass"])))
     merged = []
     for f in kept:
@@ -249,6 +258,11 @@ def findings_run(run_dir, guide_path=None, decisions_path=None):
             if (span == gspan and f.get("replacement") is not None
                     and f["replacement"] == g.get("replacement")):
                 twin, why = g, "makes the same fix to the same text as finding %s"
+                break
+            kit = _kit_id(rules.get(f["rule_id"]))
+            if span == gspan and kit and kit == _kit_id(rules.get(g["rule_id"])):
+                twin, why = g, ("same text as finding %s, from the same kit rule (kit:"
+                                + kit.replace("%", "%%") + ")")
                 break
         if twin is not None:
             twin.setdefault("also_found_by", [])

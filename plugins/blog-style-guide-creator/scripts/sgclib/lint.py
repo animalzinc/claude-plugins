@@ -175,6 +175,11 @@ def _at_sentence_start(masked, col, list_col=0):
 # ------------------------------------------------------------ dash-spacing
 
 
+SIGN_OFF_RE = re.compile(r"^[ \t]*(?:>[ \t]*)*[*_]*[ \t]*" + EM + r"[ \t]*[*_]*[ \t]*"
+                         r"[A-ZÀ-ÖØ-Þ][\w.'’\-]*(?:[ \t]+[A-ZÀ-ÖØ-Þ][\w.'’\-]*){0,3}"
+                         r"[ \t]*[*_]*[ \t]*$")
+
+
 def check_dash_spacing(ctx):
     style, ranges = ctx.p["style"], ctx.p.get("ranges")
 
@@ -186,8 +191,9 @@ def check_dash_spacing(ctx):
         return None
 
     for n, m in ctx.lines():
+        sign_off = style == "none" and SIGN_OFF_RE.match(ctx.art.line(n))
         for i, ch in enumerate(m):
-            if ch != EM:
+            if ch != EM or sign_off:
                 continue
             ls = i
             while ls > 0 and m[ls - 1] in " \t":
@@ -441,6 +447,8 @@ def check_numerals(ctx):
             before, after = m[:mt.start()], m[mt.end():]
             if list_col and mt.start() < list_col:
                 continue
+            if re.search(r"\d[ \t]*" + EN + r"[ \t]*$", before) or re.match(r"^[ \t]*" + EN + r"[ \t]*\d", after):
+                continue  # one end of an en-dash range
             if heading and not before[heading[2]:].strip(" *_"):
                 if re.match(r"^[.):]", after):
                     continue
@@ -520,7 +528,7 @@ def check_percent(ctx):
                 ctx.add(n, mt.start(), mt.end(), mt.group(1) + " percent", note="percent as a symbol")
 
 
-_SCALE_WORDS = {"thousand": "K", "million": "M", "billion": "B", "trillion": "T"}
+_SCALE_WORDS = {"million": "M", "billion": "B", "trillion": "T"}
 _SCALE_ABBR = {"k": "thousand", "m": "million", "mn": "million", "b": "billion",
                "bn": "billion", "t": "trillion"}
 
@@ -528,7 +536,7 @@ _SCALE_ABBR = {"k": "thousand", "m": "million", "mn": "million", "b": "billion",
 def check_money(ctx):
     for n, m in ctx.lines():
         if ctx.p["style"] == "abbreviated":
-            for mt in re.finditer(r"([$€£¥]\s?\d[\d.,]*)\s+(thousand|million|billion|trillion)\b",
+            for mt in re.finditer(r"([$€£¥]\s?\d[\d.,]*)\s+(million|billion|trillion)\b",
                                   m, re.IGNORECASE):
                 ctx.add(n, mt.start(), mt.end(), mt.group(1) + _SCALE_WORDS[mt.group(2).lower()],
                         note="money amount with the scale as a word")
@@ -620,7 +628,7 @@ TIME_RE = re.compile(r"(?<![\w:.])(\d{1,2})(:\d{2})?(\s?)(a\.m\.|p\.m\.|am|pm|AM
 
 
 def check_time_format(ctx):
-    style = ctx.p["style"]
+    style, drop_zero, noon = ctx.p["style"], ctx.p["drop_zero_minutes"], ctx.p["noon_midnight"]
     for n, m in ctx.lines():
         for mt in TIME_RE.finditer(m):
             hour = int(mt.group(1))
@@ -628,7 +636,15 @@ def check_time_format(ctx):
                 continue
             ap = "am" if mt.group(4).lower().startswith("a") else "pm"
             mins = mt.group(2) or ""
-            if style == "9am":
+            if drop_zero and mins == ":00":
+                mins = ""
+            note = "time not written as %s" % style
+            if noon and hour == 12 and mins in ("", ":00"):
+                want = "noon" if ap == "pm" else "midnight"
+                if _at_sentence_start(m, mt.start(), ctx.art.strip_list_marker(n)):
+                    want = _capitalize(want)
+                note = "12 o'clock as a time; the guide writes noon and midnight"
+            elif style == "9am":
                 want = "%d%s%s" % (hour, mins, ap)
             elif style == "9 am":
                 want = "%d%s %s" % (hour, mins, ap)
@@ -643,7 +659,7 @@ def check_time_format(ctx):
                 want += "."
             if want.endswith(".") and rest.startswith("."):
                 end += 1
-            ctx.add(n, start, end, want, note="time not written as %s" % style)
+            ctx.add(n, start, end, want, note=note)
 
 
 # ------------------------------------------------------------ quote-style
@@ -856,7 +872,8 @@ def check_regex(ctx):
             if mt.end() == mt.start() or MASK in mt.group(0):
                 continue
             repl = mt.expand(template) if template is not None else None
-            ctx.add(n, mt.start(), mt.end(), repl, note=ctx.p["message"], comment=ctx.p["message"])
+            ctx.add(n, mt.start(), mt.end(), repl, ctx.p["certainty"], note=ctx.p["message"],
+                    comment=ctx.p["message"])
 
 
 def _regex_pattern(v):
@@ -898,14 +915,17 @@ CHECKS = {
     "thousands": (check_thousands, {"style": (_enum("comma", "k", "either"), REQUIRED),
                                     "consistent": (_bool, True)}),
     "date-format": (check_date_format, {"ordinals": (_bool, False)}),
-    "time-format": (check_time_format, {"style": (_enum("9am", "9 am", "9 a.m."), REQUIRED)}),
+    "time-format": (check_time_format, {"style": (_enum("9am", "9 am", "9 a.m."), REQUIRED),
+                                        "drop_zero_minutes": (_bool, False),
+                                        "noon_midnight": (_bool, False)}),
     "quote-style": (check_quote_style, {"marks": (_enum("curly", "straight"), REQUIRED),
                                         "punctuation_inside": (_bool, True)}),
     "bold-label": (check_bold_label, {"separator": (_enum("colon", "period", "dash"), REQUIRED)}),
     "link-hygiene": (check_link_hygiene, {"tracking": (_bool, True), "https": (_bool, True),
                                           "max_anchor_words": (_optional_int, 12)}),
     "regex": (check_regex, {"pattern": (_regex_pattern, REQUIRED), "message": (_str, REQUIRED),
-                            "flags": (_flags, ""), "replacement": (_optional_str, None)}),
+                            "flags": (_flags, ""), "replacement": (_optional_str, None),
+                            "certainty": (_enum("certain", "uncertain"), "certain")}),
 }
 
 
