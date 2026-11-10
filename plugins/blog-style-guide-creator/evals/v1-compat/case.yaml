@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: v1-compat
+description: A version 1 guide with numbered sections still produces a report, with findings under V1- rule numbers and a pointer to the upgrade.
+tags: [check, compat]
+context:
+  scaffold_script: scaffold.sh

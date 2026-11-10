@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "findings-file.schema.json",
+  "title": "Reviewer findings file (findings/<pass>.json)",
+  "oneOf": [
+    {
+      "type": "array",
+      "items": {
+        "$ref": "finding.schema.json"
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "findings"
+      ],
+      "properties": {
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "finding.schema.json"
+          }
+        }
+      }
+    }
+  ]
+}

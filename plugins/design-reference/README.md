@@ -24,7 +24,7 @@ A `/design-reference` skill that guides you through collecting visual references
 Install the plugin:
 
 ```bash
-/plugin install design-reference
+/plugin install design-reference --marketplace animalzinc/claude-plugins
 ```
 
 Start a design research session:

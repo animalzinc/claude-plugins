@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "proposal.schema.json",
+  "title": "Guide proposal (input to sgc guide render)",
+  "type": "object",
+  "properties": {
+    "frontmatter": {
+      "type": "object",
+      "description": "Merged over the existing guide's frontmatter"
+    },
+    "title": {
+      "type": "string",
+      "description": "H1 for a new guide"
+    },
+    "intro": {
+      "type": "string"
+    },
+    "complete": {
+      "type": "boolean",
+      "description": "true: existing rules missing from rules are retired (never deleted)"
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "title",
+          "block"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Z0-9][A-Z0-9-]*$",
+            "description": "Optional only when block.source names a kit rule already in the existing guide"
+          },
+          "title": {
+            "type": "string"
+          },
+          "section": {
+            "type": "string",
+            "description": "Required for a new rule"
+          },
+          "block": {
+            "type": "object",
+            "description": "Rule block fields in order: severity, scope, kind, check, check parameters, source, evidence, audience"
+          },
+          "body": {
+            "type": "string",
+            "description": "Prose and examples after the block"
+          }
+        }
+      }
+    },
+    "retire": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

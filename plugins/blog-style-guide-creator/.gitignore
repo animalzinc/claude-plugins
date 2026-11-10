@@ -1,4 +1,7 @@
 brands/
-docs/logs/
-.claude/settings.local.json
+*.style-check/
+__pycache__/
+*.pyc
+evals/results/
+evals/*/results/
 .DS_Store

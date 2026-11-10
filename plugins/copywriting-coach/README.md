@@ -19,7 +19,7 @@ The core philosophy: **the human fills the blank page.** Claude acts as a copywr
 Install the plugin:
 
 ```bash
-/plugin install copywriting-coach
+/plugin install copywriting-coach --marketplace animalzinc/claude-plugins
 ```
 
 Start a new project:

@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "finding.schema.json",
+  "title": "Finding",
+  "description": "One finding from any pass. Reviewers write rule_id, pass, line, quote, replacement, comment, and basis; lint adds id, col, certainty, note, and check; sgc findings adds id, severity, kind, status, and the fields after it.",
+  "type": "object",
+  "required": [
+    "rule_id",
+    "line",
+    "quote"
+  ],
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9-]*$",
+      "description": "A guide rule ID, or a built-in PROOF-* or FACT-* ID"
+    },
+    "pass": {
+      "type": "string",
+      "description": "The findings file's stem (lint, usage, usage-1, structure, voice, proof, facts); sgc findings sets it from the file name"
+    },
+    "line": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "1-based line of article.md"
+    },
+    "quote": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[^\\n]*$",
+      "description": "Copied exactly from the cited line"
+    },
+    "replacement": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Replaces exactly the quote; null for a comment"
+    },
+    "comment": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "basis": {
+      "enum": [
+        "explicit",
+        "inferred"
+      ]
+    },
+    "certainty": {
+      "enum": [
+        "certain",
+        "uncertain"
+      ],
+      "description": "Lint findings only"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[LF][0-9]{4,}$",
+      "description": "L for lint (set by sgc lint), F for the rest (set by sgc findings)"
+    },
+    "col": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "0-based column of the quote on its line"
+    },
+    "note": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Lint: why the check fired"
+    },
+    "check": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Lint: the check name"
+    },
+    "severity": {
+      "enum": [
+        "must",
+        "should",
+        "prefer"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "mechanical",
+        "usage",
+        "voice",
+        "structure",
+        "proof",
+        "fact"
+      ]
+    },
+    "status": {
+      "enum": [
+        "auto",
+        "pending",
+        "kept",
+        "revised"
+      ],
+      "description": "auto: checked in code (lint, facts), skips the verifier; pending: awaits a verdict; kept and revised: after sgc verdicts"
+    },
+    "suggestion": {
+      "type": "boolean",
+      "description": "prefer severity, or an ai-drafting rule on a human draft"
+    },
+    "rule_title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "confirmed": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Uncertain lint: true when the mechanical confirmer said it applies, null when no answer"
+    },
+    "confirm_reason": {
+      "type": "string"
+    },
+    "moved_from": {
+      "type": "integer",
+      "description": "The cited line, when sgc findings re-anchored the quote"
+    },
+    "also_found_by": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verdict_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "original_replacement": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ledger_id": {
+      "type": "string",
+      "description": "FACT findings: the ledger row"
+    }
+  },
+  "additionalProperties": true
+}

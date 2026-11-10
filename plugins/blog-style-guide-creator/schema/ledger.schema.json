@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ledger.schema.json",
+  "title": "Fact ledger (facts/ledger.json)",
+  "description": "An array of rows, or an object with a rows array. Pages are saved with sgc fetch into facts/pages/.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "claim",
+      "verdict"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "claim": {
+        "type": "string"
+      },
+      "line": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "Article line; required for every verdict other than confirmed"
+      },
+      "quote": {
+        "type": "string",
+        "description": "The claim's text, copied from that line"
+      },
+      "verdict": {
+        "enum": [
+          "confirmed",
+          "contradicted",
+          "unsupported",
+          "unverifiable",
+          "link-dead",
+          "link-mismatch"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "excerpt": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Copied from the saved page; required for confirmed and contradicted"
+      },
+      "note": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "url": "https://example.org/gone",
+  "final_url": "https://example.org/gone",
+  "status": "error",
+  "http_status": 404,
+  "content_type": "text/html",
+  "title": null,
+  "fetched_at": "2026-11-09T00:00:00+00:00",
+  "chars": 0,
+  "blocked": false,
+  "note": "HTTP 404 Not Found",
+  "text_file": null,
+  "html_file": null
+}

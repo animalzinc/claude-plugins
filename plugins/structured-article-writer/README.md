@@ -17,7 +17,7 @@ A `/write` slash command that guides you through a structured 8-phase process fo
 Install the plugin:
 
 ```bash
-/plugin install structured-article-writer
+/plugin install structured-article-writer --marketplace animalzinc/claude-plugins
 ```
 
 Start a new article:

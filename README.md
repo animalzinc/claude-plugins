@@ -60,9 +60,9 @@ Human writes, AI coaches. A `/copywrite` command that guides you through Brief, 
 
 ### Blog Style Guide Creator
 
-**AI-powered editorial style guide generation from blog content**
+**Editorial style guides built from a brand's own writing, and drafts checked against them**
 
-Generate comprehensive editorial style guides by analyzing published blog articles, then review content with 8 specialized AI agents running in parallel.
+Builds a brand's style guide from its published articles, brand kit, style document, or editors' edits, then checks drafts against it: code runs the mechanical rules, parallel reviewers cover usage, structure, voice, and proofreading, and a verifier confirms every finding. Includes an optional fact-check.
 
 **Install:**
 ```bash

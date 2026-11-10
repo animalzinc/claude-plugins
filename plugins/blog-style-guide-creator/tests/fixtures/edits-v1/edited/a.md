@@ -1,0 +1,1 @@
+Kites need steady wind.

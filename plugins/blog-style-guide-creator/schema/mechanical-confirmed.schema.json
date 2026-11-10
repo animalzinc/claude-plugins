@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mechanical-confirmed.schema.json",
+  "title": "Mechanical confirmer answers (findings/mechanical-confirmed.json)",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "applies"
+    ],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^L[0-9]{4,}$"
+      },
+      "applies": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "string"
+      }
+    }
+  }
+}

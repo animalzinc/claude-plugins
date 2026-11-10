@@ -1,0 +1,14 @@
+{
+  "data": {
+    "id": 4242,
+    "brand_name": "Demo Co",
+    "updated_at": "2026-11-10T07:31:04.049Z",
+    "writing_persona": "A patient instructor who has flown every kite in the catalog.",
+    "writing_tone": "Calm, practical, and lightly playful.",
+    "writing_rules": [
+      {"id": 101, "text": "Never promise that a kite cannot break."},
+      {"id": 102, "text": "Use the product name KiteKit with a capital K in both halves."},
+      {"id": 103, "text": "Keep each paragraph under four sentences."}
+    ]
+  }
+}

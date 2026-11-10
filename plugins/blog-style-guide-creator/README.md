@@ -1,276 +1,100 @@
 # Blog Style Guide Creator
 
-**AI-powered editorial style guide generation from blog content**
-
 Created by [Tim Metz](https://www.linkedin.com/in/metztim/) ([@timmetz](https://x.com/timmetz)) | Published by [Animalz](https://animalz.co)
 
-**Connect:** [Substack](https://weeatrobots.substack.com/) | [LinkedIn](https://www.linkedin.com/in/metztim/) | [X/Twitter](https://x.com/timmetz)
+Blog Style Guide Creator writes a brand's editorial style guide from what the brand already has: its published articles, a brand kit, a style document, or the edits its editors make. It then checks drafts against that guide. Every finding quotes the exact text it flags, names the rule it breaks, and offers a fix, and nothing in a draft changes unless you ask.
 
----
+A check combines code and models. Code tests everything a pattern can settle (dash spacing, heading case, numbers, quote marks, links). Parallel reviewers read for usage, structure, voice, and plain errors. A second reviewer then verifies every judgment against the guide's own wording, and code drops any finding whose quote is not in the draft.
 
-## Overview
+## Install
 
-Generate comprehensive editorial style guides by analyzing published blog articles, then review content with 8 specialized AI agents running in parallel. Originally developed for Animalz but designed to work with any blog or publication.
+```
+/plugin install blog-style-guide-creator --marketplace animalzinc/claude-plugins
+```
 
-### Key Features
+On Claude Code before 2.1.275, add the marketplace first:
 
-- 🤖 **Automated Style Guide Generation**: Analyze 15+ blog articles to extract consistent editorial patterns
-- 🔍 **Multi-Agent Review System**: 8 specialized agents review articles in parallel (4-5x faster than manual)
-- 📊 **Batch Processing**: Review entire article portfolios with compliance reporting
-- 🎯 **Blog-Focused**: Optimized for analyzing blog content, not broader brand materials
-- ⚡ **One-Command Workflows**: Custom slash commands for all operations
-
----
-
-## Quick Start
-
-### Installation
-
-```bash
+```
 /plugin marketplace add animalzinc/claude-plugins
 /plugin install blog-style-guide-creator
 ```
 
-### Generate a Style Guide
+Requirements: Claude Code 2.1.271 or later, and Python 3.9 or later on the machine (standard library only, nothing to install).
 
-```bash
-/generate-style-guide brand-name https://example.com/blog
-```
+## Quick start
 
-### Review an Article
-
-```bash
-/style-check brand-name path/to/article.md
-```
-
----
-
-## What It Does
-
-### Phase 1: Style Guide Generation
-
-1. Collect 15-20 representative blog articles
-2. Analyze patterns across 8 editorial dimensions
-3. Generate comprehensive style guide with rules, examples, and checklist
-
-**Style Guide Sections:**
-1. Voice & Tone
-2. Grammar & Usage
-3. Punctuation
-4. Formatting
-5. Technical Standards
-6. Content Patterns
-7. Industry Terms
-8. Quick Reference Checklist
-
-### Phase 2: Article Review
-
-1. Launch 8 specialized AI agents in parallel
-2. Each agent reviews article against one section of style guide
-3. Agents report violations with line numbers and corrections
-4. Optionally apply corrections automatically
-
----
-
-## Commands
-
-### `/generate-style-guide [brand-name] [blog-url-or-directory]`
-
-Generate editorial style guide by analyzing published blog articles.
-
-**Examples:**
-```bash
-# From blog URL
-/generate-style-guide hubspot https://blog.hubspot.com
-
-# From local directory
-/generate-style-guide contentful brands/contentful/source-articles/
-```
-
-**What it does:**
-- Fetches/reads 15-20 representative articles
-- Analyzes patterns across 8 editorial dimensions
-- Generates comprehensive style guide with examples
-- Saves to `brands/[brand-name]/style-guide.md`
-
-**Time:** 1-2 hours (mostly AI analysis)
-
----
-
-### `/style-check [brand-name] [article-path] [--auto-apply]`
-
-Review blog article against editorial style guide using 8 specialized agents.
-
-**Examples:**
-```bash
-# Review only
-/style-check animalz brands/animalz/articles/original/my-article.md
-
-# Review and auto-apply corrections
-/style-check animalz brands/animalz/articles/original/my-article.md --auto-apply
-```
-
-**What it does:**
-- Launches 8 agents in parallel (one per style guide section)
-- Each agent identifies violations with line numbers
-- Generates comprehensive review report
-- Optionally applies corrections automatically
-
-**Time:** 5-10 minutes (with parallel agents) vs. 40+ minutes (manual)
-
----
-
-### `/batch-review [brand-name] [directory-path] [--auto-apply]`
-
-Batch review multiple blog articles against editorial style guide.
-
-**Examples:**
-```bash
-# Review all articles
-/batch-review animalz brands/animalz/articles/original/
-
-# Review and auto-apply corrections
-/batch-review animalz brands/animalz/articles/original/ --auto-apply
-```
-
-**What it does:**
-- Scans directory for markdown files
-- Reviews each article sequentially
-- Generates portfolio compliance report
-- Shows most common violations across all articles
-
-**Time:** ~10 minutes per 3 articles
-
----
-
-## The 8 Review Agents
-
-Each agent specializes in one editorial dimension:
-
-| Agent | Focus | Common Violations |
-|-------|-------|-------------------|
-| **1. Voice & Tone** | Active voice, pronouns, contractions | Passive voice, pronoun inconsistency |
-| **2. Grammar & Usage** | Oxford commas, Title Case, numbers | Missing commas, capitalization |
-| **3. Punctuation** | Em dashes, quotation marks, lists | Em dash spacing, list punctuation |
-| **4. Formatting** | Headings, lists, bold/italics, links | Heading hierarchy, hyperlink text |
-| **5. Technical Standards** | Dates, times, percentages, currency | Date formats, percentage spacing |
-| **6. Content Patterns** | Titles, openings, CTAs, bylines | Missing byline/CTA, weak opening |
-| **7. Industry Terms** | Acronyms, product names, terminology | Undefined acronyms, wrong capitalization |
-| **8. Quick Reference** | Comprehensive final check | Cross-category issues |
-
----
-
-## Performance
-
-| Operation | Time | Speedup |
-|-----------|------|---------|
-| **Style guide generation** | 1-2 hours | N/A (automated) |
-| **Single article review** | 5-10 min | 4-5x vs manual (40+ min) |
-| **Batch review (10 articles)** | ~30-50 min | Depends on parallel processing |
-
----
-
-## Project Structure
+Build a guide from a blog, then check a draft against it:
 
 ```
-brands/
-└── [brand-name]/
-    ├── style-guide.md           # Generated style guide
-    ├── source-articles/          # Articles used to generate guide
-    │   └── *.md
-    └── articles/
-        ├── original/             # Articles to review
-        │   └── *.md
-        └── edited/               # Auto-corrected articles
-            └── *_edited.md
+/blog-style-guide-creator:build-style-guide acme https://acme.example/blog
+/blog-style-guide-creator:style-check acme drafts/launch-post.md
 ```
 
----
+The check writes `drafts/launch-post.style-check/report.md`: violations sorted by severity with line numbers, suggestions in a separate list, and a count of the findings that were dropped and why. Add `--apply` to review fixes and write them to `launch-post_edited.md`.
 
-## Adding a New Brand
+To try it without a brand of your own, point the plugin at the demo brand in `examples/demo-brand/` (see [Demo brand](#demo-brand)).
 
-1. Create brand directory: `brands/your-brand/`
-2. Add 15+ blog articles to `brands/your-brand/source-articles/`
-3. Run: `/generate-style-guide your-brand brands/your-brand/source-articles/`
-4. Review generated style guide at `brands/your-brand/style-guide.md`
-5. Test on an article: `/style-check your-brand [article-path]`
+## Skills
 
----
+| Skill | Does |
+|---|---|
+| `build-style-guide` | Creates or updates a guide from articles, a brand kit (`--from-kit`), a style document (`--from-doc`), or editor edits (`--edits`); converts a 1.x guide (`--upgrade`) |
+| `style-check` | Checks one draft; `--facts` adds a fact-check, `--apply` offers fixes |
+| `batch-review` | Checks every draft in a folder and summarizes the rules broken most often |
+| `validate-style-guide` | Audits a guide for contradictions, vague rules, overlaps, and check settings that disagree with the rule text |
 
-## Use Cases
+`/generate-style-guide` and `/update-style-guide` from version 1 still work and run `build-style-guide`.
 
-### For Content Teams
-- **Onboard new writers** with brand-specific style guides
-- **Maintain consistency** across large content portfolios
-- **Scale content review** without hiring more editors
-- **Identify common mistakes** across all content
+## Check pipeline
 
-### For Agencies
-- **Generate client style guides** quickly from existing content
-- **Deliver consistent quality** across all client work
-- **Reduce editorial overhead** with automated reviews
-- **Create value-add deliverable** (custom style guide)
+1. **Prepare:** code writes a line-numbered copy of the draft and marks the zones no rule touches: code, block quotes, URLs, and quoted speech.
+2. **Lint:** code runs every rule that has a check, with the parameters the guide sets. A guide that closes its em dashes gets the opposite result from one that spaces them; no brand's preferences live in the code. Every draft is also checked for unclosed parentheses, square brackets, and bold markers, whatever the guide says.
+3. **Review:** in parallel, a usage reviewer, a structure reviewer, a voice reviewer, and a proofreader each read the draft against their share of the guide. A small model settles lint findings a pattern could not decide alone. With `--facts`, a fact-checker fetches a source for every claim and link.
+4. **Filter:** code drops findings whose quote is not on the cited line, findings outside the rule's scope or inside protected zones, and findings you rejected before.
+5. **Verify:** a second reviewer reads each remaining finding with the rule's exact text and keeps, revises, or drops it.
+6. **Report:** code writes the report; with `--apply`, it applies the fixes you accept and checks the result again.
 
-### For Bloggers & Publishers
-- **Document your editorial voice** automatically
-- **Ensure consistency** as your publication grows
-- **Train guest contributors** with clear guidelines
-- **Batch-review backlogs** efficiently
+A fact-check finding rests on an excerpt copied from a saved page, and code confirms every excerpt is on that page before the report lists it.
 
----
+## Building a guide
 
-## Requirements
+`build-style-guide` reads whatever sources you give it and proposes rules, each with the evidence behind it ("38 of 40 em dashes closed across 12 articles"). When sources disagree, a brand kit or style document outranks editor edits, which outrank article patterns. You see the proposed changes as a diff (added, changed, retired) and approve all, some, or none; the guide changes only after that.
 
-- Claude Code (claude.ai/code)
-- Blog articles in markdown format
-- Access to blog URL (for fetching) or local article copies
+- **Articles:** 8 to 15 recent articles give enough evidence; a blog URL, article URLs, or a folder of Markdown or HTML files all work. Articles are fetched and converted by script, so punctuation and casing counts are exact.
+- **Brand kit:** with the AirOps connector, `--from-kit` imports the kit's persona, tone, and rules, keeping each rule's wording and kit ID so a later import updates rules instead of adding copies. `--kit-only` compiles the guide from the kit alone and turns patterns found elsewhere into proposals for the kit's owner.
+- **Style document:** `--from-doc` takes Markdown, text, HTML, or PDF.
+- **Editor edits:** pairs of drafts before and after an editor's pass, in `sources/edits/<pair>/original.md` and `edited.md`. A change editors make at least twice becomes a proposed rule; content edits are kept apart from style edits.
 
----
+Each rule in the guide has a stable ID, a severity (`must`, `should`, or `prefer`), a scope (all content or listed content types), and, where code can test it, a check with parameters. The format is in [skills/build-style-guide/schema.md](skills/build-style-guide/schema.md).
 
-## Example: Animalz
+## Configuration
 
-The `examples/` directory contains complete examples:
-- Full 8-section style guide generated from 18 articles
-- Sample articles (original and edited versions)
-- Demonstrates all features of the system
+Set these when you enable the plugin, or later in `/plugin`:
 
----
+| Setting | Default | Purpose |
+|---|---|---|
+| Brand guides folder (`guides_dir`) | `brands/` in the current project | Holds one folder per brand: `<brand>/style-guide.md`, `sources/`, `builds/`, and `decisions.jsonl` |
+| Model for building guides (`deep_model`) | `opus` | Model for drafting and auditing guides: `opus` or `fable` |
 
-## Contributing
+Every skill also takes `--guide <file>` to use a guide file directly.
 
-To improve the plugin:
+## Demo brand
 
-1. **Add new agents** in `agents/` for additional review dimensions
-2. **Enhance commands** in `commands/` with new features
-3. **Share feedback** at https://github.com/animalzinc/claude-plugins/issues
-4. **Document improvements** in pull requests
+`examples/demo-brand/` is a fictional company, Acme Analytics, whose conventions differ from common defaults on purpose: closed em dashes, sentence-case headings, no serial comma, "percent" spelled out, and times written "9 a.m.". It holds three source articles, the guide built from them, an edit pair, and `drafts/seeded-draft.md`, a draft with 31 planted errors listed in `seeded-draft.expected.json`.
 
----
+```
+/blog-style-guide-creator:style-check demo-brand examples/demo-brand/drafts/seeded-draft.md --guide examples/demo-brand/style-guide.md
+```
 
-## License
+## Upgrading from 1.x
 
-MIT License - Copyright (c) 2026 Tim Metz
+A 1.x guide keeps working: the checks read its numbered sections as rules. `build-style-guide <brand> --upgrade` converts it to the 2.0 format, keeps its wording, saves the original as `style-guide.v1.md`, and shows the conversion for approval. The [changelog](CHANGELOG.md) lists what changed.
 
-See LICENSE file for details.
+## Docs and support
 
----
+- [Usage guide](docs/usage.md): every skill's options, the run folder, fixes, and the fact-check
+- [Changelog](CHANGELOG.md)
+- Issues: https://github.com/animalzinc/claude-plugins/issues
+- Email: contact@animalz.co
 
-## About the Author
-
-**Tim Metz** is a content marketing strategist and AI automation specialist. He built this plugin to streamline editorial workflows at Animalz and open-sourced it to help other content teams maintain editorial consistency at scale.
-
-**Connect with Tim:**
-- 📝 [Substack: We Eat Robots](https://weeatrobots.substack.com/)
-- 💼 [LinkedIn](https://www.linkedin.com/in/metztim/)
-- 🐦 [X/Twitter @timmetz](https://x.com/timmetz)
-
-**About Animalz:**
-[Animalz](https://animalz.co) is a content marketing agency specializing in high-quality editorial content for B2B SaaS companies. This plugin was developed internally and open-sourced to benefit the wider content marketing community.
-
----
-
-## Support
-
-- **Issues**: https://github.com/animalzinc/claude-plugins/issues
-- **Email**: contact@animalz.co
-- **Documentation**: See EXAMPLES.md for detailed usage examples
+MIT License. Copyright (c) 2026 Tim Metz.

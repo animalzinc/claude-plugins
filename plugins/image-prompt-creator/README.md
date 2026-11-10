@@ -19,7 +19,7 @@ Includes a comprehensive Nano Banana prompting guide covering model selection, p
 Install the plugin:
 
 ```bash
-/plugin install image-prompt-creator
+/plugin install image-prompt-creator --marketplace animalzinc/claude-plugins
 ```
 
 Start a new image prompt:

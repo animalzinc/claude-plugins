@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: brand-leakage
+description: A clean article in the demo brand's own conventions (closed em dashes, sentence-case headings, no serial comma) gets no finding that only another brand's conventions would explain.
+tags: [check]
+context:
+  scaffold_script: scaffold.sh

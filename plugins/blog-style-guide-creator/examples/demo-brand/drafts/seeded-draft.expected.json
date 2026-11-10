@@ -1,0 +1,42 @@
+{
+  "draft": "seeded-draft.md",
+  "guide": "../style-guide.md",
+  "content_type": "how-to",
+  "planted": [
+    {"rule_id": "TERM-AI", "line": 8, "quote": "fast-paced world", "found_by": "lint", "suggestion": true},
+    {"rule_id": "TERM-BANNED", "line": 8, "quote": "leverage", "found_by": "lint"},
+    {"rule_id": "PUNC-EMDASH", "line": 8, "quote": "data — and", "found_by": "lint"},
+    {"rule_id": "TERM-BANNED", "line": 8, "quote": "seamless", "found_by": "lint"},
+    {"rule_id": "STRUCT-LEDE", "line": 8, "quote": null, "found_by": "structure-checker"},
+    {"rule_id": "VOICE-CONCRETE", "line": 10, "quote": "AcmeBoard unlocks powerful insights for every team.", "found_by": "voice-checker"},
+    {"rule_id": "USAGE-STATS", "line": 10, "quote": "A recent survey found that most data leads lose a full day each week to reporting.", "found_by": "usage-checker"},
+    {"rule_id": "NUM-THOUSANDS", "line": 12, "quote": "4k", "found_by": "lint"},
+    {"rule_id": "NUM-PCT", "line": 12, "quote": "72%", "found_by": "lint"},
+    {"rule_id": "PROOF-WORD", "line": 12, "quote": "then", "found_by": "proofreader"},
+    {"rule_id": "HEAD-CASE", "line": 14, "quote": "Before You Start", "found_by": "lint", "confirmed_by": "mechanical-confirmer"},
+    {"rule_id": "PUNC-LABEL", "line": 16, "quote": "**Data:**", "found_by": "lint"},
+    {"rule_id": "NUM-SMALL", "line": 16, "quote": "3", "found_by": "lint"},
+    {"rule_id": "TERM-NAMES", "line": 17, "quote": "Acmeboard", "found_by": "lint"},
+    {"rule_id": "HEAD-FORMAT", "line": 20, "quote": "Steps.", "found_by": "lint"},
+    {"rule_id": "PUNC-SERIAL", "line": 22, "quote": "spreadsheets, and", "found_by": "lint", "confirmed_by": "mechanical-confirmer"},
+    {"rule_id": "NUM-SMALL", "line": 23, "quote": "3", "found_by": "lint"},
+    {"rule_id": "TERM-PREFER", "line": 24, "quote": "Utilize", "found_by": "lint"},
+    {"rule_id": "STRUCT-STEPS", "line": 25, "quote": "A filter for each team member", "found_by": "structure-checker"},
+    {"rule_id": "NUM-TIME", "line": 26, "quote": "9am", "found_by": "lint"},
+    {"rule_id": "NUM-ORD", "line": 27, "quote": "2nd", "found_by": "lint"},
+    {"rule_id": "USAGE-ACRONYM", "line": 27, "quote": "ETL", "found_by": "usage-checker"},
+    {"rule_id": "PUNC-QUOTES", "line": 36, "quote": "\"if nobody argues about it, nobody will open it\".", "found_by": "lint"},
+    {"rule_id": "PROOF-DOUBLE", "line": 36, "quote": "the the", "found_by": "proofreader"},
+    {"rule_id": "PROOF-NAME", "line": 40, "quote": "Whitfeld", "found_by": "proofreader"},
+    {"rule_id": "NUM-START", "line": 42, "quote": "12", "found_by": "lint"},
+    {"rule_id": "NUM-MONEY", "line": 42, "quote": "$2.5M", "found_by": "lint"},
+    {"rule_id": "NUM-DATE", "line": 42, "quote": "March 3rd", "found_by": "lint"},
+    {"rule_id": "PROOF-TYPO", "line": 46, "quote": "recieve", "found_by": "proofreader"},
+    {"rule_id": "LINK-HERE", "line": 46, "quote": "click here", "found_by": "lint"},
+    {"rule_id": "LINK-CLEAN", "line": 46, "quote": "https://acme.example/blog/retire-a-dashboard?utm_source=newsletter", "found_by": "lint"}
+  ],
+  "protected": [
+    {"lines": [29, 32], "kind": "code", "note": "the numeral and the spaced dash in the SQL comment are not findings"},
+    {"lines": [38, 38], "kind": "blockquote", "note": "a quoted customer keeps their own numerals and dashes"}
+  ]
+}

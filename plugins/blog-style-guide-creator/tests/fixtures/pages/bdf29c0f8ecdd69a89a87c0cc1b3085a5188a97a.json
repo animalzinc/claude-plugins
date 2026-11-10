@@ -1,0 +1,14 @@
+{
+  "url": "https://example.org/kite-facts",
+  "final_url": "https://example.org/kite-facts",
+  "status": "ok",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "title": "Kite Facts | Example",
+  "fetched_at": "2026-11-09T00:00:00+00:00",
+  "chars": 289,
+  "blocked": false,
+  "note": null,
+  "text_file": "bdf29c0f8ecdd69a89a87c0cc1b3085a5188a97a.txt",
+  "html_file": null
+}

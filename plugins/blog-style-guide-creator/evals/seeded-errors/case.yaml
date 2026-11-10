@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: seeded-errors
+description: The demo brand's seeded draft; every planted error is reported and nothing in its protected zones is flagged.
+tags: [check]
+context:
+  scaffold_script: scaffold.sh

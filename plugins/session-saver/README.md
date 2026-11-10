@@ -27,7 +27,7 @@ Say "save session", "save progress", or "session summary" at the end of a sessio
 ## Install
 
 ```bash
-/plugin install session-saver
+/plugin install session-saver --marketplace animalzinc/claude-plugins
 ```
 
 ## Author

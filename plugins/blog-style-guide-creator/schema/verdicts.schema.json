@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "verdicts.schema.json",
+  "title": "Verifier verdicts (verify/<pass>.verdicts.json)",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "verdict",
+      "reason"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "verdict": {
+        "enum": [
+          "keep",
+          "drop",
+          "revise"
+        ]
+      },
+      "reason": {
+        "type": "string"
+      },
+      "replacement": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Required with revise; null turns the finding into a comment"
+      }
+    },
+    "if": {
+      "properties": {
+        "verdict": {
+          "const": "revise"
+        }
+      }
+    },
+    "then": {
+      "required": [
+        "replacement"
+      ]
+    }
+  }
+}

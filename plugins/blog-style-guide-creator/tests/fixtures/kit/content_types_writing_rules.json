@@ -1,0 +1,10 @@
+{
+  "data": {
+    "id": 4242,
+    "content_types": [
+      {"id": 7, "name": "How-to", "header_case": "Sentence case",
+       "writing_rules": [{"id": 201, "text": "Open with the outcome the reader will reach."}]},
+      {"id": 8, "name": "Essay", "header_case": null, "writing_rules": []}
+    ]
+  }
+}

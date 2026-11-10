@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: fact-check
+description: With --facts, a link that does not support its sentence and a misspelled well-known name are reported, and every confirmed claim rests on an excerpt from a saved page.
+tags: [facts]
+context:
+  scaffold_script: scaffold.sh

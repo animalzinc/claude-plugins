@@ -26,7 +26,7 @@ It sits between a throwaway HTML preview and a full collaborative editor: no ser
 Install the plugin:
 
 ```bash
-/plugin install mdview
+/plugin install mdview --marketplace animalzinc/claude-plugins
 ```
 
 Then just ask, in natural language:

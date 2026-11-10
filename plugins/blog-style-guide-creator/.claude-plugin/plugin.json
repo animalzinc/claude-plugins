@@ -1,10 +1,28 @@
 {
   "name": "blog-style-guide-creator",
-  "version": "1.0.0",
-  "description": "AI-powered editorial style guide generation from blog content and article compliance review system. Analyze published blog articles to extract consistent patterns, then review content with 8 specialized agents in parallel.",
+  "displayName": "Blog Style Guide Creator",
+  "version": "2.0.0",
+  "description": "Builds a brand's editorial style guide from its published articles, an existing brand kit or style document, or its editors' edits, then checks drafts against it with parallel reviewers whose every finding is verified. Includes proofreading and an optional fact-check.",
   "author": {
     "name": "Tim Metz @ Animalz",
     "email": "contact@animalz.co",
     "url": "https://animalz.co"
+  },
+  "homepage": "https://github.com/animalzinc/claude-plugins/tree/main/plugins/blog-style-guide-creator",
+  "repository": "https://github.com/animalzinc/claude-plugins",
+  "license": "MIT",
+  "keywords": ["style-guide", "editorial", "content-marketing", "proofreading", "fact-check", "brand-voice", "blog"],
+  "userConfig": {
+    "guides_dir": {
+      "type": "directory",
+      "title": "Brand guides folder",
+      "description": "Folder that holds one subfolder per brand (brand/style-guide.md). Leave empty to use a brands folder in the current project."
+    },
+    "deep_model": {
+      "type": "string",
+      "title": "Model for building guides",
+      "description": "Model alias for building and auditing guides: opus or fable.",
+      "default": "opus"
+    }
   }
 }
