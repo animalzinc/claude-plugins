@@ -426,7 +426,7 @@ UNITS = (r"(?:px|pt|em|rem|ms|kb|mb|gb|tb|kg|mg|g|lb|lbs|oz|km|cm|mm|m|mi|ft|inc
          r"mph|kph|kmh|hz|khz|mhz|ghz|k|bn|degrees?|°)")
 LABELS = (r"(?:figure|fig\.|table|chapter|section|page|p\.|step|phase|level|tier|part|item|"
           r"no\.|number|episode|season|rule|appendix|grade|stage|week|day|round|issue|vol\.|"
-          r"volume|version|v\.?|line|row|column|slide|question|q)")
+          r"volume|version|v\.?|line|row|column|slide|question|q|position|rank|ranked|ranks)")
 NOT_PLURAL = {"is", "was", "has", "does", "as", "us", "its", "this", "his", "plus", "versus",
               "less", "yes", "thus", "previous", "various", "bonus", "focus", "status"}
 
@@ -458,6 +458,8 @@ def check_numerals(ctx):
                 continue
             if re.match(r"^\s*(?:a\.m\.|p\.m\.|am\b|pm\b|o'clock)", after, re.IGNORECASE):
                 continue
+            if re.match(r"^-(?:year|month|week|day)s?-old\b", after, re.IGNORECASE):
+                continue  # an age
             if re.search(r"\b" + LABELS + r"\s*$", before, re.IGNORECASE):
                 continue
             if re.search(MONTHS + r"\.?\s+$", before) or re.match(r"^\s+(?:of\s+)?" + MONTHS + r"\b", after):
@@ -467,6 +469,8 @@ def check_numerals(ctx):
             if nxt and any(w and w.endswith("s") and len(w) > 2 and w not in NOT_PLURAL
                            for w in nxt.groups()):
                 certainty = "certain"
+            if re.search(r"(?<![\w])\w*[A-Z][\w.\-]*[ \t]+$", before):
+                certainty = "uncertain"  # after a name, it may be a version ("Claude 3")
             words = number_words(value)
             if words and _at_sentence_start(m, mt.start(), list_col):
                 words = _capitalize(words)

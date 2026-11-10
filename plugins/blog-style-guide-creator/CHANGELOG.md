@@ -7,6 +7,7 @@ November 2026. Fixes from running the plugin on a real guide.
 **Checking**
 
 - `numerals` skips both numbers of an en-dash range ("3–5 times per week"), closed or spaced.
+- `numerals` skips rank positions ("position 3", "rank 2") and ages ("a 5-year-old company"), and marks a numeral after a capitalized name as uncertain, since it may be a version ("Claude 3").
 - `dash-spacing` with `style: none` skips a sign-off line: an em dash followed by a short capitalized name ("— Ty Magnin"), with optional leading whitespace, emphasis marks, or a blockquote marker. Em dashes in running prose are still flagged.
 - `time-format` takes two optional parameters, both off by default: `drop_zero_minutes` writes "9 a.m." for "9:00 a.m." and flags the ":00" form, and `noon_midnight` writes noon and midnight for 12 p.m. and 12 a.m.
 - `regex` takes an optional `certainty` (`certain` by default, or `uncertain`), so a pattern whose rule carries exemptions sends its hits to the mechanical confirmer.

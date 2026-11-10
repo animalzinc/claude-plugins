@@ -146,6 +146,12 @@ class Numbers(unittest.TestCase):
         self.assertEqual(quotes("numerals", {"spell_out_below": 10}, "Post 3%s5 times, then 4 more posts." % EN),
                          [("4", "four")])
 
+    def test_numeral_versions_ranks_ages(self):
+        self.assertEqual(hits("numerals", {"spell_out_below": 10},
+                              "It holds position 3, rank 2, for a 5-year-old company."), [])
+        found = hits("numerals", {"spell_out_below": 10}, "We tested Claude 3 models.")
+        self.assertEqual(found[0]["certainty"], "uncertain")
+
     def test_numeral_not_clearly_a_count(self):
         self.assertEqual(hits("numerals", {"spell_out_below": 10}, "The score was 3 at halftime.")[0]["certainty"],
                          "uncertain")
