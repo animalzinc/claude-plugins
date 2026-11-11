@@ -60,7 +60,7 @@
       "name": "blog-style-guide-creator",
       "source": "./plugins/blog-style-guide-creator",
       "description": "Builds a brand's editorial style guide from its published articles, a brand kit or style document, or editors' edits, then checks drafts against it with parallel reviewers whose every finding is verified. Includes proofreading and an optional fact-check.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "Tim Metz @ Animalz",
         "url": "https://animalz.co"
