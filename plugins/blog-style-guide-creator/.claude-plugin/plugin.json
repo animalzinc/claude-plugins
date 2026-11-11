@@ -1,7 +1,7 @@
 {
   "name": "blog-style-guide-creator",
   "displayName": "Blog Style Guide Creator",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Builds a brand's editorial style guide from its published articles, an existing brand kit or style document, or its editors' edits, then checks drafts against it with parallel reviewers whose every finding is verified. Includes proofreading and an optional fact-check.",
   "author": {
     "name": "Tim Metz @ Animalz",
